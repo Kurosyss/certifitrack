@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import { AlertCircle } from 'lucide-react';
+
+const title = "500 - Server Error | CertifiTrack";
+const description = "Something went wrong on our end.";
+
+// DEPLOYMENT LIMITATION DOCUMENTATION:
+// Astro static builds do not inherently serve a 500 route at runtime 
+// unless an SSR adapter (Node, Vercel, Cloudflare, etc.) is configured 
+// or the hosting provider routes 500 status codes to this statically generated 500.html.
+// 
+// When deploying to a static host, ensure the CDN/Host is configured to map 
+// internal server errors (if any) to /500.html.
+---
+
+<Layout title={title} description={description}>
+  <section class="min-h-[70vh] flex items-center justify-center py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-status-expired-bg text-status-expired-border mb-6">
+        <AlertCircle class="w-8 h-8" />
+      </div>
+      <h1 class="text-4xl sm:text-5xl font-semibold tracking-tight text-foreground mb-4">Something went wrong.</h1>
+      <p class="text-lg text-muted-foreground mb-8">
+        We encountered an unexpected error on our end. Please try again or head back to the home page.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <Button href="/" size="lg" class="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105">
+          Back Home
+        </Button>
+        <Button href="/contact" variant="outline" size="lg" class="w-full sm:w-auto">
+          Contact Support
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>

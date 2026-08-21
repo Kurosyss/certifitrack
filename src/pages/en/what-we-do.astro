@@ -1,0 +1,159 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import { FileSearch, CalendarOff, FileSpreadsheet, FileText, Calendar, CheckCircle2, AlertCircle, FileBox } from 'lucide-react';
+
+const title = "What We Do | CertifiTrack Cleanup";
+const description = "See exactly how we clean up your messy COI folder. We extract dates, flag missing coverage, and return a clean tracker.";
+---
+
+<Layout title={title} description={description}>
+  {/* Hero */}
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+      <h1 class="text-h1 text-foreground spacing-heading text-balance">We do the manual work you hate.</h1>
+      <p class="text-body-large spacing-paragraph">You didn't start a business to read insurance policies. We turn a folder of disorganized PDFs into actionable data.</p>
+    </div>
+  </section>
+
+  {/* The Process */}
+  <section class="py-16 lg:py-24 bg-surface border-b border-border overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl space-y-24 lg:space-y-32">
+      
+      {/* 01: Find */}
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+        <div class="lg:w-1/2">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">01 &mdash; Audit</div>
+          <h2 class="text-h2 text-foreground spacing-heading">We find what's missing.</h2>
+          <p class="text-body spacing-paragraph">Send us your master list of subcontractors along with your folder of PDFs. We manually match each document to the correct subcontractor, instantly revealing who hasn't provided their paperwork.</p>
+        </div>
+        <div class="lg:w-1/2 w-full">
+          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto">
+            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4">Reconciliation</div>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Atlas Ridge Mechanical</span>
+                <span class="text-[10px] text-status-active font-medium tracking-wide">FOUND</span>
+              </div>
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Summit Valley Concrete</span>
+                <span class="text-[10px] text-status-missing font-medium tracking-wide">MISSING</span>
+              </div>
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Cedar Point Roofing</span>
+                <span class="text-[10px] text-status-active font-medium tracking-wide">FOUND</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 02: Extract */}
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+        <div class="lg:w-1/2 w-full order-2 lg:order-1">
+          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto relative overflow-hidden">
+            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4 relative z-10">Data Extraction</div>
+            <div class="space-y-4 relative z-10">
+              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
+                <span class="text-xs text-muted-foreground font-medium">General Liability</span>
+                <span class="text-sm font-semibold text-status-expired">Jan 14, 2026</span>
+              </div>
+              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
+                <span class="text-xs text-muted-foreground font-medium">Workers Comp</span>
+                <span class="text-sm font-medium text-foreground">Nov 30, 2026</span>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-muted-foreground font-medium">Auto Liability</span>
+                <span class="text-sm font-medium text-foreground">Oct 01, 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 order-1 lg:order-2">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">02 &mdash; Extract</div>
+          <h2 class="text-h2 text-foreground spacing-heading">We pull the critical data.</h2>
+          <p class="text-body spacing-paragraph">You don't have time to squint at scanned ACORD forms. We read the PDFs, find the expiration dates and limits for General Liability, Workers Comp, and Auto, and flag anything that is non-compliant.</p>
+        </div>
+      </div>
+
+      {/* 03: Organize & Return */}
+      <div class="flex flex-col gap-12 items-center">
+        <div class="max-w-2xl text-center">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">03 &mdash; Organize & Return</div>
+          <h2 class="text-h2 text-foreground spacing-heading">We deliver a clean tracker.</h2>
+          <p class="text-body spacing-paragraph">We return a structured Excel spreadsheet that you can actually use. Instantly filter by status to see who needs a follow-up call, and review the exact coverage limits extracted from the forms.</p>
+        </div>
+        <div class="w-full max-w-3xl">
+          <div class="flex flex-col bg-background rounded-xl border border-border shadow-elevated overflow-hidden">
+            <div class="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <FileSpreadsheet class="w-4 h-4 text-muted-foreground" />
+                <span class="text-xs font-medium text-foreground tracking-wide">Master_Tracker_Final.xlsx</span>
+              </div>
+              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Deliverable</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
+                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
+                  <tr>
+                    <th class="px-3 py-2 font-medium border-r border-border">Subcontractor</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">GL Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">WC Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Auto Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">GL Limit</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">WC Limit</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Auto Limit</th>
+                    <th class="px-3 py-2 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border text-foreground">
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">CURRENT</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
+                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">01/14/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">EXPIRED</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border">06/15/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">MISSING</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="spacing-section bg-background text-center">
+    <div class="container mx-auto px-4 max-w-xl">
+      <h2 class="text-h2 text-foreground spacing-heading">Ready to clean up your records?</h2>
+      <Button href="/en/pricing" size="lg" class="mt-4 shadow-elevated">
+        View Pricing
+      </Button>
+    </div>
+  </section>
+</Layout>

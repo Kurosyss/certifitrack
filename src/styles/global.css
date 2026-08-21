@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Semantic Colors - Light Mode */
+  --color-background: #fafafa;
+  --color-foreground: #09090b;
+  
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  
+  --color-border: #e4e4e7;
+  --color-border-hover: #d4d4d8;
+  
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #71717a;
+  
+  --color-primary: #09090b;
+  --color-primary-foreground: #ffffff;
+  
+  --color-accent: #2563eb; 
+  --color-accent-foreground: #ffffff;
+  
+  /* Status Colors - Light */
+  --color-status-active: #16a34a;
+  --color-status-active-bg: #dcfce7;
+  --color-status-active-border: #bbf7d0;
+  
+  --color-status-review: #d97706;
+  --color-status-review-bg: #fef3c7;
+  --color-status-review-border: #fde68a;
+  
+  --color-status-expired: #dc2626;
+  --color-status-expired-bg: #fee2e2;
+  --color-status-expired-border: #fecaca;
+  
+  --color-status-missing: #71717a;
+  --color-status-missing-bg: #f4f4f5;
+  --color-status-missing-border: #e4e4e7;
+
+  /* Shadows */
+  --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-elevated: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+  --shadow-dropdown: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  
+  .dark {
+    color-scheme: dark;
+    
+    /* Semantic Colors - Premium Layered Dark Mode */
+    --color-background: #09090b; 
+    --color-foreground: #e4e4e7; /* Muted text */
+    
+    --color-surface: #121214; 
+    --color-surface-hover: #18181b;
+    
+    --color-border: #27272a; 
+    --color-border-hover: rgba(255, 255, 255, 0.15);
+    
+    --color-muted: #18181b;
+    --color-muted-foreground: #a1a1aa;
+    
+    --color-primary: #ffffff;
+    --color-primary-foreground: #09090b;
+    
+    --color-accent: #3b82f6; 
+    --color-accent-foreground: #ffffff;
+    
+    /* Status Colors - Dark (Muted/Elevated for contrast) */
+    --color-status-active: #34d399;
+    --color-status-active-bg: rgba(16, 185, 129, 0.1);
+    --color-status-active-border: rgba(16, 185, 129, 0.2);
+    
+    --color-status-review: #fbbf24;
+    --color-status-review-bg: rgba(245, 158, 11, 0.1);
+    --color-status-review-border: rgba(245, 158, 11, 0.2);
+    
+    --color-status-expired: #f87171;
+    --color-status-expired-bg: rgba(239, 68, 68, 0.1);
+    --color-status-expired-border: rgba(239, 68, 68, 0.2);
+    
+    --color-status-missing: #94a3b8;
+    --color-status-missing-bg: rgba(100, 116, 139, 0.1);
+    --color-status-missing-border: rgba(100, 116, 139, 0.2);
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-accent selection:text-white transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  /* Premium Typography System - Confident, not giant */
+  .text-display {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-tight;
+  }
+  .text-h1 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-tight;
+  }
+  .text-h2 {
+    @apply text-2xl sm:text-3xl font-medium tracking-tight leading-snug;
+  }
+  .text-h3 {
+    @apply text-xl font-medium tracking-tight leading-snug;
+  }
+  .text-body-large {
+    @apply text-lg font-normal leading-relaxed text-muted-foreground;
+  }
+  .text-body {
+    @apply text-base font-normal leading-relaxed text-foreground;
+  }
+  .text-small {
+    @apply text-sm font-normal leading-relaxed text-muted-foreground;
+  }
+  .text-caption {
+    @apply text-xs font-medium tracking-widest uppercase text-muted-foreground;
+  }
+  .text-navigation {
+    @apply text-sm font-medium transition-colors hover:text-foreground text-muted-foreground;
+  }
+  .text-button {
+    @apply text-sm font-medium;
+  }
+
+  /* Structural Spacing System - Intentional Rhythm */
+  .spacing-section {
+    @apply py-16 sm:py-24;
+  }
+  .spacing-content {
+    @apply gap-8 sm:gap-16;
+  }
+  .spacing-card {
+    @apply p-8;
+  }
+  .spacing-heading {
+    @apply mb-4 sm:mb-6;
+  }
+  .spacing-paragraph {
+    @apply mb-6;
+  }
+  .spacing-cta {
+    @apply mt-10 pt-10 border-t border-border/50;
+  }
+  .spacing-footer {
+    @apply py-12 lg:py-16;
+  }
+
+  /* Grid & Alignment System */
+  .reading-width {
+    @apply max-w-[720px] mx-auto;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Component Primitives */
+  .border-glass {
+    @apply border border-border bg-surface/80 backdrop-blur-md;
+  }
+  
+  .glass-panel {
+    @apply bg-surface/60 backdrop-blur-xl border border-border shadow-subtle rounded-xl;
+  }
+}

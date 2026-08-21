@@ -1,0 +1,28 @@
+---
+import { getLangFromUrl, useTranslatedPath } from "../i18n/utils";
+import { languages } from "../i18n/ui";
+import { Globe } from 'lucide-react';
+
+const currentLang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(currentLang);
+---
+
+<div class="relative group inline-block">
+  <button class="flex items-center gap-1.5 text-navigation hover:text-foreground px-1 py-1" aria-label="Select Language">
+    <Globe class="w-4 h-4 opacity-70" />
+    <span class="uppercase text-xs font-medium tracking-wide">{currentLang}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-50 transition-transform group-hover:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+  </button>
+  <div class="absolute right-0 top-full mt-2 w-32 bg-surface/95 backdrop-blur-md border border-border rounded-lg shadow-dropdown opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+    <div class="p-1">
+      {Object.entries(languages).map(([lang, label]) => (
+        <a 
+          href={translatePath(Astro.url.pathname, lang)} 
+          class={`block px-3 py-2 text-sm rounded-md transition-colors ${currentLang === lang ? 'bg-muted text-foreground font-medium' : 'text-muted-foreground hover:bg-muted/50 hover:text-foreground'}`}
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>

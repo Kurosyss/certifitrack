@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props extends HTMLAttributes<'a'> {
+    href: string;
+    variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
+    size?: 'sm' | 'md' | 'lg';
+    class?: string;
+}
+
+const { href, variant = 'primary', size = 'md', class: className = '', ...rest } = Astro.props;
+
+const baseStyles = "inline-flex items-center justify-center rounded-[6px] font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary disabled:opacity-50 disabled:pointer-events-none";
+
+const variants = {
+    primary: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_1px_2px_rgba(0,0,0,0.1)]",
+    secondary: "bg-surface text-foreground border border-border hover:bg-surface-hover shadow-subtle",
+    outline: "border border-border bg-transparent hover:bg-muted text-foreground",
+    ghost: "bg-transparent hover:bg-muted text-foreground",
+};
+
+const sizes = {
+    sm: "h-8 px-3 text-xs",
+    md: "h-10 py-2 px-4 text-sm",
+    lg: "h-11 px-8 text-base",
+};
+---
+
+<a href={href} class={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`} {...rest}>
+    <slot />
+</a>

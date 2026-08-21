@@ -1,0 +1,25 @@
+---
+interface Props {
+  status: 'active' | 'review' | 'expired' | 'missing';
+}
+
+const { status } = Astro.props;
+
+const statusStyles = {
+  active: "bg-[var(--color-status-active-bg)] text-[var(--color-status-active)] border-[var(--color-status-active-border)]",
+  review: "bg-[var(--color-status-review-bg)] text-[var(--color-status-review)] border-[var(--color-status-review-border)]",
+  expired: "bg-[var(--color-status-expired-bg)] text-[var(--color-status-expired)] border-[var(--color-status-expired-border)]",
+  missing: "bg-[var(--color-status-missing-bg)] text-[var(--color-status-missing)] border-[var(--color-status-missing-border)]",
+};
+
+const statusLabels = {
+  active: "ACTIVE",
+  review: "REVIEW",
+  expired: "EXPIRED",
+  missing: "MISSING",
+};
+---
+
+<span class={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold border ${statusStyles[status]}`}>
+  {statusLabels[status]}
+</span>

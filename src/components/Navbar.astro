@@ -1,0 +1,82 @@
+---
+import { siteConfig } from '../config/site';
+import { ThemeSwitcher } from './ThemeSwitcher';
+import LanguageSelector from './LanguageSelector.astro';
+import Button from './ui/Button.astro';
+import { Menu } from 'lucide-react';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const navLinks = [
+  { name: t('nav.whatWeDo'), href: translatePath('/what-we-do') },
+  { name: t('nav.howItWorks'), href: translatePath('/how-it-works') },
+  { name: t('nav.pricing'), href: translatePath('/pricing') },
+  { name: t('nav.faq'), href: translatePath('/faq') },
+  { name: t('nav.template'), href: translatePath('/templates/coi-tracking-spreadsheet') },
+];
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 max-w-7xl items-center justify-between">
+    <div class="flex items-center gap-8">
+      <a href={translatePath('/')} class="flex items-center space-x-2">
+        <span class="font-bold text-xl tracking-tight text-primary">{siteConfig.name}</span>
+      </a>
+      <nav class="hidden md:flex gap-6 items-center">
+        {navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="text-navigation"
+          >
+            {link.name}
+          </a>
+        ))}
+      </nav>
+    </div>
+    
+    <div class="flex items-center gap-3 sm:gap-4">
+      <LanguageSelector />
+      
+      <ThemeSwitcher client:load />
+      
+      <div class="hidden sm:block">
+        <Button href={translatePath('/pricing')} size="sm" class="shadow-sm">{t('cta.cleanUp')}</Button>
+      </div>
+      
+      {/* Mobile Menu Toggle */}
+      <button id="mobile-menu-btn" class="md:hidden flex items-center justify-center w-8 h-8 rounded-md text-foreground cursor-pointer hover:bg-muted/50 transition-colors" aria-label="Toggle Menu">
+        <Menu class="w-5 h-5" />
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile Menu Dropdown */}
+  <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background">
+    <nav class="flex flex-col py-4 px-4 gap-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-base font-medium text-foreground transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+      <div class="pt-4 mt-2 border-t border-border w-full">
+        <Button href={translatePath('/pricing')} size="lg" class="w-full shadow-sm text-center justify-center">{t('cta.cleanUp')}</Button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (btn && menu) {
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+  }
+</script>

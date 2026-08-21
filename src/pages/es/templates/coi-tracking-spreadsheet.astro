@@ -1,0 +1,196 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/ui/Button.astro';
+import { Download, FileSpreadsheet } from 'lucide-react';
+
+const title = "Plantilla Gratuita de Hoja de Cálculo para Seguimiento de COI | CertifiTrack";
+const description = "Rastrea certificados de subcontratistas, fechas de vencimiento, límites de cobertura y estado de documentos en Excel o Google Sheets. Descarga nuestra plantilla gratuita.";
+---
+
+<Layout title={title} description={description}>
+  {/* Hero Section */}
+  <section class="spacing-section border-b border-border bg-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground mb-6 shadow-subtle">
+            Plantilla Gratuita
+          </div>
+          <h1 class="text-h1 text-foreground spacing-heading text-balance">
+            Plantilla Gratuita de Hoja de Cálculo para Seguimiento de COI
+          </h1>
+          <p class="text-body-large spacing-paragraph">
+            Rastrea certificados de subcontratistas, fechas de vencimiento, límites de cobertura y estado de documentos. Deja de perder el rastro de qué subcontratistas tienen registros activos.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <Button href="/CERTIFITRACK_TEMPLATE.xlsx" size="lg" class="shadow-elevated w-full sm:w-auto" download>
+              <Download class="w-4 h-4 mr-2" />
+              Descargar Plantilla Excel
+            </Button>
+          </div>
+          <p class="text-caption text-muted-foreground">100% gratis. No se requiere correo electrónico para descargar.</p>
+        </div>
+
+        <div class="relative w-full overflow-hidden">
+          <div class="bg-surface rounded-2xl border border-border shadow-elevated overflow-hidden">
+            <div class="bg-muted/30 px-4 py-3 border-b border-border flex items-center justify-between">
+              <span class="text-xs font-medium text-foreground flex items-center gap-2"><FileSpreadsheet class="w-4 h-4 text-muted-foreground" /> PLANTILLA_CERTIFITRACK.xlsx</span>
+              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Solo Lectura</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
+                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
+                  <tr>
+                    <th class="px-3 py-2 font-medium border-r border-border">Subcontratista</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. RC</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. AT</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. Auto</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite RC</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite AT</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite Auto</th>
+                    <th class="px-3 py-2 font-medium">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border text-foreground">
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">VIGENTE</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
+                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">01/14/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">VENCIDO</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border">06/15/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">FALTANTE</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Summit Valley Concrete</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$5M / $5M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">VIGENTE</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  {/* Content Sections */}
+  <section class="spacing-section bg-background">
+    <div class="reading-width px-4 sm:px-6 prose prose-slate dark:prose-invert">
+      <h2 class="text-h2 text-foreground mb-4">¿Qué es esta plantilla?</h2>
+      <p class="text-body spacing-paragraph">Esta es una hoja de cálculo preformateada diseñada específicamente para Contratistas Generales y Constructores para rastrear el estado del seguro de sus subcontratistas. Proporciona una forma estructurada de registrar datos extraídos de los certificados ACORD 25.</p>
+
+      <h2 class="text-h2 text-foreground mb-4">¿Para quién es?</h2>
+      <p class="text-body spacing-paragraph">Esta plantilla es ideal para gerentes de oficina, contralores y gerentes de operaciones en empresas de construcción residencial o comercial ligera que necesitan una forma limpia y confiable de rastrear registros sin comprar costosos programas de gestión de construcción empresarial.</p>
+
+      <h2 class="text-h2 text-foreground mb-4">¿Qué columnas están incluidas?</h2>
+      <p class="text-body spacing-paragraph">La hoja de cálculo incluye los campos estándar necesarios para rastrear registros básicos:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Subcontratista</li>
+        <li>Oficio</li>
+        <li>Proyecto</li>
+        <li>Archivo de Certificado</li>
+        <li>Aseguradora</li>
+        <li>Número de Póliza</li>
+        <li>Vencimiento GL</li>
+        <li>Vencimiento WC</li>
+        <li>Vencimiento Auto</li>
+        <li>Vencimiento Umbrella</li>
+        <li>Fecha Efectiva</li>
+        <li>Estado</li>
+        <li>Notas</li>
+      </ul>
+      <p class="text-body spacing-paragraph">Campos administrativos opcionales:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Asegurado Adicional</li>
+        <li>Renuncia de Subrogación</li>
+        <li>Límite Mínimo Requerido</li>
+        <li>Límite Real</li>
+      </ul>
+      <div class="p-4 bg-muted/30 border border-border rounded-lg text-small text-muted-foreground my-6">
+        <strong class="font-semibold text-foreground">Importante:</strong> Los campos deben adaptarse a los contratos de su proyecto, a los requisitos de seguro y al asesoramiento de sus profesionales legales o de seguros.
+      </div>
+
+      <h2 class="text-h2 text-foreground mb-4">Cómo usarla</h2>
+      <ol class="text-body spacing-paragraph">
+        <li>Descargue el archivo Excel o haga una copia en Google Sheets.</li>
+        <li>Enumere a todos los subcontratistas activos en la primera columna.</li>
+        <li>Abra su carpeta de Certificados de Seguro (COIs).</li>
+        <li>Para cada certificado, extraiga manualmente las fechas y límites requeridos e ingréselos en la fila correspondiente.</li>
+        <li>Actualice la columna "Estado" para filtrar fácilmente por quién le faltan documentos o tiene pólizas vencidas.</li>
+      </ol>
+
+      <h2 class="text-h2 text-foreground mb-4">Lista de Verificación de Revisión de COI &mdash; Referencia Administrativa</h2>
+      <p class="text-body spacing-paragraph">La plantilla incluye una pestaña secundaria diseñada para ayudar a los usuarios a organizar y revisar documentos de manera sistemática. Sirve como una referencia administrativa. No determina el cumplimiento legal.</p>
+      <p class="text-body spacing-paragraph">Indicadores de estado incluidos:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Presente</li>
+        <li>Faltante</li>
+        <li>Necesita Revisión</li>
+        <li>No Proporcionado</li>
+      </ul>
+
+      <h2 class="text-h2 text-foreground mb-4">Errores Comunes al Rastrear COIs en Excel</h2>
+      <p class="text-body spacing-paragraph">Si está gestionando este proceso manualmente, tenga cuidado con estas trampas frecuentes:</p>
+      <ul class="text-body spacing-paragraph">
+        <li><strong>Sobrescribir registros anteriores:</strong> Siempre mantenga un registro histórico. Cuando un subcontratista envíe una renovación, no solo sobrescriba la fila antigua—es posible que necesite demostrar que la cobertura existió durante un período de proyecto anterior.</li>
+        <li><strong>No rastrear renuncias y asegurados adicionales:</strong> Un certificado sin los endosos requeridos a menudo es tan malo como uno vencido. Asegúrese de estar realmente verificando las casillas.</li>
+        <li><strong>Ignorar el límite de la póliza Umbrella:</strong> La Responsabilidad General a menudo no cumple con el límite total requerido del contrato por sí sola.</li>
+        <li><strong>No hacer seguimiento a "Por Determinar" o documentos faltantes:</strong> Una hoja de cálculo es tan buena como la acción que usted tome sobre ella.</li>
+      </ul>
+
+      <h2 class="text-h2 text-foreground mb-4">Cuando una Hoja de Cálculo Deja de Ser Suficiente</h2>
+      <p class="text-body spacing-paragraph">Excel y Google Sheets son formas fantásticas y gratuitas de comenzar a rastrear. Sin embargo, carecen de automatización. Una hoja de cálculo no:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Enviará correos electrónicos automáticamente a los subcontratistas cuando sus pólizas estén a 30 días del vencimiento.</li>
+        <li>Leerá los PDFs por usted para extraer los límites y fechas.</li>
+        <li>Verificará que el nombre en el certificado coincida con el nombre en su contrato.</li>
+      </ul>
+      <p class="text-body spacing-paragraph">Si está pasando horas cada semana escribiendo fechas de PDFs en celdas, es hora de mejorar su proceso.</p>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section class="spacing-section bg-muted/20 border-t border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+      <h2 class="text-h2 text-foreground mb-6 text-balance">¿Necesitas ayuda para organizar tu carpeta existente?</h2>
+      <p class="text-body-large mb-8">Envíanos la carpeta. Te devolveremos el registro estructurado.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <Button href="/es/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
+          Limpia mi Carpeta de COI &mdash; $49
+        </Button>
+      </div>
+      <p class="text-small text-muted-foreground mt-6">Hasta 25 subcontratistas.</p>
+    </div>
+  </section>
+</Layout>

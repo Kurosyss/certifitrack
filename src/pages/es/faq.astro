@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const title = "Preguntas Frecuentes | CertifiTrack Cleanup";
+const description = "Preguntas frecuentes sobre nuestro servicio de limpieza de COI.";
+
+const faqs = [
+  {
+    category: "Extracción y Entrega",
+    questions: [
+      {
+        q: "¿Leen cada certificado manualmente?",
+        a: "Nuestro proceso combina tecnología OCR con verificación humana. Extraemos campos clave (como Responsabilidad Civil, Compensación de Trabajadores, Auto y fechas de vencimiento) para garantizar un alto grado de precisión administrativa antes de devolver su hoja de cálculo."
+      },
+      {
+        q: "¿Cuánto dura la limpieza?",
+        a: "Normalmente entregamos su registro limpio dentro de [CONFIRM TURNAROUND TIME, e.g., 24 a 48 horas hábiles] después de subir sus archivos."
+      }
+    ]
+  },
+  {
+    category: "Servicio y Cumplimiento",
+    questions: [
+      {
+        q: "¿Es este un software de cumplimiento?",
+        a: "No. CertifiTrack proporciona extracción de datos administrativos. Devolvemos una hoja de cálculo estructurada con los datos encontrados en sus certificados, pero no hacemos determinaciones legales sobre el cumplimiento, exclusiones de pólizas o idoneidad de cobertura."
+      },
+      {
+        q: "¿Qué tipos de documentos puedo enviar?",
+        a: "Puede subir sus certificados como PDF dentro de un único archivo ZIP. Aceptamos certificados ACORD 25 estándar, así como copias escaneadas. También recomendamos incluir su lista maestra actual de subcontratistas para que podamos marcar los documentos faltantes."
+      }
+    ]
+  },
+  {
+    category: "Seguridad y Datos",
+    questions: [
+      {
+        q: "¿Qué tan seguros están mis datos?",
+        a: "Los archivos se procesan de forma segura. Todos los certificados subidos se eliminan de nuestros sistemas activos después de [CONFIRM RETENTION PERIOD, e.g., 30 días]."
+      },
+      {
+        q: "¿Se usan mis documentos para entrenar IA?",
+        a: "[CONFIRM AI TRAINING POLICY: e.g., No. Sus archivos se usan exclusivamente para generar su registro y no se usan para entrenar modelos públicos.]"
+      }
+    ]
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <div class="text-center mb-16">
+        <h1 class="text-h1 text-foreground spacing-heading">Preguntas Frecuentes</h1>
+        <p class="text-body-large spacing-paragraph">Todo lo que necesitas saber sobre el proceso de limpieza.</p>
+      </div>
+
+      <div class="space-y-12">
+        {faqs.map(group => (
+          <div>
+            <h2 class="text-h3 text-foreground mb-6 pb-2 border-b border-border font-semibold">{group.category}</h2>
+            <div class="space-y-4">
+              {group.questions.map(faq => (
+                <details class="group bg-surface border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+                  <summary class="flex items-center justify-between cursor-pointer p-6 font-medium text-foreground hover:bg-muted/30 transition-colors">
+                    {faq.q}
+                    <span class="ml-6 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="px-6 pb-6 pt-2 text-muted-foreground leading-relaxed">
+                    <p class="text-small">{faq.a}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center pt-8 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-2">¿Aún tienes preguntas?</h3>
+        <p class="text-small text-muted-foreground mb-6">Estamos aquí para ayudarte.</p>
+        <Button href="/es/contact" variant="outline">Contactar Soporte</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

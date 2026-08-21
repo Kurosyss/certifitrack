@@ -1,0 +1,196 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Button from '../../../components/ui/Button.astro';
+import { Download, FileSpreadsheet } from 'lucide-react';
+
+const title = "Free COI Tracking Spreadsheet Template for General Contractors | CertifiTrack";
+const description = "Track subcontractor certificates, expiration dates, coverage limits, and document status in Excel or Google Sheets. Download our free template.";
+---
+
+<Layout title={title} description={description}>
+  {/* Hero Section */}
+  <section class="spacing-section border-b border-border bg-background">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        
+        <div>
+          <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-muted-foreground mb-6 shadow-subtle">
+            Free Template
+          </div>
+          <h1 class="text-h1 text-foreground spacing-heading text-balance">
+            Free COI Tracking Spreadsheet Template
+          </h1>
+          <p class="text-body-large spacing-paragraph">
+            Track subcontractor certificates, expiration dates, coverage limits, and document status. Stop losing track of which subcontractors have active records.
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4 mb-4">
+            <Button href="/CERTIFITRACK_TEMPLATE.xlsx" size="lg" class="shadow-elevated w-full sm:w-auto" download>
+              <Download class="w-4 h-4 mr-2" />
+              Download Excel Template
+            </Button>
+          </div>
+          <p class="text-caption text-muted-foreground">100% free. No email required to download.</p>
+        </div>
+
+        <div class="relative w-full overflow-hidden">
+          <div class="bg-surface rounded-2xl border border-border shadow-elevated overflow-hidden">
+            <div class="bg-muted/30 px-4 py-3 border-b border-border flex items-center justify-between">
+              <span class="text-xs font-medium text-foreground flex items-center gap-2"><FileSpreadsheet class="w-4 h-4 text-muted-foreground" /> CERTIFITRACK_TEMPLATE.xlsx</span>
+              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Read-Only</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
+                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
+                  <tr>
+                    <th class="px-3 py-2 font-medium border-r border-border">Subcontractor</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">GL Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">WC Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Auto Exp.</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">GL Limit</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">WC Limit</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Auto Limit</th>
+                    <th class="px-3 py-2 font-medium">Status</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border text-foreground">
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">CURRENT</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
+                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">01/14/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">EXPIRED</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border">06/15/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">MISSING</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Summit Valley Concrete</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border">08/20/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$5M / $5M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">CURRENT</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  {/* Content Sections */}
+  <section class="spacing-section bg-background">
+    <div class="reading-width px-4 sm:px-6 prose prose-slate dark:prose-invert">
+      <h2 class="text-h2 text-foreground mb-4">What is this template?</h2>
+      <p class="text-body spacing-paragraph">This is a pre-formatted spreadsheet designed specifically for General Contractors and Builders to track the insurance status of their subcontractors. It provides a structured way to record data extracted from ACORD 25 certificates.</p>
+
+      <h2 class="text-h2 text-foreground mb-4">Who is it for?</h2>
+      <p class="text-body spacing-paragraph">This template is ideal for office managers, controllers, and operations managers at residential or light-commercial construction companies who need a clean, reliable way to track records without purchasing expensive enterprise construction management software.</p>
+
+      <h2 class="text-h2 text-foreground mb-4">What columns are included?</h2>
+      <p class="text-body spacing-paragraph">The spreadsheet includes the standard fields needed to track basic records:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Subcontractor</li>
+        <li>Trade</li>
+        <li>Project</li>
+        <li>Certificate File</li>
+        <li>Carrier</li>
+        <li>Policy Number</li>
+        <li>GL Expiration</li>
+        <li>WC Expiration</li>
+        <li>Auto Expiration</li>
+        <li>Umbrella Expiration</li>
+        <li>Effective Date</li>
+        <li>Status</li>
+        <li>Notes</li>
+      </ul>
+      <p class="text-body spacing-paragraph">Optional administrative fields:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Additional Insured</li>
+        <li>Waiver of Subrogation</li>
+        <li>Minimum Required Limit</li>
+        <li>Actual Limit</li>
+      </ul>
+      <div class="p-4 bg-muted/30 border border-border rounded-lg text-small text-muted-foreground my-6">
+        <strong class="font-semibold text-foreground">Important:</strong> Fields should be adapted to your project contracts, insurance requirements, and advice from your insurance or legal professionals.
+      </div>
+
+      <h2 class="text-h2 text-foreground mb-4">How to use it</h2>
+      <ol class="text-body spacing-paragraph">
+        <li>Download the Excel file or make a copy in Google Sheets.</li>
+        <li>List all active subcontractors in the first column.</li>
+        <li>Open your folder of Certificates of Insurance (COIs).</li>
+        <li>For each certificate, manually extract the required dates and limits and enter them into the corresponding row.</li>
+        <li>Update the "Status" column to easily filter by who is missing documents or has expired policies.</li>
+      </ol>
+
+      <h2 class="text-h2 text-foreground mb-4">COI Review Checklist &mdash; Administrative Reference</h2>
+      <p class="text-body spacing-paragraph">The template includes a secondary tab designed to help users organize and review documents systematically. It serves as an administrative reference. It does not determine legal compliance.</p>
+      <p class="text-body spacing-paragraph">Status indicators included:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Present</li>
+        <li>Missing</li>
+        <li>Needs Review</li>
+        <li>Not Provided</li>
+      </ul>
+
+      <h2 class="text-h2 text-foreground mb-4">Common Mistakes When Tracking COIs in Excel</h2>
+      <p class="text-body spacing-paragraph">If you're managing this process manually, watch out for these frequent pitfalls:</p>
+      <ul class="text-body spacing-paragraph">
+        <li><strong>Overwriting previous records:</strong> Always keep a historical log. When a sub sends a renewal, don't just overwrite the old row—you may need to prove coverage existed during a past project timeframe.</li>
+        <li><strong>Failing to track waivers and additional insureds:</strong> A certificate without the required endorsements is often as bad as an expired one. Make sure you're actually checking the boxes.</li>
+        <li><strong>Ignoring the Umbrella policy limit:</strong> General Liability often doesn't meet the contract's total required limit on its own.</li>
+        <li><strong>Not following up on "TBD" or missing documents:</strong> A spreadsheet is only as good as the action you take on it.</li>
+      </ul>
+
+      <h2 class="text-h2 text-foreground mb-4">When a Spreadsheet Stops Being Enough</h2>
+      <p class="text-body spacing-paragraph">Excel and Google Sheets are fantastic, free ways to start tracking. However, they lack automation. A spreadsheet will not:</p>
+      <ul class="text-body spacing-paragraph">
+        <li>Automatically email subcontractors when their policies are 30 days from expiration.</li>
+        <li>Read the PDFs for you to extract the limits and dates.</li>
+        <li>Verify that the name on the certificate matches the name on your contract.</li>
+      </ul>
+      <p class="text-body spacing-paragraph">If you're spending hours every week typing dates from PDFs into cells, it's time to upgrade your process.</p>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section class="spacing-section bg-muted/20 border-t border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+      <h2 class="text-h2 text-foreground mb-6 text-balance">Need help organizing your existing folder?</h2>
+      <p class="text-body-large mb-8">Send us the folder. We'll return the structured tracker.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <Button href="/en/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
+          Clean Up My COI Folder &mdash; $49
+        </Button>
+      </div>
+      <p class="text-small text-muted-foreground mt-6">Up to 25 subcontractors.</p>
+    </div>
+  </section>
+</Layout>

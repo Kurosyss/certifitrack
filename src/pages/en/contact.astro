@@ -1,0 +1,42 @@
+---
+import { siteConfig } from '../../config/site';
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const title = "Contact | CertifiTrack";
+const description = "Contact CertifiTrack for custom quotes, larger folders, or questions about the upload process.";
+---
+
+<Layout title={title} description={description}>
+  <section class="spacing-section bg-background min-h-[60vh] flex items-center border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      
+      <div class="bg-surface border border-border rounded-3xl p-8 sm:p-12 shadow-elevated">
+        <h1 class="text-h1 text-foreground mb-4">Contact Sales</h1>
+        
+        <p class="text-body-large text-muted-foreground mb-10 max-w-lg">
+          Questions about pricing, larger folders, unusual documents, or the upload process? Reach out below.
+        </p>
+        
+        <div class="mb-10">
+          <a href="mailto:hello@certifitrack.com" class="text-2xl sm:text-3xl font-medium text-foreground hover:text-accent transition-colors underline decoration-border hover:decoration-accent underline-offset-4">
+            hello@certifitrack.com
+          </a>
+        </div>
+        
+        <p class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-12">
+          [CONFIRM RESPONSE TIME, e.g., Typical response within 1 business day.]
+        </p>
+
+        <div class="pt-8 border-t border-border/50">
+          <h3 class="text-h3 text-foreground mb-2">100+ subcontractors?</h3>
+          <p class="text-sm text-muted-foreground mb-6">Contact us for a custom quote on larger compliance folders.</p>
+          <Button href="mailto:hello@certifitrack.com" size="lg" class="shadow-sm">
+            Get a Custom Quote
+          </Button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

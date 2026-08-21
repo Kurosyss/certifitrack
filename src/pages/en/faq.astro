@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const title = "FAQ | CertifiTrack Cleanup";
+const description = "Frequently asked questions about our COI cleanup service.";
+
+const faqs = [
+  {
+    category: "Extraction & Delivery",
+    questions: [
+      {
+        q: "Do you read every certificate manually?",
+        a: "Our process combines OCR technology with human verification. We extract key fields (such as General Liability, Workers Compensation, Auto, and expiration dates) to ensure a high degree of administrative accuracy before returning your spreadsheet."
+      },
+      {
+        q: "How long does the cleanup take?",
+        a: "We typically deliver your clean tracker within [CONFIRM TURNAROUND TIME, e.g., 24 to 48 business hours] after you upload your files."
+      }
+    ]
+  },
+  {
+    category: "Service & Compliance",
+    questions: [
+      {
+        q: "Is this compliance software?",
+        a: "No. CertifiTrack provides administrative data extraction. We return a structured spreadsheet of the data found on your certificates, but we do not make legal determinations about compliance, policy exclusions, or coverage adequacy."
+      },
+      {
+        q: "What types of documents can I send?",
+        a: "You can upload your certificates as PDFs inside a single ZIP file. We accept standard ACORD 25 certificates as well as scanned copies. We also recommend including your current subcontractor master list so we can flag missing documents."
+      }
+    ]
+  },
+  {
+    category: "Security & Data",
+    questions: [
+      {
+        q: "How secure is my data?",
+        a: "Files are processed securely. All uploaded certificates are deleted from our active systems after [CONFIRM RETENTION PERIOD, e.g., 30 days]."
+      },
+      {
+        q: "Are my documents used for AI training?",
+        a: "[CONFIRM AI TRAINING POLICY: e.g., No. Your files are used exclusively to generate your tracker and are not used to train public models.]"
+      }
+    ]
+  }
+];
+---
+
+<Layout title={title} description={description}>
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <div class="text-center mb-16">
+        <h1 class="text-h1 text-foreground spacing-heading">Frequently Asked Questions</h1>
+        <p class="text-body-large spacing-paragraph">Everything you need to know about the cleanup process.</p>
+      </div>
+
+      <div class="space-y-12">
+        {faqs.map(group => (
+          <div>
+            <h2 class="text-h3 text-foreground mb-6 pb-2 border-b border-border font-semibold">{group.category}</h2>
+            <div class="space-y-4">
+              {group.questions.map(faq => (
+                <details class="group bg-surface border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+                  <summary class="flex items-center justify-between cursor-pointer p-6 font-medium text-foreground hover:bg-muted/30 transition-colors">
+                    {faq.q}
+                    <span class="ml-6 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="px-6 pb-6 pt-2 text-muted-foreground leading-relaxed">
+                    <p class="text-small">{faq.a}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 text-center pt-8 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-2">Still have questions?</h3>
+        <p class="text-small text-muted-foreground mb-6">We're here to help.</p>
+        <Button href="/en/contact" variant="outline">Contact Support</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

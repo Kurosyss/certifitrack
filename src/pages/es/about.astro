@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const title = "Sobre Nosotros | CertifiTrack";
+const description = "Por qué creamos CertifiTrack y cómo ayudamos a los Contratistas Generales.";
+---
+
+<Layout title={title} description={description}>
+  <section class="spacing-section border-b border-border bg-background">
+    <div class="reading-width px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h1 class="text-h1 text-foreground spacing-heading">Sobre CertifiTrack</h1>
+        <p class="text-body-large text-balance">Creamos CertifiTrack porque los Contratistas Generales no deberían tener que elegir entre una carpeta desordenada de PDFs y una suscripción de software de cumplimiento empresarial de $10,000 al año.</p>
+      </div>
+
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">Qué hacemos</h2>
+          <p class="text-body spacing-paragraph">CertifiTrack es un servicio paquetizado diseñado para resolver un único y doloroso problema administrativo: <strong class="text-foreground font-medium">las carpetas desordenadas de COIs de subcontratistas</strong>.</p>
+          <p class="text-body">Tomamos los PDFs desorganizados y los certificados ACORD 25 que recopilas de los subcontratistas, los organizamos manualmente, extraemos las fechas de vencimiento y límites críticos, y te devolvemos un registro estructurado y limpio en Excel. Marcamos los documentos faltantes y las pólizas vencidas para que sepas exactamente a quién contactar.</p>
+        </section>
+
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">Por qué es importante el problema</h2>
+          <p class="text-body spacing-paragraph">Para los constructores residenciales y comerciales ligeros, el seguimiento del seguro de los subcontratistas es un dolor de cabeza masivo. Los subcontratistas envían fotos de certificados, escaneos borrosos y documentos vencidos. Cuando llega el momento de una auditoría de compensación de trabajadores, o cuando un nuevo gerente de oficina asume el cargo, revisar una carpeta de 100 PDFs desordenados toma días de tedioso ingreso manual de datos.</p>
+          <p class="text-body">Aunque existen soluciones de software empresarial, a menudo requieren obligar a tus subcontratistas a crear cuentas, aprender a usar portales nuevos y complejos, y pagar altas tarifas anuales de software.</p>
+        </section>
+
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">Nuestra filosofía de servicio</h2>
+          <p class="text-body spacing-paragraph">Creemos que a veces el mejor software es <strong class="text-foreground font-medium">no tener software</strong>.</p>
+          <p class="text-body">Nuestros clientes no quieren otro inicio de sesión. Quieren que el trabajo se haga por ellos. Combinando modernos flujos de trabajo administrativos con revisión humana manual, ofrecemos un servicio de limpieza "Todo Incluido" que no requiere capacitación (onboarding) ni tarifas recurrentes. Tú nos envías el desorden; nosotros te enviamos el registro limpio.</p>
+        </section>
+      </div>
+
+      <div class="spacing-cta text-center mt-16 pt-16 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-6">¿Listo para limpiar tu carpeta de COIs?</h3>
+        <Button href="/es/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
+          Ver Precios
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>

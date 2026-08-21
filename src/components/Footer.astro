@@ -1,0 +1,89 @@
+---
+import { siteConfig } from '../config/site';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const footerLinks = [
+  {
+    title: t('footer.product'),
+    links: [
+      { name: t('nav.whatWeDo'), href: translatePath('/what-we-do') },
+      { name: t('nav.howItWorks'), href: translatePath('/how-it-works') },
+      { name: t('nav.pricing'), href: translatePath('/pricing') },
+      { name: t('nav.template'), href: translatePath('/templates/coi-tracking-spreadsheet') },
+    ],
+  },
+  {
+    title: t('footer.support'),
+    links: [
+      { name: t('nav.faq'), href: translatePath('/faq') },
+      { name: t('footer.contact'), href: translatePath('/contact') },
+    ],
+  },
+  {
+    title: t('footer.legal'),
+    links: [
+      { name: t('footer.privacy'), href: translatePath('/privacy') },
+      { name: t('footer.terms'), href: translatePath('/terms') },
+      { name: t('footer.refunds'), href: translatePath('/refunds') },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-border bg-muted/20">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl spacing-footer">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-4 md:col-span-1">
+        <span class="font-bold text-xl tracking-tight text-primary">{siteConfig.name}</span>
+        <p class="text-small text-muted-foreground leading-relaxed">
+          {t('footer.description')}
+        </p>
+      </div>
+      
+      {footerLinks.map((section) => (
+        <div class="space-y-4">
+          <h3 class="text-sm font-semibold text-foreground tracking-wider">{section.title}</h3>
+          <ul class="space-y-3">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  {link.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    
+    <div class="spacing-cta">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 mb-8 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><path d="M21 2v6h-6"></path><path d="M21 13a9 9 0 1 1-3-7.7L21 8"></path></svg>
+          One-Time Payment
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path></svg>
+          Human Review
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          24–48 Hour Delivery
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Administrative Use
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground text-center md:text-left">
+        <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+        <p class="max-w-xl text-right">{t('footer.disclaimer')}</p>
+      </div>
+    </div>
+  </div>
+</footer>

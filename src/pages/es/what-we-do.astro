@@ -1,0 +1,159 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+import { FileSearch, CalendarOff, FileSpreadsheet, FileText, Calendar, CheckCircle2, AlertCircle, FileBox } from 'lucide-react';
+
+const title = "Qué Hacemos | CertifiTrack";
+const description = "Descubre cómo limpiamos tu desordenada carpeta de COIs. Extraemos fechas, marcamos coberturas faltantes y te devolvemos un registro limpio.";
+---
+
+<Layout title={title} description={description}>
+  {/* Hero */}
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+      <h1 class="text-h1 text-foreground spacing-heading text-balance">Hacemos el trabajo manual que odias.</h1>
+      <p class="text-body-large spacing-paragraph">No creaste una empresa para leer pólizas de seguro. Convertimos una carpeta de PDFs desorganizados en datos útiles.</p>
+    </div>
+  </section>
+
+  {/* The Process */}
+  <section class="py-16 lg:py-24 bg-surface border-b border-border overflow-hidden">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl space-y-24 lg:space-y-32">
+      
+      {/* 01: Find */}
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+        <div class="lg:w-1/2">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">01 &mdash; Auditoría</div>
+          <h2 class="text-h2 text-foreground spacing-heading">Encontramos lo que falta.</h2>
+          <p class="text-body spacing-paragraph">Envíenos su lista maestra de subcontratistas junto con su carpeta de PDFs. Hacemos coincidir manualmente cada documento con el subcontratista correcto, revelando instantáneamente quién no ha proporcionado su documentación.</p>
+        </div>
+        <div class="lg:w-1/2 w-full">
+          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto">
+            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4">Reconciliación</div>
+            <div class="space-y-2 text-sm">
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Atlas Ridge Mechanical</span>
+                <span class="text-[10px] text-status-active font-medium tracking-wide">ENCONTRADO</span>
+              </div>
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Summit Valley Concrete</span>
+                <span class="text-[10px] text-status-missing font-medium tracking-wide">FALTANTE</span>
+              </div>
+              <div class="flex items-center justify-between pb-2 border-b border-border/50">
+                <span class="font-medium text-foreground">Cedar Point Roofing</span>
+                <span class="text-[10px] text-status-active font-medium tracking-wide">ENCONTRADO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 02: Extract */}
+      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+        <div class="lg:w-1/2 w-full order-2 lg:order-1">
+          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto relative overflow-hidden">
+            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4 relative z-10">Extracción de Datos</div>
+            <div class="space-y-4 relative z-10">
+              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
+                <span class="text-xs text-muted-foreground font-medium">Responsabilidad Civil</span>
+                <span class="text-sm font-semibold text-status-expired">14 Ene, 2026</span>
+              </div>
+              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
+                <span class="text-xs text-muted-foreground font-medium">Comp. Trabajadores</span>
+                <span class="text-sm font-medium text-foreground">30 Nov, 2026</span>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-xs text-muted-foreground font-medium">Responsabilidad Auto</span>
+                <span class="text-sm font-medium text-foreground">01 Oct, 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:w-1/2 order-1 lg:order-2">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">02 &mdash; Extracción</div>
+          <h2 class="text-h2 text-foreground spacing-heading">Extraemos los datos críticos.</h2>
+          <p class="text-body spacing-paragraph">No tiene tiempo para entrecerrar los ojos ante formularios ACORD escaneados. Leemos los PDFs, encontramos las fechas de vencimiento y los límites de Responsabilidad Civil, Compensación de Trabajadores y Auto, y marcamos cualquier cosa que no cumpla.</p>
+        </div>
+      </div>
+
+      {/* 03: Organize & Return */}
+      <div class="flex flex-col gap-12 items-center">
+        <div class="max-w-2xl text-center">
+          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">03 &mdash; Organización y Entrega</div>
+          <h2 class="text-h2 text-foreground spacing-heading">Entregamos un registro limpio.</h2>
+          <p class="text-body spacing-paragraph">Devolvemos una hoja de cálculo de Excel estructurada que realmente puede usar. Filtre instantáneamente por estado para ver quién necesita una llamada de seguimiento y revise los límites de cobertura exactos extraídos de los formularios.</p>
+        </div>
+        <div class="w-full max-w-3xl">
+          <div class="flex flex-col bg-background rounded-xl border border-border shadow-elevated overflow-hidden">
+            <div class="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <FileSpreadsheet class="w-4 h-4 text-muted-foreground" />
+                <span class="text-xs font-medium text-foreground tracking-wide">Registro_Maestro_Final.xlsx</span>
+              </div>
+              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Entregable</span>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
+                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
+                  <tr>
+                    <th class="px-3 py-2 font-medium border-r border-border">Subcontratista</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. RC</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. CT</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Venc. Auto</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite RC</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite CT</th>
+                    <th class="px-3 py-2 font-medium border-r border-border">Límite Auto</th>
+                    <th class="px-3 py-2 font-medium">Estado</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border text-foreground">
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
+                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
+                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
+                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">VIGENTE</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
+                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">14/01/26</td>
+                    <td class="px-3 py-2 border-r border-border">30/11/26</td>
+                    <td class="px-3 py-2 border-r border-border">30/11/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">VENCIDO</span></td>
+                  </tr>
+                  <tr class="hover:bg-muted/30 transition-colors">
+                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border">15/06/26</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
+                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
+                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">FALTANTE</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="spacing-section bg-background text-center">
+    <div class="container mx-auto px-4 max-w-xl">
+      <h2 class="text-h2 text-foreground spacing-heading">¿Listo para limpiar tus registros?</h2>
+      <Button href="/es/pricing" size="lg" class="mt-4 shadow-elevated">
+        Ver Precios
+      </Button>
+    </div>
+  </section>
+</Layout>

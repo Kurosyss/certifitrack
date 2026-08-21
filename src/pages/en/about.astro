@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Button from '../../components/ui/Button.astro';
+
+const title = "About Us | CertifiTrack";
+const description = "Why we built CertifiTrack and how we help General Contractors.";
+---
+
+<Layout title={title} description={description}>
+  <section class="spacing-section border-b border-border bg-background">
+    <div class="reading-width px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h1 class="text-h1 text-foreground spacing-heading">About CertifiTrack</h1>
+        <p class="text-body-large text-balance">We built CertifiTrack because General Contractors shouldn't have to choose between a messy folder of PDFs and a $10,000/year enterprise compliance software subscription.</p>
+      </div>
+
+      <div class="space-y-12">
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">What We Do</h2>
+          <p class="text-body spacing-paragraph">CertifiTrack is a productized service designed to solve a single, painful administrative problem: <strong class="text-foreground font-medium">messy subcontractor COI folders</strong>.</p>
+          <p class="text-body">We take the unorganized PDFs and ACORD 25 certificates you collect from subcontractors, manually organize them, extract the critical expiration dates and limits, and return a clean, structured spreadsheet tracker. We flag missing documents and expired policies so you know exactly who to follow up with.</p>
+        </section>
+
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">Why The Problem Matters</h2>
+          <p class="text-body spacing-paragraph">For residential and light-commercial builders, tracking subcontractor insurance is a massive headache. Subcontractors send photos of certificates, blurry scans, and expired documents. When it's time for a workers' compensation audit, or when a new office manager takes over, parsing through a folder of 100 messy PDFs takes days of tedious manual data entry.</p>
+          <p class="text-body">While enterprise software solutions exist, they often require forcing your subcontractors to create accounts, learning complex new portals, and paying steep annual software fees.</p>
+        </section>
+
+        <section>
+          <h2 class="text-h2 text-foreground mb-4">Our Service Philosophy</h2>
+          <p class="text-body spacing-paragraph">We believe that sometimes the best software is <strong class="text-foreground font-medium">no software</strong>.</p>
+          <p class="text-body">Our customers don't want another login. They want the work done for them. By combining modern administrative workflows with manual human review, we offer a "Done-For-You" cleanup service that requires zero onboarding and zero recurring fees. You send us the mess; we send you the clean tracker.</p>
+        </section>
+      </div>
+
+      <div class="spacing-cta text-center mt-16 pt-16 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-6">Ready to clean up your COI folder?</h3>
+        <Button href="/en/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
+          View Pricing
+        </Button>
+      </div>
+    </div>
+  </section>
+</Layout>
