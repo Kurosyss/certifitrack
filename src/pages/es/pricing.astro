@@ -2,6 +2,7 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import CheckoutButton from '../../components/CheckoutButton.tsx';
 import { ArrowRight, CheckCircle2, FileSpreadsheet, Lock } from 'lucide-react';
 
 const title = "Precios | CertifiTrack";
@@ -61,9 +62,11 @@ const description = "Precios simples. Limpieza única. Sin suscripciones ni conf
                 <div class="text-xs text-muted-foreground">Sube tus archivos en la siguiente pantalla.</div>
               </div>
             </div>
-            <Button href={siteConfig.stripePaymentLink25} size="lg" class="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105">
-              Iniciar Proceso de Limpieza — $49
-            </Button>
+            <CheckoutButton 
+              client:load
+              text="Iniciar Proceso de Limpieza — $49"
+              className="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105"
+            />
           </div>
         </div>
       </div>

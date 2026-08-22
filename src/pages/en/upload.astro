@@ -1,0 +1,10 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Uploader from '../../components/Uploader.tsx';
+---
+
+<Layout title="Upload COI Folder | CertifiTrack" description="Upload your COI zip file to get your structured tracker." noindex={true}>
+  <section className="py-24 bg-slate-50 min-h-[calc(100vh-4rem)]">
+    <Uploader client:load />
+  </section>
+</Layout>

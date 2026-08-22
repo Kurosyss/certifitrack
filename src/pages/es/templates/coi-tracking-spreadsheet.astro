@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/ui/Button.astro';
+import CheckoutButton from '../../../components/CheckoutButton.tsx';
 import { Download, FileSpreadsheet } from 'lucide-react';
 
 const title = "Plantilla Gratuita de Hoja de Cálculo para Seguimiento de COI | CertifiTrack";
@@ -186,9 +187,11 @@ const description = "Rastrea certificados de subcontratistas, fechas de vencimie
       <h2 class="text-h2 text-foreground mb-6 text-balance">¿Necesitas ayuda para organizar tu carpeta existente?</h2>
       <p class="text-body-large mb-8">Envíanos la carpeta. Te devolveremos el registro estructurado.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <Button href="/es/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
-          Limpia mi Carpeta de COI &mdash; $49
-        </Button>
+        <CheckoutButton 
+          client:load
+          text="Limpia mi Carpeta de COI — $49"
+          className="shadow-elevated transition-transform hover:scale-105"
+        />
       </div>
       <p class="text-small text-muted-foreground mt-6">Hasta 25 subcontratistas.</p>
     </div>

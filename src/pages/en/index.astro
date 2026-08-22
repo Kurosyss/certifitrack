@@ -2,6 +2,7 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import CheckoutButton from '../../components/CheckoutButton.tsx';
 import { ArrowRight, FileText, CheckCircle2, FileSpreadsheet, File, Scan } from 'lucide-react';
 
 const title = "CertifiTrack | Turn Your Messy COI Folder Into a Clean Tracker";
@@ -30,9 +31,11 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
             Send us your subcontractor PDFs. We'll organize the documents, extract key certificate information, and return a clean spreadsheet indicating exactly who is missing coverage.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mt-8">
-            <Button href="/en/pricing" size="lg" class="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105">
-              Clean Up My COI Folder — $49
-            </Button>
+            <CheckoutButton 
+              client:load
+              text="Clean Up My COI Folder — $49"
+              className="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105"
+            />
           </div>
           <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6 text-xs font-medium text-muted-foreground">
             <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> One-time payment</span>
@@ -251,9 +254,11 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
       <h2 class="text-h2 text-foreground spacing-heading text-balance">Stop guessing before your audit.</h2>
       <p class="text-body-large spacing-paragraph">Let us handle the manual data entry so you can focus on building.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <Button href="/en/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
-          Clean Up My COI Folder &mdash; $49
-        </Button>
+        <CheckoutButton 
+          client:load
+          text="Clean Up My COI Folder — $49"
+          className="shadow-elevated transition-transform hover:scale-105"
+        />
       </div>
     </div>
   </section>

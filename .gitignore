@@ -22,3 +22,8 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Benchmark Secrets
+benchmark/.env
+benchmark_results.json
+benchmark/data/

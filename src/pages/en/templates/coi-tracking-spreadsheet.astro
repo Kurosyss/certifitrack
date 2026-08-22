@@ -1,6 +1,7 @@
 ---
 import Layout from '../../../layouts/Layout.astro';
 import Button from '../../../components/ui/Button.astro';
+import CheckoutButton from '../../../components/CheckoutButton.tsx';
 import { Download, FileSpreadsheet } from 'lucide-react';
 
 const title = "Free COI Tracking Spreadsheet Template for General Contractors | CertifiTrack";
@@ -186,9 +187,11 @@ const description = "Track subcontractor certificates, expiration dates, coverag
       <h2 class="text-h2 text-foreground mb-6 text-balance">Need help organizing your existing folder?</h2>
       <p class="text-body-large mb-8">Send us the folder. We'll return the structured tracker.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <Button href="/en/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
-          Clean Up My COI Folder &mdash; $49
-        </Button>
+        <CheckoutButton 
+          client:load
+          text="Clean Up My COI Folder — $49"
+          className="shadow-elevated transition-transform hover:scale-105"
+        />
       </div>
       <p class="text-small text-muted-foreground mt-6">Up to 25 subcontractors.</p>
     </div>

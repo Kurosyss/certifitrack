@@ -2,6 +2,7 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import CheckoutButton from '../../components/CheckoutButton.tsx';
 import { ArrowRight, FileText, CheckCircle2, FileSpreadsheet, File, Scan } from 'lucide-react';
 
 const title = "CertifiTrack | Convierte tu carpeta desordenada de COIs en un registro limpio";
@@ -30,9 +31,11 @@ const description = "Envíanos los PDFs de tus subcontratistas. Organizaremos lo
             Envíanos los PDFs de tus subcontratistas. Organizaremos los documentos, extraeremos la información clave y te devolveremos una hoja de cálculo limpia indicando exactamente quién carece de cobertura.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mt-8">
-            <Button href="/es/pricing" size="lg" class="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105">
-              Limpia mi Carpeta de COI — $49
-            </Button>
+            <CheckoutButton 
+              client:load
+              text="Limpia mi Carpeta de COI — $49"
+              className="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105"
+            />
           </div>
           <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6 text-xs font-medium text-muted-foreground">
             <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> Pago único</span>
@@ -251,9 +254,11 @@ const description = "Envíanos los PDFs de tus subcontratistas. Organizaremos lo
       <h2 class="text-h2 text-foreground spacing-heading text-balance">Deja de adivinar antes de tu auditoría.</h2>
       <p class="text-body-large spacing-paragraph">Déjanos encargarnos de la entrada manual de datos para que puedas concentrarte en construir.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <Button href="/es/pricing" size="lg" class="shadow-elevated transition-transform hover:scale-105">
-          Limpia mi Carpeta de COI &mdash; $49
-        </Button>
+        <CheckoutButton 
+          client:load
+          text="Limpia mi Carpeta de COI — $49"
+          className="shadow-elevated transition-transform hover:scale-105"
+        />
       </div>
     </div>
   </section>

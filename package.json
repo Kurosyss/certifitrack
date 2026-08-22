@@ -14,13 +14,20 @@
   "dependencies": {
     "@astrojs/react": "^6.0.4",
     "@astrojs/sitemap": "^3.7.3",
+    "@google/genai": "^2.18.0",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/pdfkit": "^0.17.6",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "astro": "^7.2.4",
+    "chalk": "^6.0.0",
+    "dotenv": "^17.4.2",
     "lucide-react": "^1.33.0",
+    "pdfkit": "^0.19.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.12",
+    "zod": "^4.4.3"
   }
 }
