@@ -9,14 +9,7 @@ export default function Uploader() {
   const [dragActive, setDragActive] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const t = params.get("token");
-    if (t) {
-      setToken(t);
-    } else {
-      setStatus("ERROR");
-      setErrorMessage("Missing payment session token. Please start from the homepage.");
-    }
+    // No token needed for open-source local-first version
   }, []);
 
   const handleDrag = useCallback((e: React.DragEvent) => {
@@ -37,7 +30,7 @@ export default function Uploader() {
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       handleFile(e.dataTransfer.files[0]);
     }
-  }, [token, status]);
+  }, [status]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -48,8 +41,6 @@ export default function Uploader() {
 
   const handleFile = async (file: File) => {
     if (status !== "READY" && status !== "ERROR") return;
-    if (!token) return;
-
     if (!file.name.endsWith(".zip") && !file.name.endsWith(".pdf")) {
       setStatus("ERROR");
       setErrorMessage("Only .zip and .pdf files are supported.");
@@ -67,9 +58,6 @@ export default function Uploader() {
       
       const res = await fetch(`${backendUrl}/v1/extract`, {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
         body: formData
       });
 
@@ -106,16 +94,8 @@ export default function Uploader() {
     }
   };
 
-  if (!token && status === "ERROR") {
-    return (
-      <div className="max-w-2xl mx-auto p-8 text-center bg-red-50 text-red-900 rounded-2xl border border-red-200 mt-12">
-        <h2 className="text-2xl font-bold mb-4">Invalid Session</h2>
-        <p className="mb-6">{errorMessage}</p>
-        <a href="/" className="inline-block bg-primary text-white font-medium px-6 py-3 rounded-full hover:bg-primary/90 transition-colors">
-          Return Home
-        </a>
-      </div>
-    );
+  if (status === "ERROR" && !errorMessage) {
+    return null;
   }
 
   return (
@@ -125,7 +105,7 @@ export default function Uploader() {
           Upload Your COI Folder
         </h1>
         <p className="text-lg text-slate-600">
-          Your payment was successful. Upload your .zip of PDFs (or a single .pdf) below to generate your tracker.
+          Upload your .zip of PDFs (or a single .pdf) below to generate your tracker.
         </p>
       </div>
 
@@ -198,7 +178,7 @@ export default function Uploader() {
         </div>
       </div>
 
-      {status === "ERROR" && token && (
+      {status === "ERROR" && (
         <div className="mt-6 p-4 rounded-xl bg-red-50 border border-red-100 text-red-800 text-center">
           <p className="font-medium">Error: {errorMessage}</p>
           <button 

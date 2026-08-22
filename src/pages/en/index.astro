@@ -2,7 +2,6 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
-import CheckoutButton from '../../components/CheckoutButton.tsx';
 import { ArrowRight, FileText, CheckCircle2, FileSpreadsheet, File, Scan } from 'lucide-react';
 
 const title = "CertifiTrack | Turn Your Messy COI Folder Into a Clean Tracker";
@@ -31,15 +30,25 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
             Send us your subcontractor PDFs. We'll organize the documents, extract key certificate information, and return a clean spreadsheet indicating exactly who is missing coverage.
           </p>
           <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mt-8">
-            <CheckoutButton 
-              client:load
-              text="Clean Up My COI Folder — $49"
-              className="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105"
-            />
+            <Button 
+              href="/en/upload"
+              size="lg"
+              class="w-full sm:w-auto shadow-elevated transition-transform hover:scale-105"
+            >
+              Start Extracting Free
+            </Button>
+            <Button 
+              href="https://github.com/certifitrack/certifitrack"
+              variant="outline"
+              size="lg"
+              class="w-full sm:w-auto"
+            >
+              View on GitHub
+            </Button>
           </div>
           <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6 text-xs font-medium text-muted-foreground">
-            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> One-time payment</span>
-            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> No software setup</span>
+            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> Open-source core</span>
+            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> Bring your own API key</span>
           </div>
         </div>
 
@@ -160,7 +169,7 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
       <div class="text-center max-w-2xl mx-auto mb-16">
         <h2 class="text-h2 text-foreground spacing-heading">How it works</h2>
-        <p class="text-body text-balance">Three simple steps. Zero software setup.</p>
+        <p class="text-body text-balance">Run it locally or deploy it yourself.</p>
       </div>
 
       <div class="relative grid md:grid-cols-3 spacing-content text-center">
@@ -168,14 +177,14 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
         
         <div class="flex flex-col items-center group">
           <div class="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-sm font-medium text-muted-foreground mb-5 shadow-subtle group-hover:border-accent group-hover:text-accent transition-colors">1</div>
-          <h3 class="text-h3 text-foreground mb-2">Send Your Files</h3>
-          <p class="text-body max-w-[280px] text-balance">Upload your messy COI folder as a ZIP file. Optionally provide your subcontractor list.</p>
+          <h3 class="text-h3 text-foreground mb-2">Configure Your API Key</h3>
+          <p class="text-body max-w-[280px] text-balance">Bring your own Google Gemini API key. Your data goes directly to the provider.</p>
         </div>
         
         <div class="flex flex-col items-center group">
           <div class="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-sm font-medium text-muted-foreground mb-5 shadow-subtle group-hover:border-accent group-hover:text-accent transition-colors">2</div>
-          <h3 class="text-h3 text-foreground mb-2">We Clean It Up</h3>
-          <p class="text-body max-w-[280px] text-balance">We manually organize the documents, read the ACORD forms, and extract the key information.</p>
+          <h3 class="text-h3 text-foreground mb-2">Upload Your Files</h3>
+          <p class="text-body max-w-[280px] text-balance">Upload your messy COI folder as a ZIP file. The local backend processes it securely.</p>
         </div>
         
         <div class="flex flex-col items-center group">
@@ -251,14 +260,16 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
   {/* Final CTA */}
   <section class="spacing-section bg-background">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
-      <h2 class="text-h2 text-foreground spacing-heading text-balance">Stop guessing before your audit.</h2>
-      <p class="text-body-large spacing-paragraph">Let us handle the manual data entry so you can focus on building.</p>
+      <h2 class="text-h2 text-foreground spacing-heading text-balance">Stop manually typing out COI data.</h2>
+      <p class="text-body-large spacing-paragraph">Run CertifiTrack locally to process your certificates instantly.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
-        <CheckoutButton 
-          client:load
-          text="Clean Up My COI Folder — $49"
-          className="shadow-elevated transition-transform hover:scale-105"
-        />
+        <Button 
+          href="/en/upload"
+          size="lg"
+          class="shadow-elevated transition-transform hover:scale-105"
+        >
+          Try the Demo
+        </Button>
       </div>
     </div>
   </section>

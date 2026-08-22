@@ -23,7 +23,6 @@ export default defineConfig({
   ],
   redirects: {
     '/': '/en/',
-    '/pricing': '/en/pricing',
     '/how-it-works': '/en/how-it-works',
     '/what-we-do': '/en/what-we-do',
     '/faq': '/en/faq',
@@ -31,8 +30,7 @@ export default defineConfig({
     '/about': '/en/about',
     '/templates/coi-tracking-spreadsheet': '/en/templates/coi-tracking-spreadsheet',
     '/privacy': '/en/privacy',
-    '/terms': '/en/terms',
-    '/refunds': '/en/refunds'
+    '/terms': '/en/terms'
   },
   vite: {
     plugins: [tailwindcss()]

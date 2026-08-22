@@ -13,7 +13,6 @@ const translatePath = useTranslatedPath(lang);
 const navLinks = [
   { name: t('nav.whatWeDo'), href: translatePath('/what-we-do') },
   { name: t('nav.howItWorks'), href: translatePath('/how-it-works') },
-  { name: t('nav.pricing'), href: translatePath('/pricing') },
   { name: t('nav.faq'), href: translatePath('/faq') },
   { name: t('nav.template'), href: translatePath('/templates/coi-tracking-spreadsheet') },
 ];
@@ -22,7 +21,10 @@ const navLinks = [
 <header class="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex h-16 max-w-7xl items-center justify-between">
     <div class="flex items-center gap-8">
-      <a href={translatePath('/')} class="flex items-center space-x-2">
+      <a href={translatePath('/')} class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
         <span class="font-bold text-xl tracking-tight text-primary">{siteConfig.name}</span>
       </a>
       <nav class="hidden md:flex gap-6 items-center">
@@ -43,7 +45,7 @@ const navLinks = [
       <ThemeSwitcher client:load />
       
       <div class="hidden sm:block">
-        <Button href={translatePath('/pricing')} size="sm" class="shadow-sm">{t('cta.cleanUp')}</Button>
+        <Button href={translatePath('/upload')} size="sm" class="shadow-sm">{t('cta.cleanUp')}</Button>
       </div>
       
       {/* Mobile Menu Toggle */}
@@ -65,7 +67,7 @@ const navLinks = [
         </a>
       ))}
       <div class="pt-4 mt-2 border-t border-border w-full">
-        <Button href={translatePath('/pricing')} size="lg" class="w-full shadow-sm text-center justify-center">{t('cta.cleanUp')}</Button>
+        <Button href={translatePath('/upload')} size="lg" class="w-full shadow-sm text-center justify-center">{t('cta.cleanUp')}</Button>
       </div>
     </nav>
   </div>
