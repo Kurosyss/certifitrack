@@ -1,10 +1,6 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><style>
     path, rect { fill: #111827; }
     @media (prefers-color-scheme: dark) {
       path, rect { fill: #F3F4F6; }
     }
-  </style>
-  <path d="M 45 15 A 35 35 0 0 0 45 85 Z"/>
-  <rect x="65" y="15" width="15" height="70"/>
-</svg>
+  </style><path d="M 45 15 A 35 35 0 0 0 45 85 Z"></path><rect x="65" y="15" width="15" height="70"></rect></svg>

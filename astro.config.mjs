@@ -30,11 +30,20 @@ export default defineConfig({
     '/about': '/en/about',
     '/templates/coi-tracking-spreadsheet': '/en/templates/coi-tracking-spreadsheet',
     '/privacy': '/en/privacy',
-    '/terms': '/en/terms'
+    '/terms': '/en/terms',
+    '/upload': '/en/upload'
   },
   vite: {
     plugins: [tailwindcss()],
     server: {
+      proxy: {
+        '/v1': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+        }
+      }
+    },
+    preview: {
       proxy: {
         '/v1': {
           target: 'http://127.0.0.1:3000',

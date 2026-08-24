@@ -1,45 +1,95 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import { ShieldCheck, Cpu, Layers, FileCode, CheckCircle2 } from 'lucide-react';
+import { siteConfig } from '../../config/site';
 
-const title = "About Us | CertifiTrack";
-const description = "Why we built CertifiTrack and how we help General Contractors.";
+const title = "About CertifiTrack | Open-Source COI Document Understanding";
+const description = "Learn why we built CertifiTrack: open-source, automated insurance document extraction for general contractors and compliance teams.";
 ---
 
 <Layout title={title} description={description}>
   <section class="spacing-section border-b border-border bg-background">
     <div class="reading-width px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <h1 class="text-h1 text-foreground spacing-heading">About CertifiTrack</h1>
-        <p class="text-body-large text-balance">We built CertifiTrack because General Contractors shouldn't have to choose between a messy folder of PDFs and a $10,000/year enterprise compliance software subscription.</p>
+      
+      {/* Header */}
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Mission & Architecture
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading text-balance">About CertifiTrack</h1>
+        <p class="text-body-large text-muted-foreground text-pretty">
+          Built to give general contractors, builders, and property managers automated insurance certificate understanding without enterprise lock-in.
+        </p>
       </div>
 
-      <div class="space-y-12">
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">What We Do</h2>
-          <p class="text-body spacing-paragraph">CertifiTrack is a productized service designed to solve a single, painful administrative problem: <strong class="text-foreground font-medium">messy subcontractor COI folders</strong>.</p>
-          <p class="text-body">We take the unorganized PDFs and ACORD 25 certificates you collect from subcontractors, manually organize them, extract the critical expiration dates and limits, and return a clean, structured spreadsheet tracker. We flag missing documents and expired policies so you know exactly who to follow up with.</p>
+      {/* Narrative Sections */}
+      <div class="space-y-12 text-body">
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">The Problem with Certificate Tracking</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            In commercial construction and vendor management, verifying certificates of insurance is mandatory, yet the workflow often remains manual. Partners submit scanned ACORD 25 certificates and multi-page policy PDFs, and administrative teams spend hours re-typing expiration dates, policy numbers, and coverage limits into spreadsheets.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack was created to provide a lightweight, open-source alternative that automates the transcription and date validation process directly into familiar spreadsheet formats.
+          </p>
         </section>
 
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">Why The Problem Matters</h2>
-          <p class="text-body spacing-paragraph">For residential and light-commercial builders, tracking subcontractor insurance is a massive headache. Subcontractors send photos of certificates, blurry scans, and expired documents. When it's time for a workers' compensation audit, or when a new office manager takes over, parsing through a folder of 100 messy PDFs takes days of tedious manual data entry.</p>
-          <p class="text-body">While enterprise software solutions exist, they often require forcing your subcontractors to create accounts, learning complex new portals, and paying steep annual software fees.</p>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">Our Software Philosophy</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack is built on three straightforward principles:
+          </p>
+          <div class="grid sm:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <FileCode class="w-4 h-4 text-primary" />
+                <span>Open Source</span>
+              </div>
+              <p class="text-small leading-normal">Free software with auditable code and no recurring SaaS subscription gates.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <ShieldCheck class="w-4 h-4 text-primary" />
+                <span>Stateless Processing</span>
+              </div>
+              <p class="text-small leading-normal">Documents are parsed on demand; temporary files are purged immediately upon completion.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <Layers class="w-4 h-4 text-primary" />
+                <span>Universal Output</span>
+              </div>
+              <p class="text-small leading-normal">Extracts clean, normalized records directly into structured spreadsheets.</p>
+            </div>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">Our Service Philosophy</h2>
-          <p class="text-body spacing-paragraph">We believe that sometimes the best software is <strong class="text-foreground font-medium">no software</strong>.</p>
-          <p class="text-body">Our customers don't want another login. They want the work done for them. By combining modern administrative workflows with manual human review, we offer a "Done-For-You" cleanup service that requires zero onboarding and zero recurring fees. You send us the mess; we send you the clean tracker.</p>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">Deterministic Validation</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Unlike generic text extractors, CertifiTrack uses deterministic date validation and structured schema boundaries. Dates are standardized (<code class="font-mono text-xs text-foreground bg-muted px-1.5 py-0.5 rounded">YYYY-MM-DD</code>), currency figures are sanitized to numeric values, and raw source filenames are retained for complete audit lineage.
+          </p>
+        </section>
+
+        <section class="pt-6 border-t border-border/60">
+          <p class="text-small text-muted-foreground">
+            Built and maintained by <a href="https://github.com/Kurosyss" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">Kurosyss</a>.
+          </p>
         </section>
       </div>
 
-      <div class="spacing-cta text-center mt-16 pt-16 border-t border-border">
-        <h3 class="text-h3 text-foreground mb-6">Ready to clean up your COI folder?</h3>
+      {/* CTA */}
+      <div class="spacing-cta text-center mt-14 pt-12 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-4">Start extracting your certificates</h3>
+        <p class="text-small text-muted-foreground mb-6">Drop your PDF certificates or ZIP archive to generate a structured tracker.</p>
         <Button href="/en/upload" size="lg" class="shadow-elevated transition-transform hover:scale-105">
           Start Extracting Free
         </Button>
       </div>
+
     </div>
   </section>
 </Layout>

@@ -13,13 +13,18 @@ const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site || siteConfig.url);
 
-const { title, description = 'Turn your messy folder of subcontractor PDFs into a clean, audit-ready tracker.', image = '/og-image.svg', noindex = false } = Astro.props;
+const { title, description = 'Turn existing Certificate of Insurance (COI) documents into structured data and Excel workbooks.', image = '/report-branding.svg', noindex = false } = Astro.props;
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="CertifiTrack" />
+<link rel="manifest" href="/site.webmanifest" />
 <meta name="generator" content={Astro.generator} />
 {noindex && <meta name="robots" content="noindex,nofollow" />}
 
@@ -74,3 +79,15 @@ const { title, description = 'Turn your messy folder of subcontractor PDFs into 
 <link rel="alternate" hreflang="x-default" href={new URL(translatePath(Astro.url.pathname, 'en'), Astro.site || siteConfig.url).href} />
 <link rel="alternate" hreflang="en" href={new URL(translatePath(Astro.url.pathname, 'en'), Astro.site || siteConfig.url).href} />
 <link rel="alternate" hreflang="es" href={new URL(translatePath(Astro.url.pathname, 'es'), Astro.site || siteConfig.url).href} />
+
+<!-- Organization Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": siteConfig.name,
+  "url": Astro.site ? Astro.site.toString() : siteConfig.url,
+  "logo": new URL('/favicon.svg', Astro.site || siteConfig.url).href,
+  "sameAs": [
+    siteConfig.socials.github
+  ]
+})} />

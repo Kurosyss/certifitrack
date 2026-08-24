@@ -1,53 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { Sun, Moon, Monitor } from 'lucide-react';
+import { Sun, Moon } from 'lucide-react';
 
 export function ThemeSwitcher() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system');
-  const [isOpen, setIsOpen] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme') as 'light' | 'dark' | 'system' | null;
-    if (stored) {
-      setTheme(stored);
-    }
+    setMounted(true);
+    const stored = localStorage.getItem('theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialDark = stored === 'dark' || (!stored && systemDark);
+    setIsDark(initialDark);
+    applyTheme(initialDark);
   }, []);
 
-  useEffect(() => {
-    const applyTheme = (t: 'light' | 'dark' | 'system') => {
-      const root = document.documentElement;
-      const isDark = 
-        t === 'dark' || 
-        (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        
-      if (isDark) {
-        root.classList.add('dark');
-        root.setAttribute('data-theme', 'dark');
-      } else {
-        root.classList.remove('dark');
-        root.setAttribute('data-theme', 'light');
-      }
-    };
+  const applyTheme = (dark: boolean) => {
+    const root = document.documentElement;
+    if (dark) {
+      root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
+  };
 
-    applyTheme(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const cycleTheme = () => {
-    if (theme === 'light') setTheme('dark');
-    else if (theme === 'dark') setTheme('system');
-    else setTheme('light');
+  const toggleTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    applyTheme(next);
   };
 
   return (
     <button 
-      onClick={cycleTheme}
-      className="p-2 rounded-md hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
-      aria-label={`Toggle theme (Current: ${theme})`}
-      title="Toggle theme"
+      type="button"
+      onClick={toggleTheme}
+      className="p-2 rounded-lg border border-border bg-surface hover:bg-surface-hover text-foreground transition-all cursor-pointer shadow-subtle flex items-center justify-center"
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      title={isDark ? "Switch to light theme" : "Switch to dark theme"}
     >
-      {theme === 'light' && <Sun size={18} />}
-      {theme === 'dark' && <Moon size={18} />}
-      {theme === 'system' && <Monitor size={18} />}
+      {mounted ? (
+        isDark ? <Sun size={18} className="text-foreground" /> : <Moon size={18} className="text-foreground" />
+      ) : (
+        <div className="w-[18px] h-[18px]" />
+      )}
     </button>
   );
 }

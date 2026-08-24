@@ -4,81 +4,81 @@
   :root {
     color-scheme: light;
     
-    /* Semantic Colors - Warm Paper Light Mode */
-    --background: #f8f7f4;
-    --foreground: #12151a;
+    /* Semantic Colors - Warm Neutral Light Mode (Apple/Vercel Minimal) */
+    --background: #F9F9F7;
+    --foreground: #121214;
     
-    --surface: #ffffff;
-    --surface-hover: #f0eee9;
+    --surface: #FFFFFF;
+    --surface-hover: #F2F1EC;
     
-    --border: #e2dfd7;
-    --border-hover: #c9c5ba;
+    --border: #E6E4DC;
+    --border-hover: #D1CFCD;
     
-    --muted: #f0eee9;
-    --muted-foreground: #6b7280;
+    --muted: #F2F1EC;
+    --muted-foreground: #71717A;
     
-    --primary: #12151a;
-    --primary-foreground: #ffffff;
+    --primary: #121214;
+    --primary-foreground: #FFFFFF;
     
-    --accent: #2563eb;
-    --accent-foreground: #ffffff;
+    --accent: #121214;
+    --accent-foreground: #FFFFFF;
     
-    /* Status Colors - Light */
-    --color-status-active: #16a34a;
-    --color-status-active-bg: #dcfce7;
-    --color-status-active-border: #bbf7d0;
+    /* Status Colors - Light (Muted, Accessible, Elegant) */
+    --color-status-active: #15803D;
+    --color-status-active-bg: #F0FDF4;
+    --color-status-active-border: #DCFCE7;
     
-    --color-status-review: #d97706;
-    --color-status-review-bg: #fef3c7;
-    --color-status-review-border: #fde68a;
+    --color-status-review: #B45309;
+    --color-status-review-bg: #FFFBEB;
+    --color-status-review-border: #FEF3C7;
     
-    --color-status-expired: #dc2626;
-    --color-status-expired-bg: #fee2e2;
-    --color-status-expired-border: #fecaca;
+    --color-status-expired: #B91C1C;
+    --color-status-expired-bg: #FEF2F2;
+    --color-status-expired-border: #FEE2E2;
     
-    --color-status-missing: #71717a;
-    --color-status-missing-bg: #f4f4f5;
-    --color-status-missing-border: #e4e4e7;
+    --color-status-missing: #52525B;
+    --color-status-missing-bg: #F4F4F5;
+    --color-status-missing-border: #E4E4E7;
   }
   
   .dark, [data-theme="dark"] {
     color-scheme: dark;
     
-    /* Semantic Colors - Rich Charcoal / Graphite Dark Mode */
-    --background: #0d1117;
-    --foreground: #f3f4f6;
+    /* Semantic Colors - Pure Neutral Charcoal/Black Dark Mode (Zero Blue Tint) */
+    --background: #09090B;
+    --foreground: #EDEDED;
     
-    --surface: #161b22;
-    --surface-hover: #1f242c;
+    --surface: #141417;
+    --surface-hover: #1C1C21;
     
-    --border: #272f3a;
-    --border-hover: #384252;
+    --border: #27272A;
+    --border-hover: #3F3F46;
     
-    --muted: #1c222b;
-    --muted-foreground: #9ca3af;
+    --muted: #18181B;
+    --muted-foreground: #A1A1AA;
     
-    --primary: #f3f4f6;
-    --primary-foreground: #0d1117;
+    --primary: #EDEDED;
+    --primary-foreground: #09090B;
     
-    --accent: #3b82f6;
-    --accent-foreground: #ffffff;
+    --accent: #EDEDED;
+    --accent-foreground: #09090B;
     
-    /* Status Colors - Dark */
-    --color-status-active: #4ade80;
-    --color-status-active-bg: rgba(34, 197, 94, 0.12);
-    --color-status-active-border: rgba(34, 197, 94, 0.25);
+    /* Status Colors - Dark (Muted, Accessible, Elegant) */
+    --color-status-active: #4ADE80;
+    --color-status-active-bg: rgba(74, 222, 128, 0.08);
+    --color-status-active-border: rgba(74, 222, 128, 0.2);
     
-    --color-status-review: #fbbf24;
-    --color-status-review-bg: rgba(245, 158, 11, 0.12);
-    --color-status-review-border: rgba(245, 158, 11, 0.25);
+    --color-status-review: #FBBF24;
+    --color-status-review-bg: rgba(251, 191, 36, 0.08);
+    --color-status-review-border: rgba(251, 191, 36, 0.2);
     
-    --color-status-expired: #f87171;
-    --color-status-expired-bg: rgba(239, 68, 68, 0.12);
-    --color-status-expired-border: rgba(239, 68, 68, 0.25);
+    --color-status-expired: #F87171;
+    --color-status-expired-bg: rgba(248, 113, 113, 0.08);
+    --color-status-expired-border: rgba(248, 113, 113, 0.2);
     
-    --color-status-missing: #9ca3af;
-    --color-status-missing-bg: rgba(156, 163, 175, 0.12);
-    --color-status-missing-border: rgba(156, 163, 175, 0.25);
+    --color-status-missing: #A1A1AA;
+    --color-status-missing-bg: rgba(161, 161, 170, 0.08);
+    --color-status-missing-border: rgba(161, 161, 170, 0.2);
   }
 
   body {
@@ -125,36 +125,36 @@
   --color-status-missing-border: var(--color-status-missing-border);
 
   /* Shadows */
-  --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-elevated: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.08);
-  --shadow-dropdown: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-elevated: 0 4px 6px -1px rgb(0 0 0 / 0.06), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-dropdown: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
 }
 
 @layer utilities {
-  /* Premium Typography System */
+  /* Premium Typography System - Clean & Tight */
   .text-display {
-    @apply text-4xl sm:text-5xl lg:text-6xl font-medium tracking-tight leading-tight;
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-tight;
   }
   .text-h1 {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight leading-tight;
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-tight;
   }
   .text-h2 {
-    @apply text-2xl sm:text-3xl font-medium tracking-tight leading-snug;
+    @apply text-xl sm:text-2xl font-semibold tracking-tight leading-snug;
   }
   .text-h3 {
-    @apply text-xl font-medium tracking-tight leading-snug;
+    @apply text-lg font-semibold tracking-tight leading-snug;
   }
   .text-body-large {
-    @apply text-lg font-normal leading-relaxed text-muted-foreground;
+    @apply text-base sm:text-lg font-normal leading-relaxed text-muted-foreground;
   }
   .text-body {
-    @apply text-base font-normal leading-relaxed text-foreground;
+    @apply text-sm sm:text-base font-normal leading-relaxed text-foreground;
   }
   .text-small {
-    @apply text-sm font-normal leading-relaxed text-muted-foreground;
+    @apply text-xs sm:text-sm font-normal leading-relaxed text-muted-foreground;
   }
   .text-caption {
-    @apply text-xs font-medium tracking-widest uppercase text-muted-foreground;
+    @apply text-[11px] font-medium tracking-wider uppercase text-muted-foreground;
   }
   .text-navigation {
     @apply text-sm font-medium transition-colors hover:text-foreground text-muted-foreground;
@@ -163,32 +163,32 @@
     @apply text-sm font-medium;
   }
 
-  /* Structural Spacing System */
+  /* Structural Spacing System - Balanced & Intentional */
   .spacing-section {
-    @apply py-16 sm:py-24;
+    @apply py-12 sm:py-16 lg:py-20;
   }
   .spacing-content {
-    @apply gap-8 sm:gap-16;
+    @apply gap-8 sm:gap-12;
   }
   .spacing-card {
-    @apply p-8;
+    @apply p-6 sm:p-8;
   }
   .spacing-heading {
-    @apply mb-4 sm:mb-6;
+    @apply mb-3 sm:mb-4;
   }
   .spacing-paragraph {
-    @apply mb-6;
+    @apply mb-5;
   }
   .spacing-cta {
-    @apply mt-10 pt-10 border-t border-border/50;
+    @apply mt-8 pt-8 border-t border-border;
   }
   .spacing-footer {
-    @apply py-12 lg:py-16;
+    @apply py-10 lg:py-14;
   }
 
   /* Grid & Alignment System */
   .reading-width {
-    @apply max-w-[720px] mx-auto;
+    @apply max-w-[700px] mx-auto;
   }
   .text-balance {
     text-wrap: balance;
@@ -196,10 +196,10 @@
 
   /* Component Primitives */
   .border-glass {
-    @apply border border-border bg-surface/80 backdrop-blur-md;
+    @apply border border-border bg-surface/90 backdrop-blur-md;
   }
   
   .glass-panel {
-    @apply bg-surface/60 backdrop-blur-xl border border-border shadow-subtle rounded-xl;
+    @apply bg-surface/80 backdrop-blur-xl border border-border shadow-subtle rounded-xl;
   }
 }

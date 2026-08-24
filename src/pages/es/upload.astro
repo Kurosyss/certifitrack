@@ -1,10 +1,13 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Uploader from '../../components/Uploader.tsx';
+
+const title = "Subir Certificados COI | CertifiTrack";
+const description = "Sube tus archivos PDF o archivo ZIP de certificados de seguro para extraer datos estructurados en una hoja de cálculo Excel.";
 ---
 
-<Layout title="Subir Carpeta COI | CertifiTrack" description="Sube tu archivo zip de COI para obtener tu registro estructurado." noindex={true}>
-  <section class="py-24 bg-background min-h-[calc(100vh-4rem)]">
-    <Uploader client:load />
+<Layout title={title} description={description} noindex={true}>
+  <section class="spacing-section bg-background min-h-[calc(100vh-4rem)]">
+    <Uploader client:load lang="es" />
   </section>
 </Layout>

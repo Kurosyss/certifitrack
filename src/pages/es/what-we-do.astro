@@ -1,157 +1,194 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
-import { FileSearch, CalendarOff, FileSpreadsheet, FileText, Calendar, CheckCircle2, AlertCircle, FileBox } from 'lucide-react';
+import { 
+  FileText, 
+  ShieldCheck, 
+  Car, 
+  Layers, 
+  Building2,
+  Calendar,
+  DollarSign,
+  FileCheck
+} from 'lucide-react';
 
-const title = "Qué Hacemos | CertifiTrack";
-const description = "Descubre cómo limpiamos tu desordenada carpeta de COIs. Extraemos fechas, marcamos coberturas faltantes y te devolvemos un registro limpio.";
+const title = "Campos y Esquema de Extracción de Seguros | CertifiTrack";
+const description = "Conoce qué campos de seguros ACORD 25 extrae CertifiTrack: pólizas, fechas de vencimiento, límites de cobertura y cláusulas de cumplimiento.";
+
+const categories = [
+  {
+    title: "Información del Certificado y Partes",
+    description: "Metadatos esenciales para identificar las entidades que figuran en el documento y la referencia del archivo de origen.",
+    icon: Building2,
+    fields: [
+      { name: "Asegurado Designado", desc: "La persona física o jurídica que figura como asegurada en el certificado." },
+      { name: "Productor / Corredor", desc: "La agencia o correduría de seguros emisora que gestiona el certificado." },
+      { name: "Titular del Certificado", desc: "Entidad designada como receptora del certificado (tu empresa, contratista o autoridad del proyecto)." },
+      { name: "Aseguradora / Compañía", desc: "Nombres de las aseguradoras suscritas y designaciones de letras/NAIC para cada línea de cobertura." },
+      { name: "Documento de Origen", desc: "Nombre del archivo original conservado en cada fila para facilitar auditorías y verificaciones." }
+    ]
+  },
+  {
+    title: "Responsabilidad Civil General (CGL)",
+    description: "Referencias de póliza de Responsabilidad Civil General, fechas de vigencia y límites extraídos del certificado.",
+    icon: ShieldCheck,
+    fields: [
+      { name: "Número de Póliza", desc: "Identificador de la póliza de responsabilidad civil comercial." },
+      { name: "Fechas de Inicio y Vencimiento", desc: "Período de vigencia extraído y normalizado en valores de fecha estructurados." },
+      { name: "Límite por Ocurrencia", desc: "Límite de cobertura por siniestro individual extraído de la sección de Responsabilidad General." },
+      { name: "Límite Agregado General", desc: "Límite agregado general extraído de la sección de Responsabilidad General." },
+      { name: "Productos y Operaciones Terminadas", desc: "Límite agregado para productos y operaciones terminadas extraído del certificado." }
+    ]
+  },
+  {
+    title: "Compensación de Trabajadores (Workers' Comp)",
+    description: "Referencias de póliza de accidentes laborales, indicadores estatutarios y límites de responsabilidad patronal.",
+    icon: FileText,
+    fields: [
+      { name: "Número de Póliza y Vigencia", desc: "Número de póliza de compensación laboral, fecha de inicio y vencimiento." },
+      { name: "Indicador de Límites Estatutarios", desc: "Casilla de verificación que indica cobertura estatutaria de compensación de trabajadores." },
+      { name: "Límites de Responsabilidad Patronal", desc: "Límites extraídos por accidente, límite por enfermedad y por empleado." }
+    ]
+  },
+  {
+    title: "Responsabilidad Civil de Automóviles",
+    description: "Número de póliza, período de vigencia, límite único combinado e información sobre el alcance de vehículos.",
+    icon: Car,
+    fields: [
+      { name: "Póliza y Fechas de Auto", desc: "Identificador de la póliza comercial de vehículos y período de cobertura." },
+      { name: "Límite Único Combinado (CSL)", desc: "Monto total combinado por accidente vehicular extraído de la sección de automóviles." },
+      { name: "Alcance de Vehículos Cubiertos", desc: "Indicadores extraídos para Cualquier Auto, Autos Propios, Programados o Contratados." }
+    ]
+  },
+  {
+    title: "Exceso de Responsabilidad / Sombrilla (Umbrella)",
+    description: "Identificadores de póliza Sombrilla o Exceso de responsabilidad, fechas de vigencia, límites por ocurrencia y agregado.",
+    icon: Layers,
+    fields: [
+      { name: "Póliza Sombrilla y Vigencia", desc: "Identificador de la póliza de exceso de responsabilidad y fechas de cobertura." },
+      { name: "Límites por Ocurrencia y Agregado", desc: "Límites por ocurrencia y agregado extraídos de la sección sombrilla." }
+    ]
+  },
+  {
+    title: "Endosos y Estado de Seguimiento",
+    description: "Indicadores de endosos contractuales y estado calculado según las fechas de vencimiento extraídas.",
+    icon: FileCheck,
+    fields: [
+      { name: "Asegurado Adicional", desc: "Indicador que confirma si la casilla de Asegurado Adicional está marcada." },
+      { name: "Renuncia a Subrogación", desc: "Indicador que confirma si la casilla de Renuncia a Subrogación está marcada." },
+      { name: "Estado de Seguimiento", desc: "Estado calculado según la fecha de vencimiento: VIGENTE, POR VENCER, VENCIDO o EN REVISIÓN." }
+    ]
+  }
+];
 ---
 
 <Layout title={title} description={description}>
-  {/* Hero */}
+  {/* Encabezado */}
   <section class="spacing-section bg-background border-b border-border">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
-      <h1 class="text-h1 text-foreground spacing-heading text-balance">Hacemos el trabajo manual que odias.</h1>
-      <p class="text-body-large spacing-paragraph">No creaste una empresa para leer pólizas de seguro. Convertimos una carpeta de PDFs desorganizados en datos útiles.</p>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Esquema de Datos y Coberturas
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading text-balance font-semibold">
+          ¿Qué Campos de Seguros Extrae CertifiTrack?
+        </h1>
+        <p class="text-body-large spacing-paragraph text-muted-foreground text-pretty">
+          CertifiTrack analiza de forma sistemática los formularios ACORD 25 para normalizar identidades de contratistas, vigencias de póliza, límites y cláusulas contractuales en datos estructurados.
+        </p>
+      </div>
     </div>
   </section>
 
-  {/* The Process */}
-  <section class="py-16 lg:py-24 bg-surface border-b border-border overflow-hidden">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl space-y-24 lg:space-y-32">
-      
-      {/* 01: Find */}
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-        <div class="lg:w-1/2">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">01 &mdash; Auditoría</div>
-          <h2 class="text-h2 text-foreground spacing-heading">Encontramos lo que falta.</h2>
-          <p class="text-body spacing-paragraph">Envíenos su lista maestra de subcontratistas junto con su carpeta de PDFs. Hacemos coincidir manualmente cada documento con el subcontratista correcto, revelando instantáneamente quién no ha proporcionado su documentación.</p>
-        </div>
-        <div class="lg:w-1/2 w-full">
-          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto">
-            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4">Reconciliación</div>
-            <div class="space-y-2 text-sm">
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Atlas Ridge Mechanical</span>
-                <span class="text-[10px] text-status-active font-medium tracking-wide">ENCONTRADO</span>
-              </div>
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Summit Valley Concrete</span>
-                <span class="text-[10px] text-status-missing font-medium tracking-wide">FALTANTE</span>
-              </div>
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Cedar Point Roofing</span>
-                <span class="text-[10px] text-status-active font-medium tracking-wide">ENCONTRADO</span>
+  {/* Grilla del Explorador de Esquema */}
+  <section class="spacing-section bg-surface border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+        {categories.map((category) => {
+          const Icon = category.icon;
+          return (
+            <div class="rounded-2xl border border-border bg-background p-6 sm:p-8 shadow-subtle flex flex-col justify-between h-full transition-all hover:border-border-hover">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-xl bg-surface border border-border flex items-center justify-center text-foreground shrink-0 shadow-subtle">
+                    <Icon class="w-4 h-4" />
+                  </div>
+                  <h2 class="text-h3 text-foreground text-lg">{category.title}</h2>
+                </div>
+                <p class="text-small text-muted-foreground mb-6 leading-relaxed">
+                  {category.description}
+                </p>
+
+                <div class="divide-y divide-border border-t border-border">
+                  {category.fields.map((field) => (
+                    <div class="py-3.5 space-y-1">
+                      <div class="text-xs font-semibold text-foreground tracking-tight">
+                        {field.name}
+                      </div>
+                      <p class="text-small text-muted-foreground leading-normal">
+                        {field.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  {/* Por qué importa la normalización */}
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-h2 text-foreground spacing-heading">Por Qué Importa la Normalización de Datos</h2>
+        <p class="text-body text-muted-foreground text-pretty">
+          Los certificados emitidos por diferentes corredores usan formatos dispares. La normalización convierte archivos desordenados en registros listos para actuar.
+        </p>
       </div>
 
-      {/* 02: Extract */}
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-        <div class="lg:w-1/2 w-full order-2 lg:order-1">
-          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto relative overflow-hidden">
-            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4 relative z-10">Extracción de Datos</div>
-            <div class="space-y-4 relative z-10">
-              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
-                <span class="text-xs text-muted-foreground font-medium">Responsabilidad Civil</span>
-                <span class="text-sm font-semibold text-status-expired">14 Ene, 2026</span>
-              </div>
-              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
-                <span class="text-xs text-muted-foreground font-medium">Comp. Trabajadores</span>
-                <span class="text-sm font-medium text-foreground">30 Nov, 2026</span>
-              </div>
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-muted-foreground font-medium">Responsabilidad Auto</span>
-                <span class="text-sm font-medium text-foreground">01 Oct, 2026</span>
-              </div>
-            </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <Calendar class="w-4 h-4" />
           </div>
+          <h3 class="text-h3 text-foreground text-base">Fechas de Vencimiento Uniformes</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Cada corredor escribe fechas en formatos distintos. CertifiTrack estandariza cada fecha para que tus hojas de cálculo se ordenen cronológicamente y alerten renovaciones sin errores.
+          </p>
         </div>
-        <div class="lg:w-1/2 order-1 lg:order-2">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">02 &mdash; Extracción</div>
-          <h2 class="text-h2 text-foreground spacing-heading">Extraemos los datos críticos.</h2>
-          <p class="text-body spacing-paragraph">No tiene tiempo para entrecerrar los ojos ante formularios ACORD escaneados. Leemos los PDFs, encontramos las fechas de vencimiento y los límites de Responsabilidad Civil, Compensación de Trabajadores y Auto, y marcamos cualquier cosa que no cumpla.</p>
-        </div>
-      </div>
 
-      {/* 03: Organize & Return */}
-      <div class="flex flex-col gap-12 items-center">
-        <div class="max-w-2xl text-center">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">03 &mdash; Organización y Entrega</div>
-          <h2 class="text-h2 text-foreground spacing-heading">Entregamos un registro limpio.</h2>
-          <p class="text-body spacing-paragraph">Devolvemos una hoja de cálculo de Excel estructurada que realmente puede usar. Filtre instantáneamente por estado para ver quién necesita una llamada de seguimiento y revise los límites de cobertura exactos extraídos de los formularios.</p>
-        </div>
-        <div class="w-full max-w-3xl">
-          <div class="flex flex-col bg-background rounded-xl border border-border shadow-elevated overflow-hidden">
-            <div class="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <FileSpreadsheet class="w-4 h-4 text-muted-foreground" />
-                <span class="text-xs font-medium text-foreground tracking-wide">Registro_Maestro_Final.xlsx</span>
-              </div>
-              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Entregable</span>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
-                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
-                  <tr>
-                    <th class="px-3 py-2 font-medium border-r border-border">Subcontratista</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Venc. RC</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Venc. CT</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Venc. Auto</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Límite RC</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Límite CT</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Límite Auto</th>
-                    <th class="px-3 py-2 font-medium">Estado</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border text-foreground">
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
-                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
-                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
-                    <td class="px-3 py-2 border-r border-border">12/10/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">VIGENTE</span></td>
-                  </tr>
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
-                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">14/01/26</td>
-                    <td class="px-3 py-2 border-r border-border">30/11/26</td>
-                    <td class="px-3 py-2 border-r border-border">30/11/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">VENCIDO</span></td>
-                  </tr>
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border">15/06/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">FALTANTE</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <DollarSign class="w-4 h-4" />
           </div>
+          <h3 class="text-h3 text-foreground text-base">Límites de Cobertura Estructurados</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Los montos de cobertura se convierten en valores numéricos limpios, facilitando filtrar contratistas que cumplen los mínimos contractuales de aquellos con coberturas insuficientes.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <FileText class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Trazabilidad Total de Archivos</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Cada fila del libro de cálculo conserva el nombre del archivo PDF original, garantizando total transparencia durante auditorías de seguros y conciliaciones de obra.
+          </p>
         </div>
       </div>
-      
     </div>
   </section>
 
   {/* CTA */}
-  <section class="spacing-section bg-background text-center">
+  <section class="spacing-section bg-surface text-center">
     <div class="container mx-auto px-4 max-w-xl">
-      <h2 class="text-h2 text-foreground spacing-heading">¿Listo para limpiar tus registros?</h2>
-      <Button href="/es/upload" size="lg" class="mt-4 shadow-elevated">
+      <h2 class="text-h2 text-foreground spacing-heading">¿Listo para procesar tus certificados?</h2>
+      <p class="text-body-large spacing-paragraph text-muted-foreground">Sube tus archivos PDF o carpeta ZIP para generar hojas de cálculo estructuradas en segundos.</p>
+      <Button href="/es/upload" size="lg" class="mt-2 shadow-elevated transition-transform hover:scale-105">
         Comienza a Extraer Gratis
       </Button>
     </div>

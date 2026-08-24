@@ -1,24 +1,104 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Button from '../../components/ui/Button.astro';
+import { siteConfig } from '../../config/site';
+import { ExternalLink } from 'lucide-react';
 
 const title = "Términos de Servicio | CertifiTrack";
-const description = "Términos de servicio de CertifiTrack.";
+const description = "Términos y condiciones para el uso de la herramienta open-source de extracción de COIs CertifiTrack.";
 ---
 
-<Layout title={title} description={description} noindex={true}>
-  <section class="spacing-section border-b border-border bg-background min-h-[60vh] flex items-center justify-center">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl text-center">
-      <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 border border-amber-500/20 mb-6 shadow-subtle">PENDIENTE DE REVISIÓN LEGAL</div>
-      <h1 class="text-h1 text-foreground spacing-heading">Términos de Servicio</h1>
-      <p class="text-body-large spacing-paragraph">Nuestros Términos de Servicio en español se encuentran actualmente en revisión legal para garantizar su total exactitud.</p>
-      <p class="text-body spacing-paragraph">Mientras tanto, por favor consulta la versión oficial en inglés.</p>
+<Layout title={title} description={description}>
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="reading-width px-4 sm:px-6">
       
-      <div class="spacing-cta mt-8">
-        <Button href="/en/terms" size="lg" class="shadow-sm">
-          Ver Términos en Inglés
-        </Button>
+      {/* Encabezado */}
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Términos y Condiciones
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading">Términos de Servicio</h1>
+        <p class="text-small text-muted-foreground">Última actualización: Agosto 2026</p>
       </div>
+
+      {/* Cuadro de aviso */}
+      <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle mb-10 space-y-2">
+        <h2 class="text-h3 text-foreground text-base font-semibold">Aviso Importante</h2>
+        <p class="text-small text-muted-foreground leading-relaxed">
+          CertifiTrack es una herramienta de software de código abierto para la extracción automatizada de datos de certificados de seguro. No proporciona asesoramiento legal, de suscripción de seguros ni de cumplimiento normativo. Verifica siempre los datos extraídos contra los documentos originales.
+        </p>
+      </div>
+
+      {/* Secciones de contenido */}
+      <div class="space-y-10 text-body">
+        
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">1. Descripción del Software</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack permite la ingesta de documentos y la extracción automatizada de campos de certificados de seguro ACORD 25. El software analiza archivos PDF o archivos ZIP comprimidos, extrae coberturas comerciales, normaliza fechas y compila los resultados en un libro de Excel (.xlsx).
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">2. Sin Asesoramiento Legal o de Seguros</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack NO es una agencia de seguros, correduría ni autoridad legal de cumplimiento. El software no determina la idoneidad de las coberturas ni verifica la vigencia de las pólizas directamente con las aseguradoras.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Eres el único responsable de revisar y comprobar los números de póliza, fechas de vencimiento y límites extraídos antes de tomar decisiones operativas, contractuales o de cumplimiento.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">3. Tratamiento y Ciclo de Vida de Archivos</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Los archivos subidos se almacenan temporalmente en el servidor exclusivamente para realizar la extracción de texto y la normalización de fechas. Una vez generado el archivo Excel o si se produce un error, los archivos temporales se eliminan de inmediato. CertifiTrack no conserva copias permanentes de tus documentos.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">4. Limitación de Responsabilidad</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack se proporciona "tal cual", sin garantías de ningún tipo, explícitas o implícitas.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            En ningún caso los autores, desarrolladores o colaboradores serán responsables de reclamos, daños o pérdidas derivados del uso de este software, errores en la extracción automatizada o decisiones tomadas con base en los archivos generados.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">5. Propiedad Intelectual</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Conservas la propiedad total de todos los documentos y datos que proceses a través de CertifiTrack. El código fuente de CertifiTrack es software de código abierto disponible bajo los términos de su respectiva licencia de repositorio.
+          </p>
+        </section>
+
+        <section class="space-y-3 pt-6 border-t border-border">
+          <h2 class="text-h2 text-foreground text-xl">6. Contacto y Repositorio</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Para preguntas sobre estos términos, reportes de problemas o colaboraciones de código abierto:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a 
+              href={siteConfig.socials.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline"
+            >
+              <span>Repositorio en GitHub</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+            <span class="hidden sm:inline text-muted-foreground">&bull;</span>
+            <a 
+              href={`mailto:${siteConfig.supportEmail}`} 
+              class="text-sm font-medium text-foreground hover:underline"
+            >
+              {siteConfig.supportEmail}
+            </a>
+          </div>
+        </section>
+
+      </div>
+
     </div>
   </section>
 </Layout>

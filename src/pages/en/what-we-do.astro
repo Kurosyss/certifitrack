@@ -1,157 +1,196 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
-import { FileSearch, CalendarOff, FileSpreadsheet, FileText, Calendar, CheckCircle2, AlertCircle, FileBox } from 'lucide-react';
+import { 
+  FileText, 
+  ShieldCheck, 
+  Car, 
+  Layers, 
+  CheckCircle2, 
+  Building2,
+  Calendar,
+  DollarSign,
+  FileCheck,
+  ArrowRight
+} from 'lucide-react';
 
-const title = "What We Do | CertifiTrack Cleanup";
-const description = "See exactly how we clean up your messy COI folder. We extract dates, flag missing coverage, and return a clean tracker.";
+const title = "Supported Insurance Fields & Schema | CertifiTrack";
+const description = "Learn which ACORD 25 insurance fields CertifiTrack extracts: policy numbers, expiration dates, coverage limits, and compliance endorsements.";
+
+const categories = [
+  {
+    title: "Certificate & Party Information",
+    description: "Core certificate metadata identifying the parties listed on the document and the source file reference.",
+    icon: Building2,
+    fields: [
+      { name: "Named Insured", desc: "The person or organization listed as insured on the certificate." },
+      { name: "Producer / Broker", desc: "The issuing insurance agency or broker contact managing the certificate." },
+      { name: "Certificate Holder", desc: "The designated certificate recipient organization or project authority." },
+      { name: "Insurer / Carrier", desc: "Underwriting carrier names and NAIC / letter designations listed for each line of coverage." },
+      { name: "Source Document", desc: "Original filename preserved on every row for fast verification and audit checks." }
+    ]
+  },
+  {
+    title: "General Liability (CGL)",
+    description: "Commercial General Liability policy references, term dates, and coverage limits extracted from the certificate.",
+    icon: ShieldCheck,
+    fields: [
+      { name: "Policy Number", desc: "Commercial general liability policy reference number." },
+      { name: "Effective & Expiration Dates", desc: "Policy term dates extracted and normalized into structured date values." },
+      { name: "Each Occurrence Limit", desc: "Per-occurrence coverage limit extracted from the General Liability section." },
+      { name: "General Aggregate Limit", desc: "General aggregate limit extracted from the General Liability section." },
+      { name: "Products & Completed Operations", desc: "Products and completed operations aggregate limit extracted from the certificate." }
+    ]
+  },
+  {
+    title: "Workers' Compensation & Employer's Liability",
+    description: "Workers' Compensation policy references, statutory indicators, and employer's liability limits.",
+    icon: FileText,
+    fields: [
+      { name: "Policy Number & Term Dates", desc: "Workers' Compensation policy number, effective date, and expiration date." },
+      { name: "Statutory Limits Indicator", desc: "Extracted checkbox flag indicating statutory workers' compensation coverage." },
+      { name: "Employer's Liability Limits", desc: "Extracted limits for each accident, disease policy limit, and disease each employee." }
+    ]
+  },
+  {
+    title: "Commercial Automobile Liability",
+    description: "Policy number, coverage period, combined single limit, and supported vehicle-scope information extracted from the certificate.",
+    icon: Car,
+    fields: [
+      { name: "Policy Number & Term Dates", desc: "Automobile liability policy number, effective date, and expiration date." },
+      { name: "Combined Single Limit (CSL)", desc: "Combined single limit (or split bodily injury / property damage limits) extracted from the auto section." },
+      { name: "Vehicle Scope Flags", desc: "Extracted indicator flags for Any Auto, All Owned Autos, Scheduled, or Hired/Non-Owned vehicles." }
+    ]
+  },
+  {
+    title: "Umbrella & Excess Liability",
+    description: "Excess or Umbrella liability policy numbers, term dates, occurrence limits, and aggregate limits.",
+    icon: Layers,
+    fields: [
+      { name: "Policy Number & Term Dates", desc: "Commercial Umbrella or Excess liability policy identifier and coverage dates." },
+      { name: "Each Occurrence & Aggregate Limits", desc: "Each occurrence limit and aggregate limit extracted from the umbrella section." }
+    ]
+  },
+  {
+    title: "Endorsement Flags & Tracking Status",
+    description: "Contractual endorsement indicators and evaluated date status based on extracted term dates.",
+    icon: FileCheck,
+    fields: [
+      { name: "Additional Insured Status", desc: "Extracted checkbox indicator confirming Additional Insured endorsement." },
+      { name: "Waiver of Subrogation", desc: "Extracted checkbox indicator confirming Waiver of Subrogation endorsement." },
+      { name: "Tracking Status", desc: "Calculated date status based on extracted expiration dates: CURRENT, EXPIRING, EXPIRED, or REVIEW." }
+    ]
+  }
+];
 ---
 
 <Layout title={title} description={description}>
-  {/* Hero */}
+  {/* Page Header */}
   <section class="spacing-section bg-background border-b border-border">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
-      <h1 class="text-h1 text-foreground spacing-heading text-balance">We do the manual work you hate.</h1>
-      <p class="text-body-large spacing-paragraph">You didn't start a business to read insurance policies. We turn a folder of disorganized PDFs into actionable data.</p>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Supported Fields & Schema
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading text-balance font-semibold">
+          What Insurance Fields Does CertifiTrack Extract?
+        </h1>
+        <p class="text-body-large spacing-paragraph text-muted-foreground text-pretty">
+          CertifiTrack systematically parses standard ACORD 25 certificates to normalize contractor identities, policy timelines, coverage limits, and contractual endorsements into structured data.
+        </p>
+      </div>
     </div>
   </section>
 
-  {/* The Process */}
-  <section class="py-16 lg:py-24 bg-surface border-b border-border overflow-hidden">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl space-y-24 lg:space-y-32">
-      
-      {/* 01: Find */}
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-        <div class="lg:w-1/2">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">01 &mdash; Audit</div>
-          <h2 class="text-h2 text-foreground spacing-heading">We find what's missing.</h2>
-          <p class="text-body spacing-paragraph">Send us your master list of subcontractors along with your folder of PDFs. We manually match each document to the correct subcontractor, instantly revealing who hasn't provided their paperwork.</p>
-        </div>
-        <div class="lg:w-1/2 w-full">
-          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto">
-            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4">Reconciliation</div>
-            <div class="space-y-2 text-sm">
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Atlas Ridge Mechanical</span>
-                <span class="text-[10px] text-status-active font-medium tracking-wide">FOUND</span>
-              </div>
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Summit Valley Concrete</span>
-                <span class="text-[10px] text-status-missing font-medium tracking-wide">MISSING</span>
-              </div>
-              <div class="flex items-center justify-between pb-2 border-b border-border/50">
-                <span class="font-medium text-foreground">Cedar Point Roofing</span>
-                <span class="text-[10px] text-status-active font-medium tracking-wide">FOUND</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  {/* Schema Explorer Grid */}
+  <section class="spacing-section bg-surface border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
+        {categories.map((category) => {
+          const Icon = category.icon;
+          return (
+            <div class="rounded-2xl border border-border bg-background p-6 sm:p-8 shadow-subtle flex flex-col justify-between h-full transition-all hover:border-border-hover">
+              <div>
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-9 h-9 rounded-xl bg-surface border border-border flex items-center justify-center text-foreground shrink-0 shadow-subtle">
+                    <Icon class="w-4 h-4" />
+                  </div>
+                  <h2 class="text-h3 text-foreground text-lg">{category.title}</h2>
+                </div>
+                <p class="text-small text-muted-foreground mb-6 leading-relaxed">
+                  {category.description}
+                </p>
 
-      {/* 02: Extract */}
-      <div class="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-        <div class="lg:w-1/2 w-full order-2 lg:order-1">
-          <div class="bg-background rounded-xl border border-border shadow-subtle p-6 max-w-sm mx-auto relative overflow-hidden">
-            <div class="text-[10px] font-medium text-muted-foreground uppercase tracking-[0.1em] mb-4 relative z-10">Data Extraction</div>
-            <div class="space-y-4 relative z-10">
-              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
-                <span class="text-xs text-muted-foreground font-medium">General Liability</span>
-                <span class="text-sm font-semibold text-status-expired">Jan 14, 2026</span>
-              </div>
-              <div class="flex justify-between items-baseline border-b border-border/60 pb-2">
-                <span class="text-xs text-muted-foreground font-medium">Workers Comp</span>
-                <span class="text-sm font-medium text-foreground">Nov 30, 2026</span>
-              </div>
-              <div class="flex justify-between items-baseline">
-                <span class="text-xs text-muted-foreground font-medium">Auto Liability</span>
-                <span class="text-sm font-medium text-foreground">Oct 01, 2026</span>
+                <div class="divide-y divide-border border-t border-border">
+                  {category.fields.map((field) => (
+                    <div class="py-3.5 space-y-1">
+                      <div class="text-xs font-semibold text-foreground tracking-tight">
+                        {field.name}
+                      </div>
+                      <p class="text-small text-muted-foreground leading-normal">
+                        {field.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="lg:w-1/2 order-1 lg:order-2">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">02 &mdash; Extract</div>
-          <h2 class="text-h2 text-foreground spacing-heading">We pull the critical data.</h2>
-          <p class="text-body spacing-paragraph">You don't have time to squint at scanned ACORD forms. We read the PDFs, find the expiration dates and limits for General Liability, Workers Comp, and Auto, and flag anything that is non-compliant.</p>
-        </div>
+          );
+        })}
       </div>
-
-      {/* 03: Organize & Return */}
-      <div class="flex flex-col gap-12 items-center">
-        <div class="max-w-2xl text-center">
-          <div class="text-xs font-medium text-muted-foreground tracking-widest uppercase mb-4">03 &mdash; Organize & Return</div>
-          <h2 class="text-h2 text-foreground spacing-heading">We deliver a clean tracker.</h2>
-          <p class="text-body spacing-paragraph">We return a structured Excel spreadsheet that you can actually use. Instantly filter by status to see who needs a follow-up call, and review the exact coverage limits extracted from the forms.</p>
-        </div>
-        <div class="w-full max-w-3xl">
-          <div class="flex flex-col bg-background rounded-xl border border-border shadow-elevated overflow-hidden">
-            <div class="px-4 py-3 bg-muted/30 border-b border-border flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <FileSpreadsheet class="w-4 h-4 text-muted-foreground" />
-                <span class="text-xs font-medium text-foreground tracking-wide">Master_Tracker_Final.xlsx</span>
-              </div>
-              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Deliverable</span>
-            </div>
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
-                <thead class="bg-muted/10 text-muted-foreground border-b border-border">
-                  <tr>
-                    <th class="px-3 py-2 font-medium border-r border-border">Subcontractor</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">GL Exp.</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">WC Exp.</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Auto Exp.</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">GL Limit</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">WC Limit</th>
-                    <th class="px-3 py-2 font-medium border-r border-border">Auto Limit</th>
-                    <th class="px-3 py-2 font-medium">Status</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border text-foreground">
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
-                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
-                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
-                    <td class="px-3 py-2 border-r border-border">10/12/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M / $2M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border text-[9px]">CURRENT</span></td>
-                  </tr>
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
-                    <td class="px-3 py-2 border-r border-border text-status-expired font-medium">01/14/26</td>
-                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
-                    <td class="px-3 py-2 border-r border-border">11/30/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$2M / $4M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border text-[9px]">EXPIRED</span></td>
-                  </tr>
-                  <tr class="hover:bg-muted/30 transition-colors">
-                    <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border">06/15/26</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">$1M</td>
-                    <td class="px-3 py-2 border-r border-border text-muted-foreground">—</td>
-                    <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border text-[9px]">MISSING</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      
     </div>
   </section>
 
-  {/* CTA */}
-  <section class="spacing-section bg-background text-center">
+  {/* Why Normalization Matters */}
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <h2 class="text-h2 text-foreground spacing-heading">Why Structured Normalization Matters</h2>
+        <p class="text-body text-muted-foreground text-pretty">
+          Raw certificate documents use inconsistent broker formats. Normalizing data turns messy files into actionable records.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <Calendar class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Consistent Expiration Dates</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Different brokers write dates in various formats. CertifiTrack standardizes every date so your spreadsheets sort cleanly and renewal alerts fire reliably.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <DollarSign class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Structured Coverage Limits</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Policy thresholds are parsed into clean numeric figures, making it effortless to filter contractors who meet project minimums versus those who are underinsured.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle space-y-2.5">
+          <div class="w-8 h-8 rounded-lg bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+            <FileText class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Traceable Extracted Data</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">
+            Every extracted spreadsheet row retains its source certificate filename, ensuring total clarity during annual insurance audits and subcontractor reconciliations.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA Section */}
+  <section class="spacing-section bg-surface text-center">
     <div class="container mx-auto px-4 max-w-xl">
-      <h2 class="text-h2 text-foreground spacing-heading">Ready to clean up your records?</h2>
-      <Button href="/en/upload" size="lg" class="mt-4 shadow-elevated">
+      <h2 class="text-h2 text-foreground spacing-heading">Ready to extract your COI records?</h2>
+      <p class="text-body-large spacing-paragraph text-muted-foreground">Upload your PDFs or ZIP folder to generate structured spreadsheets in seconds.</p>
+      <Button href="/en/upload" size="lg" class="mt-2 shadow-elevated transition-transform hover:scale-105">
         Start Extracting Free
       </Button>
     </div>

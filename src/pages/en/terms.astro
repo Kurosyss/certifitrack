@@ -1,85 +1,102 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/site';
+import { ExternalLink } from 'lucide-react';
 
 const title = "Terms of Service | CertifiTrack";
-const description = "Terms and conditions for using CertifiTrack.";
+const description = "Terms and conditions for using the CertifiTrack open-source COI document extraction tool.";
 ---
 
 <Layout title={title} description={description}>
-  <section class="py-16 sm:py-24 bg-background">
+  <section class="spacing-section bg-background border-b border-border">
     <div class="reading-width px-4 sm:px-6">
       
       {/* Header */}
-      <div class="mb-12">
-        <h1 class="text-3xl font-semibold tracking-tight text-foreground mb-3">Terms of Service</h1>
-        <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest">Last Updated: August 2026</p>
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Terms & Conditions
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading">Terms of Service</h1>
+        <p class="text-small text-muted-foreground">Last updated: August 2026</p>
       </div>
 
-      {/* Intro */}
-      <div class="prose prose-slate dark:prose-invert max-w-none">
-        <p class="text-base leading-relaxed text-muted-foreground mb-10">
-          By using {siteConfig.legalEntityName} ("CertifiTrack"), you agree to these Terms. Please read them carefully.
+      {/* Intro Box */}
+      <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle mb-10 space-y-2">
+        <h2 class="text-h3 text-foreground text-base font-semibold">Important Notice</h2>
+        <p class="text-small text-muted-foreground leading-relaxed">
+          CertifiTrack is an automated open-source software tool for extracting data from insurance certificates. It does not provide legal, insurance underwriting, or compliance counsel. Always independently verify extracted data against source certificate documents.
         </p>
+      </div>
 
-        {/* Contents Navigation */}
-        <div class="bg-surface border border-border rounded-lg p-5 mb-12 shadow-subtle">
-          <h2 class="text-xs font-semibold text-foreground uppercase tracking-widest mb-3">Contents</h2>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#service" class="text-muted-foreground hover:text-foreground transition-colors">1. Description of Service</a></li>
-            <li><a href="#limitations" class="text-muted-foreground hover:text-foreground transition-colors">2. Limitations of Liability</a></li>
-            <li><a href="#intellectual-property" class="text-muted-foreground hover:text-foreground transition-colors">3. Intellectual Property</a></li>
-            <li><a href="#governing-law" class="text-muted-foreground hover:text-foreground transition-colors">4. Governing Law</a></li>
-            <li><a href="#contact" class="text-muted-foreground hover:text-foreground transition-colors">5. Contact Us</a></li>
-          </ul>
-        </div>
+      {/* Content Sections */}
+      <div class="space-y-10 text-body">
+        
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">1. Description of Software</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack provides automated document ingestion and data extraction for ACORD 25 Certificates of Insurance. The software parses uploaded PDF files or ZIP archives, extracts commercial liability policy fields, validates date formats, and compiles the results into a structured Excel (.xlsx) workbook.
+          </p>
+        </section>
 
-        {/* Content Sections */}
-        <div class="space-y-12">
-          
-          <section id="service" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">1. Description of Service</h2>
-            <p class="text-base text-muted-foreground mb-4">
-              CertifiTrack provides administrative data extraction services for Certificates of Insurance (COIs). We receive your documents, organize them, extract data into a spreadsheet, and return the results.
-            </p>
-            <p class="text-base text-muted-foreground font-medium text-foreground">
-              CertifiTrack is NOT an insurance broker, agent, or compliance software. We do not make coverage determinations or guarantee that your subcontractors are properly insured.
-            </p>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">2. No Insurance or Compliance Advice</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack is NOT an insurance agency, broker, or legal compliance authority. The software does not determine insurance adequacy, verify policy active status with carriers, or guarantee that subcontractors meet specific contract requirements.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            You are solely responsible for reviewing and verifying all extracted policy numbers, expiration dates, and coverage limits before making operational, hiring, or compliance decisions.
+          </p>
+        </section>
 
-          <section id="limitations" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">2. Limitations of Liability</h2>
-            <p class="text-base text-muted-foreground mb-4">
-              While we strive for accuracy in data extraction, optical character recognition (OCR) and manual review can produce errors. You are solely responsible for verifying the accuracy of the returned data before making any business decisions based upon it.
-            </p>
-            <p class="text-base text-muted-foreground">
-              To the maximum extent permitted by law, CertifiTrack shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the service.
-            </p>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">3. File Handling & Lifecycle</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            Uploaded files are stored temporarily on the server purely to execute text extraction and date normalization. As soon as the output spreadsheet is generated or if an extraction error occurs, temporary files are immediately removed from disk. CertifiTrack does not retain permanent copies of your documents.
+          </p>
+        </section>
 
-          <section id="intellectual-property" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">3. Intellectual Property</h2>
-            <p class="text-base text-muted-foreground">
-              You retain all rights to the documents you upload. By uploading them, you grant us a limited license to process them solely for the purpose of providing the service to you.
-            </p>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">4. Limitation of Liability</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            In no event shall the authors, maintainers, or contributors be liable for any claim, damages, or losses arising from the use of this software, errors in automated data extraction, or reliance on generated output files.
+          </p>
+        </section>
 
-          <section id="governing-law" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">4. Governing Law</h2>
-            <p class="text-base text-muted-foreground">
-              These Terms shall be governed by and construed in accordance with the laws of {siteConfig.governingLaw}, without regard to its conflict of law provisions.
-            </p>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">5. Intellectual Property</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            You retain all ownership rights to the documents and data you process through CertifiTrack. The CertifiTrack codebase is open-source software accessible under its respective repository license.
+          </p>
+        </section>
 
-          <section id="contact" class="scroll-mt-24 pt-8 border-t border-border">
-            <h2 class="text-xl font-semibold text-foreground mb-3">5. Contact Us</h2>
-            <p class="text-base text-muted-foreground mb-4">
-              If you have questions about these Terms, please contact our support team.
-            </p>
-            <a href={`mailto:${siteConfig.supportEmail}`} class="text-accent hover:underline font-medium">{siteConfig.supportEmail}</a>
-          </section>
+        <section class="space-y-3 pt-6 border-t border-border">
+          <h2 class="text-h2 text-foreground text-xl">6. Contact & Repository</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            For questions regarding these terms, issue reports, or open-source contributions:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a 
+              href={siteConfig.socials.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline"
+            >
+              <span>GitHub Repository</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+            <span class="hidden sm:inline text-muted-foreground">&bull;</span>
+            <a 
+              href={`mailto:${siteConfig.supportEmail}`} 
+              class="text-sm font-medium text-foreground hover:underline"
+            >
+              {siteConfig.supportEmail}
+            </a>
+          </div>
+        </section>
 
-        </div>
       </div>
 
     </div>

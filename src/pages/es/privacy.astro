@@ -1,24 +1,110 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import Button from '../../components/ui/Button.astro';
+import { siteConfig } from '../../config/site';
+import { ShieldCheck, FileText, Trash2, Cpu, ExternalLink } from 'lucide-react';
 
 const title = "Política de Privacidad | CertifiTrack";
-const description = "Política de privacidad de CertifiTrack.";
+const description = "Conoce cómo CertifiTrack procesa certificados subidos, gestiona archivos temporales y maneja los datos durante la extracción.";
 ---
 
-<Layout title={title} description={description} noindex={true}>
-  <section class="spacing-section border-b border-border bg-background min-h-[60vh] flex items-center justify-center">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl text-center">
-      <div class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 border border-amber-500/20 mb-6 shadow-subtle">PENDIENTE DE REVISIÓN LEGAL</div>
-      <h1 class="text-h1 text-foreground spacing-heading">Política de Privacidad</h1>
-      <p class="text-body-large spacing-paragraph">Nuestra Política de Privacidad en español se encuentra actualmente en revisión legal para garantizar su total exactitud.</p>
-      <p class="text-body spacing-paragraph">Mientras tanto, por favor consulta la versión oficial en inglés.</p>
+<Layout title={title} description={description}>
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="reading-width px-4 sm:px-6">
       
-      <div class="spacing-cta mt-8">
-        <Button href="/en/privacy" size="lg" class="shadow-sm">
-          Ver Política en Inglés
-        </Button>
+      {/* Header */}
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Gestión de Datos y Privacidad
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading">Política de Privacidad</h1>
+        <p class="text-small text-muted-foreground">Última actualización: Agosto 2026</p>
       </div>
+
+      {/* Core Summary */}
+      <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle mb-10 space-y-2">
+        <h2 class="text-h3 text-foreground text-base font-semibold">Resumen de Tratamiento de Datos</h2>
+        <p class="text-small text-muted-foreground leading-relaxed">
+          CertifiTrack es un proyecto de software de código abierto diseñado para extraer campos estructurados de seguros a partir de documentos ACORD 25. No mantenemos cuentas de usuario, no creamos perfiles comerciales y los archivos temporales generados durante la extracción se eliminan automáticamente tras el procesamiento.
+        </p>
+      </div>
+
+      {/* Document Sections */}
+      <div class="space-y-10 text-body">
+        
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">1. Información que Proporcionas y Subes</h2>
+          <p class="text-body text-muted-foreground">
+            Al utilizar la herramienta de extracción de CertifiTrack, envías archivos de documentos (como archivos PDF o archivos comprimidos ZIP con PDFs) para su análisis.
+          </p>
+          <p class="text-body text-muted-foreground">
+            Estos documentos suelen incluir datos de seguros comerciales: nombres de subcontratistas asegurados, números de póliza, aseguradoras emisoras, montos de cobertura y fechas de vigencia.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">2. Procesamiento y Limpieza Automática de Archivos</h2>
+          <p class="text-body text-muted-foreground">
+            CertifiTrack funciona como un servicio de extracción sin estado (stateless):
+          </p>
+          <ul class="space-y-2 text-body text-muted-foreground list-disc pl-5">
+            <li>
+              <strong class="text-foreground">Almacenamiento Local Temporal:</strong> Cuando subes un archivo, este se guarda en un directorio temporal aislado del servidor únicamente para permitir la extracción de texto del PDF y su segmentación.
+            </li>
+            <li>
+              <strong class="text-foreground">Eliminación Inmediata:</strong> Tan pronto como finaliza la extracción y se genera el archivo Excel (.xlsx) resultante—o si ocurre un error durante el proceso—los archivos temporales se borran de inmediato del disco.
+            </li>
+            <li>
+              <strong class="text-foreground">Sin Bases de Datos Permanentes:</strong> CertifiTrack no almacena tus certificados subidos ni las hojas de cálculo generadas en una base de datos a largo plazo.
+            </li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">3. Proveedores Externos de Inferencia de IA</h2>
+          <p class="text-body text-muted-foreground">
+            Cuando se configura un proveedor externo de IA (como la API de Google Gemini) en el entorno de ejecución, el texto del documento puede procesarse a través de dicho proveedor para extraer campos semiestructurados. De forma alternativa, la extracción determinística local opera sin llamadas a APIs externas.
+          </p>
+          <p class="text-body text-muted-foreground">
+            Los datos transmitidos a proveedores externos se rigen por los términos de servicio y políticas de privacidad del proveedor correspondiente. Debes asegurarte de que el envío de certificados cumpla con tus compromisos contractuales y normativas internas de gestión de datos.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">4. Información que No Recopilamos</h2>
+          <ul class="space-y-1.5 text-body text-muted-foreground list-disc pl-5">
+            <li>No requerimos registro de cuentas, contraseñas ni credenciales personales.</li>
+            <li>No recopilamos ni almacenamos números de tarjetas de crédito ni datos de facturación.</li>
+            <li>No vendemos ni comercializamos tus documentos ni los datos de seguros extraídos.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3 pt-6 border-t border-border">
+          <h2 class="text-h2 text-foreground text-xl">5. Código Fuente y Contacto</h2>
+          <p class="text-body text-muted-foreground">
+            CertifiTrack es software de código abierto. Puedes inspeccionar el código fuente completo y los mecanismos de seguridad directamente en el repositorio del proyecto:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a 
+              href={siteConfig.socials.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline"
+            >
+              <span>Repositorio en GitHub</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+            <span class="hidden sm:inline text-muted-foreground">&bull;</span>
+            <a 
+              href={`mailto:${siteConfig.supportEmail}`} 
+              class="text-sm font-medium text-foreground hover:underline"
+            >
+              {siteConfig.supportEmail}
+            </a>
+          </div>
+        </section>
+
+      </div>
+
     </div>
   </section>
 </Layout>

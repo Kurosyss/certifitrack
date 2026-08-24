@@ -2,34 +2,91 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
-import { ArrowRight, FileText, CheckCircle2, FileSpreadsheet, File, Scan } from 'lucide-react';
+import { ArrowRight, FileText, CheckCircle2, FileSpreadsheet, File, ShieldCheck, Cpu, Layers, Download } from 'lucide-react';
 
-const title = "CertifiTrack | Turn Your Messy COI Folder Into a Clean Tracker";
-const description = "Send us your subcontractor PDFs. We'll organize the documents, extract the key certificate information, and return a clean tracker within 24-48 hours.";
+const title = "Open-Source COI Document Extraction & Insurance Tracking | CertifiTrack";
+const description = "Extract ACORD 25 Certificate of Insurance PDFs into structured, verified insurance data and audit-ready Excel spreadsheets in seconds.";
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://certifitrack.com/#website",
+      "url": "https://certifitrack.com/en/",
+      "name": "CertifiTrack",
+      "description": "Open-source COI document understanding and insurance tracking tool."
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://certifitrack.com/#software",
+      "name": "CertifiTrack",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web, Windows, macOS, Linux",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://certifitrack.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is an ACORD 25 Certificate of Insurance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An ACORD 25 is the standard Certificate of Liability Insurance form summarizing coverage types, policy numbers, effective dates, expiration dates, and limits for commercial subcontractors and vendors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does CertifiTrack extract data from COI PDFs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "CertifiTrack isolates insurance sections, extracts policy numbers, limits, and dates, and verifies them through deterministic validation rules before compiling everything into a clean Excel workbook."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I upload multiple certificates at once?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can upload a single PDF or a ZIP archive containing multiple certificates to generate a consolidated tracking spreadsheet."
+          }
+        }
+      ]
+    }
+  ]
+};
 ---
 
 <Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
   {/* Hero Section */}
   <section class="relative spacing-section overflow-hidden border-b border-border">
-    {/* Subtle gradient background */}
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--color-muted)_0%,_transparent_50%)] -z-10"></div>
-    
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
       <div class="grid lg:grid-cols-12 spacing-content items-center">
         
-        {/* Left: Copy */}
-        <div class="lg:col-span-6 max-w-xl">
-          <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 backdrop-blur-sm px-3 py-1 text-[11px] font-medium tracking-wide uppercase text-muted-foreground mb-6 shadow-sm">
-            <span class="flex h-1.5 w-1.5 rounded-full bg-accent"></span>
-            Done-For-You Service
+        {/* Left: Headline & Actions */}
+        <div class="lg:col-span-6 max-w-xl w-full min-w-0">
+          <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-6 shadow-subtle">
+            <span class="flex h-1.5 w-1.5 rounded-full bg-[var(--color-status-active)]"></span>
+            COI DOCUMENT EXTRACTION
           </div>
-          <h1 class="text-display text-foreground spacing-heading text-balance">
-            Turn your messy COI folder into a clean tracker.
+          
+          <h1 class="text-display text-foreground spacing-heading text-balance font-semibold">
+            Turn messy COI documents into structured, usable data.
           </h1>
-          <p class="text-body-large spacing-paragraph">
-            Send us your subcontractor PDFs. We'll organize the documents, extract key certificate information, and return a clean spreadsheet indicating exactly who is missing coverage.
+          
+          <p class="text-body-large spacing-paragraph text-muted-foreground text-pretty">
+            Upload individual COI PDFs or a ZIP archive containing multiple documents. CertifiTrack extracts supported policy, coverage, date, limit, and certificate information into structured output and Excel.
           </p>
-          <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center mt-8">
+          
+          <div class="flex flex-col sm:flex-row gap-3.5 items-start sm:items-center mt-8">
             <Button 
               href="/en/upload"
               size="lg"
@@ -48,112 +105,144 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
               View on GitHub
             </Button>
           </div>
-          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mt-6 text-xs font-medium text-muted-foreground">
-            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> Open-source core</span>
-            <span class="flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 opacity-40"/> Bring your own API key</span>
+          
+          <div class="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2 mt-7 text-xs font-medium text-muted-foreground">
+            <span class="inline-flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 text-foreground opacity-70 shrink-0"/> ACORD 25 extraction</span>
+            <span class="inline-flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 text-foreground opacity-70 shrink-0"/> Multi-file ZIP support</span>
+            <span class="inline-flex items-center gap-1.5"><CheckCircle2 class="w-3.5 h-3.5 text-foreground opacity-70 shrink-0"/> No account required</span>
           </div>
         </div>
 
         {/* Right: Transformation Visual */}
-        <div class="lg:col-span-6 relative w-full mt-12 lg:mt-0">
-          <div class="flex flex-col gap-6 w-full max-w-2xl mx-auto lg:ml-auto">
+        <div class="lg:col-span-6 relative w-full min-w-0 mt-10 lg:mt-0">
+          <div class="flex flex-col gap-4 w-full max-w-full lg:max-w-2xl mx-auto lg:ml-auto min-w-0">
             
             {/* BEFORE: Messy Files */}
-            <div class="flex flex-col bg-surface rounded-xl border border-border shadow-subtle overflow-hidden">
-              <div class="px-4 py-3 bg-muted border-b border-border flex items-center justify-between">
-                <div class="flex items-center gap-2 text-foreground">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-1.2-1.2A2 2 0 0 0 7.55 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
-                  <span class="text-xs font-medium tracking-wide">subcontractor_cois_2026.zip</span>
+            <div class="flex flex-col bg-surface rounded-2xl border border-border shadow-subtle overflow-hidden w-full min-w-0">
+              <div class="px-4 py-2.5 bg-muted/40 border-b border-border flex items-center justify-between">
+                <div class="flex items-center gap-2 text-foreground truncate min-w-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground shrink-0"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-1.2-1.2A2 2 0 0 0 7.55 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/></svg>
+                  <span class="text-xs font-medium tracking-wide truncate">vendor_coi_documents.zip</span>
                 </div>
-                <span class="text-[10px] text-muted-foreground">46 items</span>
+                <span class="text-[11px] tabular-nums text-muted-foreground shrink-0 ml-2">4 files</span>
               </div>
               <div class="flex flex-col text-[11px]">
                 <div class="flex items-center justify-between px-4 py-2 border-b border-border/40 hover:bg-muted/30">
-                  <div class="flex items-center gap-3">
-                    <File class="w-3.5 h-3.5 text-muted-foreground/60"/> 
-                    <span class="text-foreground">ACORD_25_Atlas_Ridge.pdf</span>
+                  <div class="flex items-center gap-3 truncate min-w-0">
+                    <File class="w-3.5 h-3.5 text-muted-foreground/60 shrink-0"/> 
+                    <span class="text-foreground truncate">ACORD_25_Atlas_Ridge.pdf</span>
                   </div>
-                  <span class="text-muted-foreground">1.2 MB</span>
+                  <span class="text-[11px] tabular-nums text-muted-foreground shrink-0 ml-2">1.2 MB</span>
                 </div>
                 <div class="flex items-center justify-between px-4 py-2 border-b border-border/40 hover:bg-muted/30">
-                  <div class="flex items-center gap-3">
-                    <File class="w-3.5 h-3.5 text-muted-foreground/60"/> 
-                    <span class="text-foreground">Renewal_COI_Cedar_Point.pdf</span>
+                  <div class="flex items-center gap-3 truncate min-w-0">
+                    <File class="w-3.5 h-3.5 text-muted-foreground/60 shrink-0"/> 
+                    <span class="text-foreground truncate">Renewal_COI_Cedar_Point.pdf</span>
                   </div>
-                  <span class="text-muted-foreground">840 KB</span>
+                  <span class="text-[11px] tabular-nums text-muted-foreground shrink-0 ml-2">840 KB</span>
                 </div>
                 <div class="flex items-center justify-between px-4 py-2 border-b border-border/40 hover:bg-muted/30">
-                  <div class="flex items-center gap-3">
-                    <File class="w-3.5 h-3.5 text-muted-foreground/60"/> 
-                    <span class="text-foreground">Workers_Comp_2026.pdf</span>
+                  <div class="flex items-center gap-3 truncate min-w-0">
+                    <File class="w-3.5 h-3.5 text-muted-foreground/60 shrink-0"/> 
+                    <span class="text-foreground truncate">Workers_Comp_Horizon.pdf</span>
                   </div>
-                  <span class="text-muted-foreground">2.1 MB</span>
+                  <span class="text-[11px] tabular-nums text-muted-foreground shrink-0 ml-2">1.5 MB</span>
                 </div>
-                <div class="flex items-center justify-between px-4 py-2 hover:bg-muted/30">
-                  <div class="flex items-center gap-3">
-                    <File class="w-3.5 h-3.5 text-muted-foreground/60"/> 
-                    <span class="text-foreground">Auto_Liability_COI.pdf</span>
+                <div class="flex items-center justify-between px-4 py-2 border-b border-border/40 hover:bg-muted/30">
+                  <div class="flex items-center gap-3 truncate min-w-0">
+                    <File class="w-3.5 h-3.5 text-muted-foreground/60 shrink-0"/> 
+                    <span class="text-foreground truncate">Vanguard_Electrical_COI.pdf</span>
                   </div>
-                  <span class="text-muted-foreground">950 KB</span>
-                </div>
-                <div class="bg-muted/20 px-4 py-1.5 text-[10px] text-muted-foreground italic border-t border-border/40 text-center">
-                  + 42 unstructured files
+                  <span class="text-[11px] tabular-nums text-muted-foreground shrink-0 ml-2">2.1 MB</span>
                 </div>
               </div>
             </div>
 
-            {/* ARROW */}
-            <div class="flex justify-center -my-3 z-10 relative">
-              <div class="bg-background border border-border rounded-full p-1.5 shadow-sm text-muted-foreground">
-                <ArrowRight class="w-4 h-4 rotate-90 lg:rotate-0" />
+            {/* TRANSITION INDICATOR */}
+            <div class="flex items-center justify-center -my-1">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-background border border-border text-[10px] font-medium text-muted-foreground uppercase tracking-wider shadow-subtle">
+                <span>Automated Extraction & Structured Export</span>
+                <ArrowRight class="w-3 h-3 rotate-90 sm:rotate-0" />
               </div>
             </div>
 
-            {/* AFTER: Clean Tracker */}
-            <div class="flex flex-col bg-surface rounded-xl border border-border shadow-elevated overflow-hidden">
-              <div class="px-4 py-3 bg-muted border-b border-border flex items-center gap-2">
-                <FileSpreadsheet class="w-4 h-4 text-status-active" />
-                <span class="text-xs font-medium text-foreground tracking-wide">Master_Tracker_Final.xlsx</span>
+            {/* AFTER: Clean Excel Spreadsheet */}
+            <div class="flex flex-col bg-surface rounded-2xl border border-border shadow-elevated overflow-hidden w-full min-w-0">
+              <div class="px-4 py-2.5 bg-muted/40 border-b border-border flex items-center justify-between">
+                <div class="flex items-center gap-2 text-foreground truncate min-w-0">
+                  <FileSpreadsheet class="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                  <span class="text-xs font-semibold tracking-wide truncate">COI_Tracker_Export.xlsx</span>
+                </div>
+                <span class="text-[10px] uppercase tracking-wider text-muted-foreground bg-background px-2 py-0.5 rounded-md border border-border shrink-0 ml-2">
+                  STRUCTURED OUTPUT
+                </span>
               </div>
-              <div class="overflow-x-auto">
-                <table class="w-full text-left text-[10px] font-sans whitespace-nowrap">
-                  <thead class="bg-background text-muted-foreground border-b border-border">
+              
+              <div class="overflow-x-auto w-full max-w-full">
+                <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
+                  <thead class="bg-muted/60 text-muted-foreground font-semibold border-b border-border">
                     <tr>
-                      <th class="px-3 py-2 font-medium border-r border-border">Subcontractor</th>
-                      <th class="px-3 py-2 font-medium border-r border-border">GL Exp.</th>
-                      <th class="px-3 py-2 font-medium border-r border-border">WC Exp.</th>
-                      <th class="px-3 py-2 font-medium border-r border-border">GL Limit</th>
-                      <th class="px-3 py-2 font-medium">Status</th>
+                      <th class="px-3.5 py-2">Named Insured</th>
+                      <th class="px-3.5 py-2">Carrier</th>
+                      <th class="px-3.5 py-2">Policy #</th>
+                      <th class="px-3.5 py-2">Effective</th>
+                      <th class="px-3.5 py-2">Expiration</th>
+                      <th class="px-3.5 py-2">Limit</th>
+                      <th class="px-3.5 py-2">Status</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-border text-foreground bg-surface">
-                    <tr class="hover:bg-muted/50 transition-colors">
-                      <td class="px-3 py-2 font-medium border-r border-border">Atlas Ridge Mechanical</td>
-                      <td class="px-3 py-2 border-r border-border">10/12/26</td>
-                      <td class="px-3 py-2 border-r border-border">05/01/26</td>
-                      <td class="px-3 py-2 border-r border-border">$1M / $2M</td>
-                      <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 font-semibold text-status-active border border-status-active-border">CURRENT</span></td>
+                  <tbody class="divide-y divide-border/40 font-sans">
+                    <tr class="hover:bg-muted/30">
+                      <td class="px-3.5 py-2 font-medium text-foreground">Atlas Ridge Framing LLC</td>
+                      <td class="px-3.5 py-2 text-muted-foreground">Travelers Property</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">GL-9481-22A</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2026-01-15</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2027-01-15</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">$1,000,000</td>
+                      <td class="px-3.5 py-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                          CURRENT
+                        </span>
+                      </td>
                     </tr>
-                    <tr class="hover:bg-muted/50 transition-colors">
-                      <td class="px-3 py-2 font-medium border-r border-border">Cedar Point Roofing</td>
-                      <td class="px-3 py-2 border-r border-border text-status-expired font-medium">01/14/26</td>
-                      <td class="px-3 py-2 border-r border-border">11/30/26</td>
-                      <td class="px-3 py-2 border-r border-border">$2M / $4M</td>
-                      <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 font-semibold text-status-expired border border-status-expired-border">EXPIRED</span></td>
+                    <tr class="hover:bg-muted/30">
+                      <td class="px-3.5 py-2 font-medium text-foreground">Cedar Point Roofing Inc</td>
+                      <td class="px-3.5 py-2 text-muted-foreground">Liberty Mutual</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">CGL-4029-88</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2025-08-01</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2026-08-01</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">$2,000,000</td>
+                      <td class="px-3.5 py-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                          EXPIRING
+                        </span>
+                      </td>
                     </tr>
-                    <tr class="hover:bg-muted/50 transition-colors">
-                      <td class="px-3 py-2 font-medium border-r border-border">Northstar Electrical</td>
-                      <td class="px-3 py-2 border-r border-border">08/20/26</td>
-                      <td class="px-3 py-2 border-r border-border text-status-review font-medium">09/01/26</td>
-                      <td class="px-3 py-2 border-r border-border">$1M / $2M</td>
-                      <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-review-bg px-1.5 py-0.5 font-semibold text-status-review border border-status-review-border">EXPIRING</span></td>
+                    <tr class="hover:bg-muted/30">
+                      <td class="px-3.5 py-2 font-medium text-foreground">Horizon Transport & Logistics</td>
+                      <td class="px-3.5 py-2 text-muted-foreground">State Fund</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">WC-7721-04</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2025-03-10</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2026-03-10</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">$1,000,000</td>
+                      <td class="px-3.5 py-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                          EXPIRED
+                        </span>
+                      </td>
                     </tr>
-                    <tr class="hover:bg-muted/50 transition-colors">
-                      <td class="px-3 py-2 font-medium border-r border-border">Summit Valley Concrete</td>
-                      <td class="px-3 py-2 border-r border-border">—</td>
-                      <td class="px-3 py-2 border-r border-border">—</td>
-                      <td class="px-3 py-2 border-r border-border">—</td>
-                      <td class="px-3 py-2"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 font-semibold text-status-missing border border-status-missing-border">MISSING</span></td>
+                    <tr class="hover:bg-muted/30">
+                      <td class="px-3.5 py-2 font-medium text-foreground">Vanguard Electrical Contractors</td>
+                      <td class="px-3.5 py-2 text-muted-foreground">Hartford Casualty</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">GL-8821-44</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2026-04-01</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">2027-04-01</td>
+                      <td class="px-3.5 py-2 tabular-nums text-muted-foreground">$2,000,000</td>
+                      <td class="px-3.5 py-2">
+                        <span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-muted text-muted-foreground border border-border">
+                          MISSING
+                        </span>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -166,95 +255,151 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
     </div>
   </section>
 
-  {/* How It Works */}
-  <section class="spacing-section bg-background">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <h2 class="text-h2 text-foreground spacing-heading">How it works</h2>
-        <p class="text-body text-balance">Run it locally or deploy it yourself.</p>
+  {/* Comprehensive ACORD 25 Field Extraction */}
+  <section class="spacing-section bg-surface border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-h2 text-foreground spacing-heading">Comprehensive ACORD 25 Field Extraction</h2>
+        <p class="text-body text-muted-foreground">CertifiTrack parses each standardized certificate section into structured tabular columns ready for reconciliation and reporting.</p>
       </div>
 
-      <div class="relative grid md:grid-cols-3 spacing-content text-center">
-        <div class="hidden md:block absolute top-6 left-[16%] right-[16%] h-px bg-border -z-10"></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         
-        <div class="flex flex-col items-center group">
-          <div class="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-sm font-medium text-muted-foreground mb-5 shadow-subtle group-hover:border-accent group-hover:text-accent transition-colors">1</div>
-          <h3 class="text-h3 text-foreground mb-2">Configure Your API Key</h3>
-          <p class="text-body max-w-[280px] text-balance">Bring your own Google Gemini API key. Your data goes directly to the provider.</p>
+        <div class="p-6 rounded-2xl border border-border bg-background shadow-subtle space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-foreground mb-3 shadow-subtle">
+            <FileText class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">General Liability</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Each Occurrence, General Aggregate, Products & Completed Operations limits, Policy Number, Effective Date, and Expiration Date.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-background shadow-subtle space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-foreground mb-3 shadow-subtle">
+            <ShieldCheck class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Workers' Compensation</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Statutory Limits indicator, Employer's Liability limits (Each Accident, Disease Policy Limit, Disease Each Employee), Policy Number, and Expiration Date.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-background shadow-subtle space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-foreground mb-3 shadow-subtle">
+            <Layers class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Automobile & Umbrella</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Combined Single Limit (CSL), Any Auto / Owned Auto flags, Umbrella/Excess Occurrence & Aggregate limits, and Expiration Dates.</p>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-border bg-background shadow-subtle space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-surface border border-border flex items-center justify-center text-foreground mb-3 shadow-subtle">
+            <Cpu class="w-4 h-4" />
+          </div>
+          <h3 class="text-h3 text-foreground text-base">Certificate & Party Information</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Named Insured, Producer / Broker agency, Underwriting Carriers (A–F), Certificate Holder, and Source Filename.</p>
+        </div>
+
+      </div>
+
+      <div class="mt-10 text-center">
+        <a href="/en/what-we-do" class="text-xs font-semibold text-foreground uppercase tracking-wider hover:underline inline-flex items-center gap-1.5">
+          <span>Explore Complete Schema & All Supported Columns</span>
+          <ArrowRight class="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* How It Works */}
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <h2 class="text-h2 text-foreground spacing-heading">How CertifiTrack Works</h2>
+        <p class="text-body text-muted-foreground text-balance">A multi-stage pipeline designed for precision insurance document processing.</p>
+      </div>
+
+      <div class="relative grid md:grid-cols-3 gap-8 text-center">
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-semibold text-foreground mb-4 shadow-subtle">01</div>
+          <h3 class="text-h3 text-foreground mb-2 text-base">01 — Upload Documents</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Upload a single PDF or ZIP archive. Files are safely decompressed and isolated in temporary processing buffers.</p>
         </div>
         
-        <div class="flex flex-col items-center group">
-          <div class="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-sm font-medium text-muted-foreground mb-5 shadow-subtle group-hover:border-accent group-hover:text-accent transition-colors">2</div>
-          <h3 class="text-h3 text-foreground mb-2">Upload Your Files</h3>
-          <p class="text-body max-w-[280px] text-balance">Upload your messy COI folder as a ZIP file. The local backend processes it securely.</p>
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-semibold text-foreground mb-4 shadow-subtle">02</div>
+          <h3 class="text-h3 text-foreground mb-2 text-base">02 — Extract & Normalize</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Extracts policy fields within isolated document boundaries to prevent cross-coverage field confusion.</p>
         </div>
         
-        <div class="flex flex-col items-center group">
-          <div class="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center text-sm font-medium text-muted-foreground mb-5 shadow-subtle group-hover:border-accent group-hover:text-accent transition-colors">3</div>
-          <h3 class="text-h3 text-foreground mb-2">Get Your Tracker</h3>
-          <p class="text-body max-w-[280px] text-balance">Receive your structured Excel tracker highlighting missing and expired records within 24–48 hours.</p>
+        <div class="flex flex-col items-center">
+          <div class="w-9 h-9 rounded-full bg-surface border border-border flex items-center justify-center text-xs font-semibold text-foreground mb-4 shadow-subtle">03</div>
+          <h3 class="text-h3 text-foreground mb-2 text-base">03 — Download Your Workbook</h3>
+          <p class="text-small text-muted-foreground leading-relaxed">Applies rule-based date validation, logical chronological checks, and clean limit parsing into Excel.</p>
         </div>
       </div>
     </div>
   </section>
 
-  {/* What You Receive Section */}
-  <section class="spacing-section bg-surface border-y border-border">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-5xl">
-      <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-        <div class="lg:col-span-7 order-2 lg:order-1">
-          <div class="bg-surface border border-border rounded-xl shadow-elevated overflow-hidden">
-            <div class="bg-muted/30 px-4 py-3 border-b border-border flex items-center justify-between">
-              <span class="text-xs font-medium text-foreground flex items-center gap-2"><FileSpreadsheet class="w-4 h-4 text-muted-foreground"/> Master_Tracker_Final.xlsx</span>
-              <span class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold">Output</span>
-            </div>
-            <div class="overflow-x-auto p-4">
-              <table class="w-full text-left text-[11px] font-sans whitespace-nowrap">
-                <thead class="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-2 border-b border-border">
-                  <tr>
-                    <th class="pb-2 pr-4">Subcontractor</th>
-                    <th class="pb-2 pr-4">GL Exp.</th>
-                    <th class="pb-2 pr-4">GL Limit</th>
-                    <th class="pb-2">Status</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border/50 text-foreground">
-                  <tr>
-                    <td class="py-2.5 pr-4 font-medium">Atlas Ridge Mechanical</td>
-                    <td class="py-2.5 pr-4 text-muted-foreground">10/12/26</td>
-                    <td class="py-2.5 pr-4 text-muted-foreground">$1M / $2M</td>
-                    <td class="py-2.5"><span class="inline-flex items-center rounded-sm bg-status-active-bg px-1.5 py-0.5 text-[9px] font-semibold text-status-active border border-status-active-border">CURRENT</span></td>
-                  </tr>
-                  <tr>
-                    <td class="py-2.5 pr-4 font-medium">Cedar Point Roofing</td>
-                    <td class="py-2.5 pr-4 text-status-expired font-medium">01/14/26</td>
-                    <td class="py-2.5 pr-4 text-muted-foreground">$2M / $4M</td>
-                    <td class="py-2.5"><span class="inline-flex items-center rounded-sm bg-status-expired-bg px-1.5 py-0.5 text-[9px] font-semibold text-status-expired border border-status-expired-border">EXPIRED</span></td>
-                  </tr>
-                  <tr>
-                    <td class="py-2.5 pr-4 font-medium">Northstar Electrical</td>
-                    <td class="py-2.5 pr-4 text-muted-foreground">—</td>
-                    <td class="py-2.5 pr-4 text-muted-foreground">—</td>
-                    <td class="py-2.5"><span class="inline-flex items-center rounded-sm bg-status-missing-bg px-1.5 py-0.5 text-[9px] font-semibold text-status-missing border border-status-missing-border">MISSING</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+  {/* Visible FAQ Section */}
+  <section class="spacing-section bg-surface border-b border-border">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+      <div class="text-center mb-12">
+        <h2 class="text-h2 text-foreground spacing-heading">Frequently Asked Questions</h2>
+        <p class="text-body text-muted-foreground">Common questions about COI document extraction and compliance tracking.</p>
+      </div>
 
-        <div class="lg:col-span-5 order-1 lg:order-2">
-          <h2 class="text-h2 text-foreground spacing-heading">What you receive</h2>
-          <p class="text-body spacing-paragraph">We don't just dump raw data on you. We return a structured tracker your team can actually use to review certificate dates, limits, and missing documents.</p>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start gap-3 text-body text-foreground"><CheckCircle2 class="w-5 h-5 text-accent shrink-0"/> Matched Subcontractors to PDFs</li>
-            <li class="flex items-start gap-3 text-body text-foreground"><CheckCircle2 class="w-5 h-5 text-accent shrink-0"/> Extracted Expiration Dates</li>
-            <li class="flex items-start gap-3 text-body text-foreground"><CheckCircle2 class="w-5 h-5 text-accent shrink-0"/> Missing Documents Flagged</li>
-          </ul>
-          <Button href="/en/templates/coi-tracking-spreadsheet" variant="outline" class="w-full sm:w-auto">
-            See Example Output
-          </Button>
-        </div>
+      <div class="space-y-4">
+        <details class="group bg-background border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-foreground hover:bg-muted/30 transition-colors text-sm">
+            <span>What is an ACORD 25 Certificate of Insurance?</span>
+            <span class="ml-4 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-muted-foreground text-small leading-relaxed">
+            An ACORD 25 is the standard industry form summarizing commercial liability coverage, effective dates, expiration dates, and policy limits provided by a subcontractor or vendor to a general contractor or property manager.
+          </div>
+        </details>
+
+        <details class="group bg-background border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-foreground hover:bg-muted/30 transition-colors text-sm">
+            <span>How does CertifiTrack extract data from COI PDFs?</span>
+            <span class="ml-4 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-muted-foreground text-small leading-relaxed">
+            CertifiTrack reads the structured sections of each certificate PDF, parses coverage types (General Liability, Workers' Comp, Auto, Umbrella), verifies dates and numbers through deterministic validation rules, and outputs a normalized Excel table.
+          </div>
+        </details>
+
+        <details class="group bg-background border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-foreground hover:bg-muted/30 transition-colors text-sm">
+            <span>Can I process multiple COIs at once?</span>
+            <span class="ml-4 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-muted-foreground text-small leading-relaxed">
+            Yes. You can upload multiple PDFs compressed in a single ZIP file. CertifiTrack extracts each document in sequence and produces a consolidated master spreadsheet with one row per certificate.
+          </div>
+        </details>
+
+        <details class="group bg-background border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-foreground hover:bg-muted/30 transition-colors text-sm">
+            <span>Are uploaded files stored permanently?</span>
+            <span class="ml-4 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </summary>
+          <div class="px-5 pb-5 pt-1 text-muted-foreground text-small leading-relaxed">
+            No. CertifiTrack operates statelessly. Files are handled in isolated temporary directories and deleted immediately once the Excel output has been created and sent back to your browser.
+          </div>
+        </details>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/en/faq" class="text-xs font-semibold uppercase tracking-wider text-foreground hover:underline">
+          View full FAQ &rarr;
+        </a>
       </div>
     </div>
   </section>
@@ -262,15 +407,15 @@ const description = "Send us your subcontractor PDFs. We'll organize the documen
   {/* Final CTA */}
   <section class="spacing-section bg-background">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
-      <h2 class="text-h2 text-foreground spacing-heading text-balance">Stop manually typing out COI data.</h2>
-      <p class="text-body-large spacing-paragraph">Run CertifiTrack locally to process your certificates instantly.</p>
+      <h2 class="text-h2 text-foreground spacing-heading text-balance font-semibold">Stop manually transcribing certificate policies.</h2>
+      <p class="text-body-large spacing-paragraph text-muted-foreground">Upload your COI PDF or ZIP folder now to generate structured, audit-ready insurance data.</p>
       <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
         <Button 
           href="/en/upload"
           size="lg"
           class="shadow-elevated transition-transform hover:scale-105"
         >
-          Try the Demo
+          Start Extracting Free
         </Button>
       </div>
     </div>

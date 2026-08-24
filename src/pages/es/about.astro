@@ -1,45 +1,95 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import { ShieldCheck, Layers, FileCode } from 'lucide-react';
+import { siteConfig } from '../../config/site';
 
-const title = "Sobre Nosotros | CertifiTrack";
-const description = "Por qué creamos CertifiTrack y cómo ayudamos a los Contratistas Generales.";
+const title = "Acerca de CertifiTrack | Extracción Open-Source de Certificados de Seguro";
+const description = "Conoce por qué creamos CertifiTrack: extracción automatizada y de código abierto de certificados de seguro para contratistas generales y equipos de cumplimiento.";
 ---
 
 <Layout title={title} description={description}>
   <section class="spacing-section border-b border-border bg-background">
     <div class="reading-width px-4 sm:px-6">
-      <div class="text-center mb-16">
-        <h1 class="text-h1 text-foreground spacing-heading">Sobre CertifiTrack</h1>
-        <p class="text-body-large text-balance">Creamos CertifiTrack porque los Contratistas Generales no deberían tener que elegir entre una carpeta desordenada de PDFs y una suscripción de software de cumplimiento empresarial de $10,000 al año.</p>
+      
+      {/* Header */}
+      <div class="text-center mb-14">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Misión y Arquitectura
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading text-balance">Acerca de CertifiTrack</h1>
+        <p class="text-body-large text-muted-foreground text-pretty">
+          Diseñado para brindar a contratistas generales y administradores una herramienta automatizada de análisis de pólizas de seguro sin ataduras corporativas.
+        </p>
       </div>
 
-      <div class="space-y-12">
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">Qué hacemos</h2>
-          <p class="text-body spacing-paragraph">CertifiTrack es un servicio paquetizado diseñado para resolver un único y doloroso problema administrativo: <strong class="text-foreground font-medium">las carpetas desordenadas de COIs de subcontratistas</strong>.</p>
-          <p class="text-body">Tomamos los PDFs desorganizados y los certificados ACORD 25 que recopilas de los subcontratistas, los organizamos manualmente, extraemos las fechas de vencimiento y límites críticos, y te devolvemos un registro estructurado y limpio en Excel. Marcamos los documentos faltantes y las pólizas vencidas para que sepas exactamente a quién contactar.</p>
+      {/* Secciones */}
+      <div class="space-y-12 text-body">
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">El Problema del Seguimiento de Certificados</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            En la gestión de proyectos y proveedores, verificar certificados de seguro es indispensable, pero el proceso suele ser manual. Los socios envían escaneos de certificados ACORD 25 y los equipos administrativos dedican horas a transcribir fechas de vencimiento, números de póliza y límites de cobertura en hojas de cálculo.
+          </p>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack se creó para ofrecer una alternativa ligera y de código abierto que automatiza la transcripción y validación de fechas directamente en formatos de hoja de cálculo estructurados.
+          </p>
         </section>
 
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">Por qué es importante el problema</h2>
-          <p class="text-body spacing-paragraph">Para los constructores residenciales y comerciales ligeros, el seguimiento del seguro de los subcontratistas es un dolor de cabeza masivo. Los subcontratistas envían fotos de certificados, escaneos borrosos y documentos vencidos. Cuando llega el momento de una auditoría de compensación de trabajadores, o cuando un nuevo gerente de oficina asume el cargo, revisar una carpeta de 100 PDFs desordenados toma días de tedioso ingreso manual de datos.</p>
-          <p class="text-body">Aunque existen soluciones de software empresarial, a menudo requieren obligar a tus subcontratistas a crear cuentas, aprender a usar portales nuevos y complejos, y pagar altas tarifas anuales de software.</p>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">Nuestra Filosofía de Software</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            CertifiTrack se fundamenta en tres pilares esenciales:
+          </p>
+          <div class="grid sm:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <FileCode class="w-4 h-4 text-primary" />
+                <span>Código Abierto</span>
+              </div>
+              <p class="text-small leading-normal">Software gratuito y auditable, sin suscripciones obligatorias ni tarifas ocultas.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <ShieldCheck class="w-4 h-4 text-primary" />
+                <span>Procesamiento Sin Estado</span>
+              </div>
+              <p class="text-small leading-normal">Los documentos se analizan al momento; los archivos temporales se borran de inmediato.</p>
+            </div>
+
+            <div class="p-4 rounded-xl border border-border bg-surface shadow-subtle space-y-1.5">
+              <div class="text-xs font-semibold text-foreground flex items-center gap-1.5">
+                <Layers class="w-4 h-4 text-primary" />
+                <span>Formato Universal</span>
+              </div>
+              <p class="text-small leading-normal">Genera registros normalizados directamente en hojas de cálculo estructuradas.</p>
+            </div>
+          </div>
         </section>
 
-        <section>
-          <h2 class="text-h2 text-foreground mb-4">Nuestra filosofía de servicio</h2>
-          <p class="text-body spacing-paragraph">Creemos que a veces el mejor software es <strong class="text-foreground font-medium">no tener software</strong>.</p>
-          <p class="text-body">Nuestros clientes no quieren otro inicio de sesión. Quieren que el trabajo se haga por ellos. Combinando modernos flujos de trabajo administrativos con revisión humana manual, ofrecemos un servicio de limpieza "Todo Incluido" que no requiere capacitación (onboarding) ni tarifas recurrentes. Tú nos envías el desorden; nosotros te enviamos el registro limpio.</p>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">Validación Determinística</h2>
+          <p class="text-body text-muted-foreground leading-relaxed">
+            A diferencia de extractores genéricos, CertifiTrack aplica validación determinística de fechas (<code class="font-mono text-xs text-foreground bg-muted px-1.5 py-0.5 rounded">YYYY-MM-DD</code>), sanea valores monetarios y conserva el nombre del archivo de origen para garantizar la trazabilidad de la información.
+          </p>
+        </section>
+
+        <section class="pt-6 border-t border-border/60">
+          <p class="text-small text-muted-foreground">
+            Desarrollado y mantenido por <a href="https://github.com/Kurosyss" target="_blank" rel="noopener noreferrer" class="font-medium text-foreground hover:underline">Kurosyss</a>.
+          </p>
         </section>
       </div>
 
-      <div class="spacing-cta text-center mt-16 pt-16 border-t border-border">
-        <h3 class="text-h3 text-foreground mb-6">¿Listo para limpiar tu carpeta de COIs?</h3>
+      {/* CTA */}
+      <div class="spacing-cta text-center mt-14 pt-12 border-t border-border">
+        <h3 class="text-h3 text-foreground mb-4">Comienza a extraer tus certificados</h3>
+        <p class="text-small text-muted-foreground mb-6">Sube tus archivos PDF o archivo ZIP para generar tu registro estructurado.</p>
         <Button href="/es/upload" size="lg" class="shadow-elevated transition-transform hover:scale-105">
           Comienza a Extraer Gratis
         </Button>
       </div>
+
     </div>
   </section>
 </Layout>

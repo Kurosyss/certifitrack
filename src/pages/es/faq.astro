@@ -2,58 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
 
-const title = "Preguntas Frecuentes | CertifiTrack Cleanup";
-const description = "Preguntas frecuentes sobre nuestro servicio de limpieza de COI.";
+const title = "Preguntas Frecuentes | Extracción de COI CertifiTrack";
+const description = "Preguntas frecuentes sobre la extracción de Certificados de Seguro (COI) y seguimiento en Excel con CertifiTrack.";
 
 const faqs = [
   {
-    category: "Extracción y Entrega",
+    category: "Extracción y Flujo de Trabajo",
     questions: [
       {
-        q: "¿Leen cada certificado manualmente?",
-        a: "Nuestro proceso combina tecnología OCR con verificación humana. Extraemos campos clave (como Responsabilidad Civil, Compensación de Trabajadores, Auto y fechas de vencimiento) para garantizar un alto grado de precisión administrativa antes de devolver su hoja de cálculo."
+        q: "¿Qué es un Certificado de Seguro ACORD 25 (COI)?",
+        a: "Un ACORD 25 es el formulario estándar de Certificado de Seguro de Responsabilidad Civil utilizado en seguros comerciales. Resume tipos de cobertura clave, números de póliza, fechas de vigencia, fechas de vencimiento y límites para Responsabilidad Civil General, Automóvil, Exceso/Umbrella y Compensación de Trabajadores."
       },
       {
-        q: "¿Cuánto dura la limpieza?",
-        a: "Normalmente entregamos su registro limpio dentro de [CONFIRM TURNAROUND TIME, e.g., 24 a 48 horas hábiles] después de subir sus archivos."
+        q: "¿Cómo extrae CertifiTrack los datos de los PDFs de COI?",
+        a: "CertifiTrack procesa sus documentos PDF ACORD 25 mediante un flujo especializado de segmentación y extracción. Aísla las secciones de cobertura, extrae números de póliza, límites y fechas de vencimiento, y los verifica mediante reglas de validación deterministas antes de generar un libro de Excel estructurado."
+      },
+      {
+        q: "¿Puedo procesar múltiples certificados a la vez?",
+        a: "Sí. Puede subir un solo archivo .pdf o comprimir múltiples certificados PDF en un archivo .zip. CertifiTrack extrae cada documento de forma segura, valida los campos y genera una hoja de cálculo Excel consolidada con una fila por certificado."
+      },
+      {
+        q: "¿Cuánto tarda el proceso de extracción?",
+        a: "La extracción automatizada normalmente procesa cada documento en 10 a 30 segundos, generando y descargando su archivo Excel (.xlsx) listo para usar inmediatamente al finalizar."
       }
     ]
   },
   {
-    category: "Servicio y Cumplimiento",
+    category: "Coberturas y Validación",
     questions: [
       {
-        q: "¿Es este un software de cumplimiento?",
-        a: "No. CertifiTrack proporciona extracción de datos administrativos. Devolvemos una hoja de cálculo estructurada con los datos encontrados en sus certificados, pero no hacemos determinaciones legales sobre el cumplimiento, exclusiones de pólizas o idoneidad de cobertura."
+        q: "¿Qué campos de cobertura de seguro se extraen?",
+        a: "CertifiTrack extrae el Asegurado Nombrado (Subcontratista/Proveedor), Responsabilidad Civil General (Límites por ocurrencia y agregado, fechas de vigencia y vencimiento, nº de póliza), Automóvil Comercial (Límite único combinado, fechas, nº de póliza), Exceso/Umbrella (Límites, fechas, nº de póliza) y Compensación de Trabajadores (Límites estatutarios, fechas, nº de póliza)."
       },
       {
-        q: "¿Qué tipos de documentos puedo enviar?",
-        a: "Puede subir sus certificados como PDF dentro de un único archivo ZIP. Aceptamos certificados ACORD 25 estándar, así como copias escaneadas. También recomendamos incluir su lista maestra actual de subcontratistas para que podamos marcar los documentos faltantes."
+        q: "¿Es CertifiTrack un servicio de asesoría legal o cumplimiento?",
+        a: "No. CertifiTrack es una herramienta de extracción de datos administrativos. Extrae y estructura la información impresa en sus certificados en una hoja de cálculo conveniente. No proporciona asesoramiento legal, verificación de endosos de pólizas ni evaluaciones de suscripción de seguros."
+      },
+      {
+        q: "¿Cómo se validan las fechas de vencimiento y los límites?",
+        a: "Los campos extraídos se evalúan mediante reglas deterministas que comprueban el formato de fecha (ISO-8601), aseguran que las fechas de vigencia sean anteriores a las de vencimiento, señalan períodos con conflicto o duración cero y verifican que los límites de póliza estén dentro de rangos numéricos válidos."
       }
     ]
   },
   {
-    category: "Seguridad y Datos",
+    category: "Privacidad y Seguridad",
     questions: [
       {
-        q: "¿Qué tan seguros están mis datos?",
-        a: "Los archivos se procesan de forma segura. Todos los certificados subidos se eliminan de nuestros sistemas activos después de [CONFIRM RETENTION PERIOD, e.g., 30 días]."
+        q: "¿Se almacenan mis certificados subidos de forma permanente?",
+        a: "No. CertifiTrack opera de forma sin estado (stateless). Los archivos subidos se procesan en almacenamiento temporal aislado y se eliminan inmediatamente después de generar el archivo Excel. No mantenemos una base de datos permanente de sus documentos."
       },
       {
-        q: "¿Se usan mis documentos para entrenar IA?",
-        a: "[CONFIRM AI TRAINING POLICY: e.g., No. Sus archivos se usan exclusivamente para generar su registro y no se usan para entrenar modelos públicos.]"
+        q: "¿Se exponen las claves de API en el navegador?",
+        a: "No. Todas las credenciales de proveedores de IA y el procesamiento de extracción se ejecutan estrictamente en el servidor backend. Las claves de API nunca se envían ni son accesibles desde el código JavaScript del cliente."
       }
     ]
   }
 ];
+
+const allFaqItems = faqs.flatMap(g => g.questions);
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": allFaqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
 ---
 
 <Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+  
   <section class="spacing-section bg-background border-b border-border">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
       <div class="text-center mb-16">
         <h1 class="text-h1 text-foreground spacing-heading">Preguntas Frecuentes</h1>
-        <p class="text-body-large spacing-paragraph">Todo lo que necesitas saber sobre el proceso de limpieza.</p>
+        <p class="text-body-large spacing-paragraph">Todo lo que necesitas saber sobre la extracción de datos de COI y el seguimiento en hojas de cálculo.</p>
       </div>
 
       <div class="space-y-12">
@@ -64,7 +92,7 @@ const faqs = [
               {group.questions.map(faq => (
                 <details class="group bg-surface border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
                   <summary class="flex items-center justify-between cursor-pointer p-6 font-medium text-foreground hover:bg-muted/30 transition-colors">
-                    {faq.q}
+                    <span>{faq.q}</span>
                     <span class="ml-6 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -82,9 +110,9 @@ const faqs = [
       </div>
 
       <div class="mt-16 text-center pt-8 border-t border-border">
-        <h3 class="text-h3 text-foreground mb-2">¿Aún tienes preguntas?</h3>
-        <p class="text-small text-muted-foreground mb-6">Estamos aquí para ayudarte.</p>
-        <Button href="/es/contact" variant="outline">Contactar Soporte</Button>
+        <h3 class="text-h3 text-foreground mb-2">¿Listo para procesar sus archivos COI?</h3>
+        <p class="text-small text-muted-foreground mb-6">Suba su carpeta de certificados y genere un registro en Excel en segundos.</p>
+        <Button href="/es/upload" size="lg">Subir Carpeta de COI</Button>
       </div>
     </div>
   </section>

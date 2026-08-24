@@ -6,7 +6,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath(lang);
 
-const footerLinks = [
+const footerSections = [
   {
     title: t('footer.product'),
     links: [
@@ -16,19 +16,25 @@ const footerLinks = [
     ],
   },
   {
-    title: t('footer.support'),
+    title: t('footer.resources'),
     links: [
-      { name: t('nav.faq'), href: translatePath('/faq'), external: false },
-      { name: t('footer.contact'), href: translatePath('/contact'), external: false },
-      { name: t('footer.buyCoffee'), href: siteConfig.buyMeACoffee, external: true },
-      { name: t('footer.github'), href: siteConfig.socials.github, external: true },
+      { name: t('nav.about'), href: translatePath('/about') },
+      { name: t('nav.faq'), href: translatePath('/faq') },
+      { name: t('nav.contact'), href: translatePath('/contact') },
     ],
   },
   {
     title: t('footer.legal'),
     links: [
-      { name: t('footer.privacy'), href: translatePath('/privacy'), external: false },
-      { name: t('footer.terms'), href: translatePath('/terms'), external: false },
+      { name: t('footer.privacy'), href: translatePath('/privacy') },
+      { name: t('footer.terms'), href: translatePath('/terms') },
+    ],
+  },
+  {
+    title: t('footer.support'),
+    links: [
+      { name: t('footer.buyCoffee'), href: siteConfig.buyMeACoffee, external: true },
+      { name: t('footer.github'), href: siteConfig.socials.github, external: true },
     ],
   },
 ];
@@ -36,23 +42,29 @@ const footerLinks = [
 
 <footer class="border-t border-border bg-muted/20">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl spacing-footer">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div class="space-y-4 md:col-span-1">
-        <span class="font-bold text-xl tracking-tight text-primary">{siteConfig.name}</span>
-        <p class="text-small text-muted-foreground leading-relaxed">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <div class="col-span-2 md:col-span-1 space-y-3">
+        <a href={translatePath('/')} class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-primary" viewBox="0 0 100 100">
+            <path d="M 45 15 A 35 35 0 0 0 45 85 Z" fill="currentColor"/>
+            <rect x="65" y="15" width="15" height="70" fill="currentColor"/>
+          </svg>
+          <span class="font-bold text-lg tracking-tight text-primary">{siteConfig.name}</span>
+        </a>
+        <p class="text-small text-muted-foreground leading-relaxed pr-2">
           {t('footer.description')}
         </p>
       </div>
       
-      {footerLinks.map((section) => (
-        <div class="space-y-4">
-          <h3 class="text-sm font-semibold text-foreground tracking-wider">{section.title}</h3>
-          <ul class="space-y-3">
+      {footerSections.map((section) => (
+        <div class="space-y-3">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-foreground">{section.title}</h3>
+          <ul class="space-y-2">
             {section.links.map((link) => (
               <li>
                 <a 
                   href={link.href} 
-                  class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  class="text-small text-muted-foreground hover:text-foreground transition-colors"
                   {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
                   {link.name}
@@ -64,30 +76,9 @@ const footerLinks = [
       ))}
     </div>
     
-    <div class="spacing-cta">
-      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 mb-8 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-        <div class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-          Open Source
-        </div>
-        <div class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
-          Local First
-        </div>
-        <div class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          Bring Your Own API
-        </div>
-        <div class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-foreground/60"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          Secure Extraction
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground text-center md:text-left">
-        <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
-        <p class="max-w-xl text-right">{t('footer.disclaimer')}</p>
-      </div>
+    <div class="pt-8 border-t border-border/60 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground text-center md:text-left">
+      <p>&copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.</p>
+      <p class="max-w-xl text-right text-[11px] leading-relaxed opacity-80">{t('footer.disclaimer')}</p>
     </div>
   </div>
 </footer>

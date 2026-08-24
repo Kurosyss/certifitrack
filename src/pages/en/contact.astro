@@ -2,38 +2,92 @@
 import { siteConfig } from '../../config/site';
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
+import { Mail, FileCode, ArrowRight, ShieldCheck, FileSpreadsheet } from 'lucide-react';
 
-const title = "Contact | CertifiTrack";
-const description = "Contact CertifiTrack for custom quotes, larger folders, or questions about the upload process.";
+const title = "Contact & Support | CertifiTrack";
+const description = "Get support, submit feature feedback, or report extraction issues for CertifiTrack open-source COI extractor.";
 ---
 
 <Layout title={title} description={description}>
-  <section class="spacing-section bg-background min-h-[60vh] flex items-center border-b border-border">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
+  <section class="spacing-section bg-background border-b border-border">
+    <div class="reading-width px-4 sm:px-6">
       
-      <div class="bg-surface border border-border rounded-3xl p-8 sm:p-12 shadow-elevated">
-        <h1 class="text-h1 text-foreground mb-4">Contact Sales</h1>
-        
-        <p class="text-body-large text-muted-foreground mb-10 max-w-lg">
-          Questions about pricing, larger folders, unusual documents, or the upload process? Reach out below.
-        </p>
-        
-        <div class="mb-10">
-          <a href="mailto:hello@certifitrack.com" class="text-2xl sm:text-3xl font-medium text-foreground hover:text-accent transition-colors underline decoration-border hover:decoration-accent underline-offset-4">
-            hello@certifitrack.com
-          </a>
+      {/* Header */}
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Support & Inquiries
         </div>
-        
-        <p class="text-xs font-medium text-muted-foreground uppercase tracking-widest mb-12">
-          [CONFIRM RESPONSE TIME, e.g., Typical response within 1 business day.]
+        <h1 class="text-h1 text-foreground spacing-heading text-balance">Contact & Support</h1>
+        <p class="text-body-large text-muted-foreground text-pretty">
+          Have questions about ACORD 25 extraction, file limits, or open-source development? We're here to help.
         </p>
+      </div>
 
-        <div class="pt-8 border-t border-border/50">
-          <h3 class="text-h3 text-foreground mb-2">100+ subcontractors?</h3>
-          <p class="text-sm text-muted-foreground mb-6">Contact us for a custom quote on larger compliance folders.</p>
-          <Button href="mailto:hello@certifitrack.com" size="lg" class="shadow-sm">
-            Get a Custom Quote
-          </Button>
+      {/* Support Cards */}
+      <div class="grid sm:grid-cols-2 gap-6 mb-10">
+        
+        {/* Email Support Card */}
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+              <Mail class="w-4 h-4" />
+            </div>
+            <h2 class="text-h3 text-foreground text-base font-semibold">Direct Email Support</h2>
+            <p class="text-small text-muted-foreground leading-relaxed">
+              For general inquiries, document parsing questions, or troubleshooting assistance.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-border/60">
+            <a 
+              href={`mailto:${siteConfig.supportEmail}`}
+              class="text-sm font-medium text-foreground hover:underline inline-flex items-center gap-1.5"
+            >
+              <span>{siteConfig.supportEmail}</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        {/* GitHub Repository Card */}
+        <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle flex flex-col justify-between space-y-4">
+          <div class="space-y-2">
+            <div class="w-9 h-9 rounded-xl bg-background border border-border flex items-center justify-center text-foreground shadow-subtle">
+              <FileCode class="w-4 h-4" />
+            </div>
+            <h2 class="text-h3 text-foreground text-base font-semibold">GitHub Repository</h2>
+            <p class="text-small text-muted-foreground leading-relaxed">
+              Report bugs, submit pull requests, or explore upcoming schema extraction updates.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-border/60">
+            <a 
+              href={siteConfig.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm font-medium text-foreground hover:underline inline-flex items-center gap-1.5"
+            >
+              <span>github.com/Kurosyss/certifitrack</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Helpful FAQ Link Card */}
+      <div class="p-6 rounded-2xl border border-border bg-muted/20 text-center space-y-3">
+        <h3 class="text-sm font-semibold text-foreground">Looking for quick answers?</h3>
+        <p class="text-small text-muted-foreground max-w-md mx-auto leading-relaxed">
+          Check out our frequently asked questions for guidance on supported document formats, extraction boundaries, and data handling.
+        </p>
+        <div class="pt-2">
+          <a 
+            href="/en/faq" 
+            class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-foreground hover:underline"
+          >
+            <span>Read the FAQ</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
         </div>
       </div>
 

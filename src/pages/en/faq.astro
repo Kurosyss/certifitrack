@@ -2,58 +2,86 @@
 import Layout from '../../layouts/Layout.astro';
 import Button from '../../components/ui/Button.astro';
 
-const title = "FAQ | CertifiTrack Cleanup";
-const description = "Frequently asked questions about our COI cleanup service.";
+const title = "FAQ | CertifiTrack COI Extraction";
+const description = "Frequently asked questions about CertifiTrack Certificate of Insurance extraction and Excel tracking.";
 
 const faqs = [
   {
-    category: "Extraction & Delivery",
+    category: "Extraction & Workflow",
     questions: [
       {
-        q: "Do you read every certificate manually?",
-        a: "Our process combines OCR technology with human verification. We extract key fields (such as General Liability, Workers Compensation, Auto, and expiration dates) to ensure a high degree of administrative accuracy before returning your spreadsheet."
+        q: "What is an ACORD 25 Certificate of Insurance (COI)?",
+        a: "An ACORD 25 is the standard Certificate of Liability Insurance form used in commercial insurance across the United States. It summarizes key coverage types, policy numbers, effective dates, expiration dates, and policy limits for General Liability, Automobile Liability, Umbrella/Excess Liability, and Workers' Compensation."
       },
       {
-        q: "How long does the cleanup take?",
-        a: "We typically deliver your clean tracker within [CONFIRM TURNAROUND TIME, e.g., 24 to 48 business hours] after you upload your files."
+        q: "How does CertifiTrack extract data from COI PDFs?",
+        a: "CertifiTrack analyzes your ACORD 25 PDF documents using a specialized segmentation and extraction pipeline. It isolates insurance sections, extracts policy numbers, limits, and expiration dates, and verifies them through deterministic validation rules before compiling everything into a structured Excel workbook."
+      },
+      {
+        q: "Can I process multiple COIs at once?",
+        a: "Yes. You can upload a single .pdf or compress multiple PDF certificates into a .zip archive. CertifiTrack extracts each PDF safely, validates the fields, and produces a consolidated Excel tracker with one row per certificate."
+      },
+      {
+        q: "How fast is the extraction process?",
+        a: "Automated extraction typically processes each document in 10 to 30 seconds, generating and downloading your ready-to-use Excel (.xlsx) file immediately upon completion."
       }
     ]
   },
   {
-    category: "Service & Compliance",
+    category: "Coverage & Validation",
     questions: [
       {
-        q: "Is this compliance software?",
-        a: "No. CertifiTrack provides administrative data extraction. We return a structured spreadsheet of the data found on your certificates, but we do not make legal determinations about compliance, policy exclusions, or coverage adequacy."
+        q: "What insurance coverage fields are extracted?",
+        a: "CertifiTrack extracts Named Insured (Subcontractor/Vendor), General Liability (Occurrence & Aggregate limits, Effective & Expiration dates, Policy #), Automobile Liability (Combined Single Limit, Dates, Policy #), Umbrella/Excess Liability (Limits, Dates, Policy #), and Workers' Compensation (Statutory Limits, Dates, Policy #)."
       },
       {
-        q: "What types of documents can I send?",
-        a: "You can upload your certificates as PDFs inside a single ZIP file. We accept standard ACORD 25 certificates as well as scanned copies. We also recommend including your current subcontractor master list so we can flag missing documents."
+        q: "Is CertifiTrack an insurance compliance or legal verification service?",
+        a: "No. CertifiTrack is an administrative data extraction tool. It extracts and structures the information printed on your certificate documents into a convenient spreadsheet. It does not provide legal advice, policy endorsement verification, or insurance underwriting evaluations."
+      },
+      {
+        q: "How are expiration dates and limits validated?",
+        a: "Extracted fields are evaluated through deterministic rules that check date formatting (ISO-8601), ensure effective dates precede expiration dates, flag zero-duration or conflicting periods, and verify that extracted policy limits fall within valid numeric ranges."
       }
     ]
   },
   {
-    category: "Security & Data",
+    category: "Privacy & Security",
     questions: [
       {
-        q: "How secure is my data?",
-        a: "Files are processed securely. All uploaded certificates are deleted from our active systems after [CONFIRM RETENTION PERIOD, e.g., 30 days]."
+        q: "Are my uploaded certificates stored permanently?",
+        a: "No. CertifiTrack operates statelessly. Uploaded files are written to isolated temporary storage during processing and are immediately removed after the Excel output is generated. We do not maintain a permanent database of your documents."
       },
       {
-        q: "Are my documents used for AI training?",
-        a: "[CONFIRM AI TRAINING POLICY: e.g., No. Your files are used exclusively to generate your tracker and are not used to train public models.]"
+        q: "Are API keys exposed in the browser?",
+        a: "No. All AI provider credentials and extraction processing are executed strictly on the backend server. No API keys or provider secrets are ever shipped to or accessible from client-side JavaScript."
       }
     ]
   }
 ];
+
+const allFaqItems = faqs.flatMap(g => g.questions);
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": allFaqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
 ---
 
 <Layout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(faqStructuredData)} />
+  
   <section class="spacing-section bg-background border-b border-border">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
       <div class="text-center mb-16">
         <h1 class="text-h1 text-foreground spacing-heading">Frequently Asked Questions</h1>
-        <p class="text-body-large spacing-paragraph">Everything you need to know about the cleanup process.</p>
+        <p class="text-body-large spacing-paragraph">Everything you need to know about COI data extraction and spreadsheet tracking.</p>
       </div>
 
       <div class="space-y-12">
@@ -64,7 +92,7 @@ const faqs = [
               {group.questions.map(faq => (
                 <details class="group bg-surface border border-border rounded-xl overflow-hidden shadow-subtle [&_summary::-webkit-details-marker]:hidden">
                   <summary class="flex items-center justify-between cursor-pointer p-6 font-medium text-foreground hover:bg-muted/30 transition-colors">
-                    {faq.q}
+                    <span>{faq.q}</span>
                     <span class="ml-6 flex-shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
@@ -82,9 +110,9 @@ const faqs = [
       </div>
 
       <div class="mt-16 text-center pt-8 border-t border-border">
-        <h3 class="text-h3 text-foreground mb-2">Still have questions?</h3>
-        <p class="text-small text-muted-foreground mb-6">We're here to help.</p>
-        <Button href="/en/contact" variant="outline">Contact Support</Button>
+        <h3 class="text-h3 text-foreground mb-2">Ready to convert your COI files?</h3>
+        <p class="text-small text-muted-foreground mb-6">Upload your certificate folder and generate an Excel tracker in seconds.</p>
+        <Button href="/en/upload" size="lg">Upload COI Folder</Button>
       </div>
     </div>
   </section>

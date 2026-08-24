@@ -1,91 +1,108 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { siteConfig } from '../../config/site';
-import { ShieldCheck } from 'lucide-react';
+import { ShieldCheck, FileText, Trash2, Cpu, ExternalLink } from 'lucide-react';
 
 const title = "Privacy Policy | CertifiTrack";
-const description = "How we handle your data and documents.";
+const description = "Learn how CertifiTrack processes uploaded certificates, handles temporary files, and manages data during document extraction.";
 ---
 
 <Layout title={title} description={description}>
-  <section class="py-16 sm:py-24 bg-background">
+  <section class="spacing-section bg-background border-b border-border">
     <div class="reading-width px-4 sm:px-6">
       
       {/* Header */}
-      <div class="mb-12">
-        <h1 class="text-3xl font-semibold tracking-tight text-foreground mb-3">Privacy Policy</h1>
-        <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest">Last Updated: August 2026</p>
+      <div class="mb-10">
+        <div class="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-caption text-muted-foreground mb-4 shadow-subtle">
+          Data Handling & Privacy
+        </div>
+        <h1 class="text-h1 text-foreground spacing-heading">Privacy Policy</h1>
+        <p class="text-small text-muted-foreground">Last updated: August 2026</p>
       </div>
 
-      {/* Intro */}
-      <div class="prose prose-slate dark:prose-invert max-w-none">
-        <p class="text-base leading-relaxed text-muted-foreground mb-10">
-          {siteConfig.legalEntityName} ("CertifiTrack") provides administrative data extraction services. We take the privacy and security of your documents seriously. This policy explains what we collect and how we use it.
+      {/* Core Summary */}
+      <div class="p-6 rounded-2xl border border-border bg-surface shadow-subtle mb-10 space-y-2">
+        <h2 class="text-h3 text-foreground text-base font-semibold">Summary of Data Handling</h2>
+        <p class="text-small text-muted-foreground leading-relaxed">
+          CertifiTrack is an open-source software project designed to extract structured insurance fields from ACORD 25 documents. We do not maintain user accounts, we do not build customer marketing profiles, and temporary files created during extraction are automatically deleted after processing.
         </p>
+      </div>
 
-        {/* Contents Navigation */}
-        <div class="bg-surface border border-border rounded-lg p-5 mb-12 shadow-subtle">
-          <h2 class="text-xs font-semibold text-foreground uppercase tracking-widest mb-3">Contents</h2>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#information-we-collect" class="text-muted-foreground hover:text-foreground transition-colors">1. Information We Collect</a></li>
-            <li><a href="#how-we-use" class="text-muted-foreground hover:text-foreground transition-colors">2. How We Use Your Information</a></li>
-            <li><a href="#retention" class="text-muted-foreground hover:text-foreground transition-colors">3. Data Retention and Deletion</a></li>
-            <li><a href="#sharing" class="text-muted-foreground hover:text-foreground transition-colors">4. Third-Party Sharing</a></li>
-            <li><a href="#contact" class="text-muted-foreground hover:text-foreground transition-colors">5. Contact Us</a></li>
+      {/* Document Sections */}
+      <div class="space-y-10 text-body">
+        
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">1. Information You Provide and Upload</h2>
+          <p class="text-body text-muted-foreground">
+            When you use the CertifiTrack extraction tool, you submit document files (such as PDF files or ZIP archives containing PDFs) to be processed.
+          </p>
+          <p class="text-body text-muted-foreground">
+            These documents typically contain commercial insurance data, including named insured entities, policy numbers, insurance carriers, coverage amounts, and policy expiration dates.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">2. How Documents Are Processed & Cleaned Up</h2>
+          <p class="text-body text-muted-foreground">
+            CertifiTrack operates as a stateless document extraction service:
+          </p>
+          <ul class="space-y-2 text-body text-muted-foreground list-disc pl-5">
+            <li>
+              <strong class="text-foreground">Temporary Local Storage:</strong> When a file is uploaded, it is written to an isolated temporary directory on the server to allow PDF text extraction and segmentation.
+            </li>
+            <li>
+              <strong class="text-foreground">Immediate File Deletion:</strong> As soon as the extraction finishes and the resulting Excel (.xlsx) file is generated—or if an error occurs during parsing—the temporary files and unpack directories are immediately deleted by the backend file manager.
+            </li>
+            <li>
+              <strong class="text-foreground">No Database Persistence:</strong> CertifiTrack does not store your uploaded documents, extracted records, or generated spreadsheets in a permanent database.
+            </li>
           </ul>
-        </div>
+        </section>
 
-        {/* Content Sections */}
-        <div class="space-y-12">
-          
-          <section id="information-we-collect" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">1. Information We Collect</h2>
-            <p class="text-base text-muted-foreground mb-4">We collect the information you voluntarily provide to us when you upload files for our cleanup service. This includes:</p>
-            <ul class="list-disc pl-5 space-y-2 text-base text-muted-foreground mb-6">
-              <li><strong class="text-foreground">Contact information:</strong> Name and email address used for delivery.</li>
-              <li><strong class="text-foreground">Subcontractor lists:</strong> Names, emails, and required limits you provide for matching.</li>
-              <li><strong class="text-foreground">Insurance Documents:</strong> Certificates of Insurance (COIs), ACORD forms, and endorsements contained in your upload.</li>
-            </ul>
-            
-            {/* Callout */}
-            <div class="flex gap-3 p-4 rounded-lg bg-muted/50 border border-border">
-              <ShieldCheck class="w-5 h-5 text-accent shrink-0 mt-0.5" />
-              <p class="text-sm text-foreground m-0 leading-relaxed">
-                As a local-first application, CertifiTrack does not process payments or store financial information on our servers.
-              </p>
-            </div>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">3. Third-Party AI Inference Providers</h2>
+          <p class="text-body text-muted-foreground">
+            When an external AI provider (such as the Google Gemini API) is configured in the environment, document content may be processed by that provider to extract semi-structured certificate fields. Alternatively, deterministic local extraction operates without external API calls.
+          </p>
+          <p class="text-body text-muted-foreground">
+            Data sent to external AI providers is governed by the terms of service and data privacy policies of the respective provider. You should ensure that uploading your certificates complies with your contractual obligations and organizational data handling guidelines.
+          </p>
+        </section>
 
-          <section id="how-we-use" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">2. How We Use Your Information</h2>
-            <p class="text-base text-muted-foreground">
-              We use the uploaded documents strictly for the purpose of providing the CertifiTrack Cleanup service. This includes organizing the files, reading the documents to extract relevant dates and limits, and generating your final tracker. {siteConfig.aiTrainingPolicy}
-            </p>
-          </section>
+        <section class="space-y-3">
+          <h2 class="text-h2 text-foreground text-xl">4. Information We Do Not Collect</h2>
+          <ul class="space-y-1.5 text-body text-muted-foreground list-disc pl-5">
+            <li>We do not require account registration, passwords, or personal credentials.</li>
+            <li>We do not collect or store credit card numbers or payment billing information.</li>
+            <li>We do not sell, rent, or monetize your documents or extracted insurance data.</li>
+          </ul>
+        </section>
 
-          <section id="retention" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">3. Data Retention and Deletion</h2>
-            <p class="text-base text-muted-foreground">
-              Uploaded files and generated trackers are retained for {siteConfig.dataRetention}. After this period, source documents and output files are permanently deleted from our active systems. You are responsible for downloading and securely storing your own copies.
-            </p>
-          </section>
+        <section class="space-y-3 pt-6 border-t border-border">
+          <h2 class="text-h2 text-foreground text-xl">5. Source Code & Contact</h2>
+          <p class="text-body text-muted-foreground">
+            CertifiTrack is open-source software. You can inspect the complete source code, security controls, and file management logic directly in the project repository:
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <a 
+              href={siteConfig.socials.github} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:underline"
+            >
+              <span>GitHub Repository</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+            <span class="hidden sm:inline text-muted-foreground">&bull;</span>
+            <a 
+              href={`mailto:${siteConfig.supportEmail}`} 
+              class="text-sm font-medium text-foreground hover:underline"
+            >
+              {siteConfig.supportEmail}
+            </a>
+          </div>
+        </section>
 
-          <section id="sharing" class="scroll-mt-24">
-            <h2 class="text-xl font-semibold text-foreground mb-4">4. Third-Party Sharing</h2>
-            <p class="text-base text-muted-foreground">
-              We do not sell, rent, or trade your data to third parties. We only share information with trusted service providers necessary to operate our service (such as secure cloud file hosting environments and payment processing providers).
-            </p>
-          </section>
-
-          <section id="contact" class="scroll-mt-24 pt-8 border-t border-border">
-            <h2 class="text-xl font-semibold text-foreground mb-3">5. Contact Us</h2>
-            <p class="text-base text-muted-foreground mb-4">
-              If you have questions about this Privacy Policy, please contact our support team.
-            </p>
-            <a href={`mailto:${siteConfig.supportEmail}`} class="text-accent hover:underline font-medium">{siteConfig.supportEmail}</a>
-          </section>
-
-        </div>
       </div>
 
     </div>

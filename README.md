@@ -1,156 +1,216 @@
 # CertifiTrack
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
-![Build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
-![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
-![Node](https://img.shields.io/badge/node-%3E%3D%2020-blue?style=flat-square)
-
-**Turn messy COI folders into structured, validated tracking spreadsheets.**
-
-<p align="center">
-  <img src="docs/images/hero-social.svg" alt="CertifiTrack Hero" width="100%">
-</p>
-
-[What is CertifiTrack?](#what-is-certifitrack) • [How it Works](#how-it-works) • [Quick Start](#quick-start) • [Providers](#providers) • [Privacy](#privacy--data-flow)
+Turn existing Certificate of Insurance (COI) documents into structured data and Excel workbooks.
 
 ---
 
-## What is CertifiTrack?
+## Why CertifiTrack
 
-CertifiTrack is a free, open-source, local-first tool for compliance teams, risk managers, and operations staff who manually process dozens or hundreds of Certificates of Insurance (COIs). 
+In commercial construction, property management, and vendor onboarding, collecting Certificates of Insurance (COIs) is standard procedure. However, managing them is overwhelmingly manual: teams receive diverse ACORD 25 PDF forms and multi-page policies, then spend hours manually transcribing policy numbers, coverage limits, and expiration dates into spreadsheets.
 
-Instead of typing data by hand, CertifiTrack extracts structured data from complex PDFs and ZIP archives using Large Language Models (LLMs) and produces a clean, standardized Excel (XLSX) tracker.
-
-<p align="center">
-  <img src="docs/images/transformation.svg" alt="Before and After Transformation" width="100%">
-</p>
-
-### Why Local-First?
-You control your infrastructure and your API keys. Instead of sending sensitive documents to a proprietary SaaS database, you process them locally on your own machine. CertifiTrack runs completely stateless and cleans up memory immediately.
+CertifiTrack automates this transcription pipeline locally and statelessly, extracting core insurance fields and generating structured, audit-ready Excel workbooks without requiring SaaS subscriptions or permanent cloud databases.
 
 ---
 
-## How it Works
+## Features
 
-CertifiTrack uses a **Bring-Your-Own-API** model. You run the app locally and supply your own API key for extraction.
-
-<p align="center">
-  <img src="docs/images/architecture.svg" alt="Architecture Diagram" width="800">
-</p>
-
-1. **Upload**: Drop a messy ZIP of COIs into the local web interface.
-2. **Extraction**: The backend streams files to your configured AI Provider (e.g., Google Gemini).
-3. **Validation**: CertifiTrack evaluates the structured JSON against standard insurance logic.
-4. **Export**: It generates a flagged, readable `.xlsx` tracker.
+- **COI & ACORD 25 Extraction**: Parses standard Certificate of Liability Insurance documents and extracts key parties, policies, dates, and limits.
+- **Single PDF & ZIP Batch Processing**: Upload individual PDF certificates or a `.zip` archive containing multiple documents.
+- **Normalized Dates & Limits**: Standardizes diverse date formats into canonical `YYYY-MM-DD` and sanitizes currency limits into numeric values.
+- **Structured Fields**: Captures Named Insured, Certificate Holder, Producer/Broker, Carrier names, Policy Numbers, Effective/Expiration dates, and Occurrence/Aggregate limits.
+- **Human Review Flagging**: Automatically flags ambiguous documents or missing critical fields with explicit reason codes (`INSUFFICIENT_EVIDENCE`) instead of guessing.
+- **Excel (.xlsx) Workbook Generation**: Generates clean, formatted spreadsheets summarizing all processed certificates with source file lineage.
+- **Deterministic Validation**: Rule-based validation verifies extracted fields against document text without hallucination.
+- **Stateless & Temporary File Purge**: Temporary files and extracted buffers are completely deleted immediately after request completion.
 
 ---
 
-## Quick Start
+## How It Works
 
-### 1. Clone & Install
+```
+Existing COI (PDF / ZIP)
+       │
+       ▼
+   1. Parse & Decode Text Streams
+       │
+       ▼
+   2. Multi-Signal Document Classification
+       │
+       ▼
+   3. Extract Insurance Fields & Coverages
+       │
+       ▼
+   4. Normalize Dates & Numeric Limits
+       │
+       ▼
+   5. Deterministic Validation & Quality Gate
+       │
+       ▼
+   6. Export Structured Excel (.xlsx) Workbook
+```
+
+---
+
+## Supported Data
+
+CertifiTrack extracts the following structured fields from supported insurance certificates:
+
+| Category | Extracted Fields |
+| :--- | :--- |
+| **Certificate & Parties** | Named Insured, Certificate Holder, Producer / Broker, Carrier / Insurer Names |
+| **General Liability** | Policy Number, Effective Date, Expiration Date, Each Occurrence Limit, General Aggregate Limit |
+| **Automobile Liability** | Policy Number, Effective Date, Expiration Date, Combined Single Limit |
+| **Workers Compensation** | Policy Number, Effective Date, Expiration Date, Statutory / E.L. Limits |
+| **Excess / Umbrella** | Policy Number, Effective Date, Expiration Date, Occurrence Limit, Aggregate Limit |
+| **Endorsements & Metadata** | Additional Insured, Waiver of Subrogation, Project / Operations Description, Source Filename |
+
+---
+
+## Architecture
+
+- **Frontend**: [Astro](https://astro.build/) with [React](https://react.dev/) island components and [Tailwind CSS](https://tailwindcss.com/). Fully static multi-language routing (`en` / `es`).
+- **Backend**: [Fastify](https://fastify.dev/) and TypeScript REST API with streaming multipart upload handling (`@fastify/multipart`).
+- **Extraction Engine**:
+  - **Deterministic Extractor**: Local PDF text stream decoding, FlateDecode decompression, and multi-signal regex classification. Operates 100% offline with zero external API calls.
+  - **Optional External AI Provider**: Optional Google Gemini API integration (`@google/genai`) for multi-pass structured document extraction when configured.
+- **Workbook Generation**: [ExcelJS](https://github.com/exceljs/exceljs) for generating structured `.xlsx` workbooks with formatted headers and data typing.
+
+---
+
+## Local Development
+
+### Prerequisites
+- Node.js >= 22.12.0
+- npm >= 10.0.0
+
+### Installation
+
 ```bash
-git clone https://github.com/certifitrack/certifitrack.git
+# 1. Clone the repository
+git clone https://github.com/Kurosyss/certifitrack.git
 cd certifitrack
 
-# Frontend dependencies
+# 2. Install frontend dependencies
 npm install
 
-# Backend dependencies
+# 3. Install backend dependencies
 cd backend
 npm install
+cd ..
 ```
 
-### 2. Configure Environment
-Copy the configuration files:
+### Running Locally
+
 ```bash
-cp backend/.env.example backend/.env
-cp .env.example .env
-```
-*(Ensure frontend `.env` points `PUBLIC_BACKEND_URL` to `http://127.0.0.1:3000`)*
+# Option A: Start both frontend and backend concurrently
+npm run dev:all
 
-### 3. Choose Provider (`backend/.env`)
-Set your extraction provider in `backend/.env`:
+# Option B: Run in separate terminal sessions
+# Terminal 1 (Backend API on http://127.0.0.1:3000):
+npm run dev:backend
 
-**Gemini Mode (Real AI Extraction)**
-```env
-CERTIFITRACK_PROVIDER=gemini
-GEMINI_API_KEY=your_actual_api_key_here
-```
-
-**Mock Mode (Local Testing)**
-```env
-CERTIFITRACK_PROVIDER=mock
-```
-
-### 4. Start Servers
-```bash
-# Terminal 1 (Backend)
-cd backend && npm run dev
-
-# Terminal 2 (Frontend)
+# Terminal 2 (Frontend on http://localhost:4321):
 npm run dev
 ```
-Open `http://localhost:4321` and upload a ZIP to generate your tracker.
 
 ---
 
-## Output Tracker
+## Environment Variables
 
-CertifiTrack generates a highly readable Excel workbook summarizing coverages, limits, insured parties, and policy numbers, complete with deterministic status flags.
+Copy the example environment files:
 
-<p align="center">
-  <img src="docs/images/tracker-preview.svg" alt="Tracker Preview" width="100%">
-</p>
+```bash
+# Backend configuration
+cp backend/.env.example backend/.env
 
----
+# Frontend configuration (optional)
+cp .env.example .env
+```
 
-## Configuration & Providers
+### Backend (`backend/.env`)
 
-CertifiTrack requires a provider to extract text from unstructured PDFs.
+```env
+PORT=3000
+HOST=127.0.0.1
+LOG_LEVEL=info
 
-- **`gemini`**: Uses the Google Gemini API (Requires `GEMINI_API_KEY`).
-- **`mock`**: Uses a deterministic local mock provider. Does not require an API key and is excellent for validating the local workflow.
+# Provider Selection: 'deterministic' (offline, default), 'gemini' (AI-assisted), or 'mock' (tests)
+CERTIFITRACK_PROVIDER=deterministic
 
-*Note: OpenAI and Mistral providers are planned for future MVP iterations.*
+# Optional: Google Gemini API Key (only required if CERTIFITRACK_PROVIDER=gemini)
+GEMINI_API_KEY=
 
----
-
-## Privacy & Data Flow
-
-- **Stateless & Local**: CertifiTrack itself stores no data. It does not use a database. Uploaded files are immediately deleted from temporary storage after extraction.
-- **Data Transmission**: If you configure a cloud provider (like `gemini`), your document data **is transmitted** to that external API. You are responsible for reviewing your chosen provider's data retention policies.
-- **Disclaimer**: AI extraction is for informational purposes only. It does not constitute legal or insurance compliance advice.
-
----
-
-## Project Status
-
-> **Note**: This is an early-stage Open-Source MVP.
-> 
-> The local application logic, validation engine, and mock pipelines are stable and tested. Real-world Gemini extraction benchmarking is currently pending unblocking of API quotas. 
-
-## Roadmap
-
-- [x] Local-first architecture
-- [x] Bring-Your-Own-API model
-- [x] Mock Provider
-- [x] Gemini Provider
-- [ ] OpenAI / Anthropic Providers
-- [ ] Local Ollama Integration
-- [ ] Custom Schema Definitions
+# Upload Constraints
+MAX_FILE_SIZE_BYTES=10485760
+DOCUMENT_TIMEOUT_MS=30000
+CONCURRENCY_LIMIT=3
+```
 
 ---
 
-## Support the Project
+## Testing
 
-CertifiTrack is completely free and open source. If it saves your team hours of manual data entry or you want to support continued development:
+The backend test suite is powered by [Vitest](https://vitest.dev/).
 
-☕ [Buy Me a Coffee](https://buymeacoffee.com/kurosys)
+```bash
+# Run backend test suite
+cd backend
+npm test
+```
+
+**Test Coverage**: 8 test suites passing (26 total unit and integration tests covering deterministic stream extraction, ZIP safety, schema validation, Excel workbook generation, API endpoints, and cleanup lifecycle).
+
+```bash
+# Build static frontend application
+npm run build
+```
 
 ---
 
-## Contributing & Security
+## Security
 
-- **Contributing**: Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to run the test suites (`vitest`) and submit Pull Requests.
-- **Security**: For vulnerabilities (e.g., zip-slip or path traversal bypasses), please review our policy in [SECURITY.md](SECURITY.md).
-- **License**: Released under the [MIT License](LICENSE).
+- **No Committed Secrets**: Credentials and API keys are strictly loaded via server-side environment variables and never exposed to the client bundle.
+- **Archive Safety (Zip-Slip Prevention)**: ZIP file extraction validates absolute paths against target temp directories to prevent directory traversal attacks.
+- **Stateless Processing**: Uploaded documents are saved to randomized UUID temp folders and deleted immediately after extraction in a mandatory `finally` block.
+- **Input Validation**: Strict MIME type checking and file size bounds (10MB limit) prevent unhandled payloads.
+
+---
+
+## Privacy
+
+- CertifiTrack operates statelessly without a database.
+- Uploaded files exist only in volatile temporary directories during extraction.
+- When running in deterministic mode (`CERTIFITRACK_PROVIDER=deterministic`), document data never leaves your machine.
+- When configured with an external AI provider, document text/images are transmitted directly to the configured provider API.
+
+---
+
+## Limitations
+
+- **Image-Only Scans**: Text-based deterministic extraction requires readable PDF font/text streams. Low-resolution image-only scans require OCR or an external multimodal AI provider.
+- **Handwritten Documents**: Handwritten alterations or illegible photocopies cannot be deterministically extracted and are flagged for human review.
+- **Informational Tool**: CertifiTrack is an extraction utility and does not provide legal, compliance, or insurance underwriting advice.
+
+---
+
+## Contributing
+
+Contributions are welcome! To contribute:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/improvement`).
+3. Ensure all tests pass (`npm test` in `backend/` and `npm run build` in root).
+4. Commit your changes with clear messages (`git commit -m 'feat: add coverage field'`).
+5. Push to your branch and open a Pull Request.
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Developer
+
+Built and maintained by [Kurosyss](https://github.com/Kurosyss).

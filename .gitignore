@@ -15,7 +15,21 @@ pnpm-debug.log*
 
 # environment variables
 .env
+.env.*
 .env.production
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# logs and debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+backend/tests/debug_pdf.cjs
+scratch/
 
 # macOS-specific files
 .DS_Store

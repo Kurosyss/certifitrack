@@ -8,6 +8,7 @@ import os from "os";
 
 describe("API Routes - POST /v1/extract", () => {
   const app = buildApp();
+  const fixturesDir = path.join(__dirname, "fixtures");
 
   beforeAll(async () => {
     await app.ready();
@@ -51,10 +52,9 @@ describe("API Routes - POST /v1/extract", () => {
   });
 
   it("should successfully process a valid PDF", async () => {
-    // Note: In NODE_ENV=test, this uses MockExtractionProvider
-    const tmp = await createTestFile("valid.pdf", "%PDF-1.4 mock pdf content");
+    const samplePdf = await fs.readFile(path.join(fixturesDir, "certifitrack_sample_coi_test.pdf"));
     const form = new FormData();
-    form.append("file", await fs.readFile(tmp), { filename: "valid.pdf", contentType: "application/pdf" });
+    form.append("file", samplePdf, { filename: "certifitrack_sample_coi_test.pdf", contentType: "application/pdf" });
 
     const response = await app.inject({
       method: "POST",
@@ -68,7 +68,6 @@ describe("API Routes - POST /v1/extract", () => {
 
     expect(response.statusCode).toBe(200);
     expect(response.headers["content-type"]).toBe("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-    // Verify it's an actual buffer returned
     expect(response.rawPayload.length).toBeGreaterThan(0);
   });
 });

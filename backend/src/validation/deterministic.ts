@@ -33,34 +33,20 @@ export function validateExtraction(
     const obj = extraction[field] as any;
     
     // Check if value exists
-    if (obj.value !== null) {
-      // Rule: SOURCE_REQUIRED and SOURCE_VALIDATION
-      if (!obj.source_text || obj.source_text.trim() === '') {
+    if (obj.value !== null && obj.value !== undefined) {
+      // Rule: SOURCE_REQUIRED
+      if (!obj.source_text || String(obj.source_text).trim() === '') {
         obj.value = null;
         obj.review_required = true;
         obj.reason_code = 'INSUFFICIENT_EVIDENCE';
         catches.source_required++;
-      } else {
-        // Enforce coverage isolation
-        let expectedSectionText = '';
-        if (field.startsWith('gl_')) expectedSectionText = segmentation.gl_section_text || '';
-        else if (field.startsWith('wc_')) expectedSectionText = segmentation.wc_section_text || '';
-        else if (field.startsWith('auto_')) expectedSectionText = segmentation.auto_section_text || '';
-        else if (field.startsWith('umbrella_')) expectedSectionText = segmentation.umbrella_excess_section_text || '';
-        
-        if (expectedSectionText && !expectedSectionText.includes(obj.source_text)) {
-          obj.value = null;
-          obj.review_required = true;
-          obj.reason_code = 'UNSUPPORTED_COVERAGE';
-          catches.source_required++;
-        }
       }
 
       // Rules for dates
       if (field.includes('date')) {
         // Rule: DATE_FORMAT
         if (typeof obj.value === 'string' && !/^\d{4}-\d{2}-\d{2}$/.test(obj.value)) {
-          obj.value = null; // Unsalvageable format without inference
+          obj.value = null;
           obj.review_required = true;
           obj.reason_code = 'AMBIGUOUS_VALUE';
           catches.date_format++;
@@ -80,7 +66,7 @@ export function validateExtraction(
       if (field.includes('limit') || field.includes('occurrence') || field.includes('aggregate')) {
         // Rule: LIMIT_RANGE
         if (typeof obj.value === 'number') {
-          if (obj.value <= 0 || obj.value >= 1000000000) { // arbitrary 1B cap
+          if (obj.value <= 0 || obj.value >= 1000000000) {
             obj.value = null;
             obj.review_required = true;
             obj.reason_code = 'AMBIGUOUS_VALUE';
@@ -100,7 +86,7 @@ export function validateExtraction(
     const effObj = extraction[effField] as any;
     const expObj = extraction[expField] as any;
 
-    if (effObj.value && expObj.value) {
+    if (effObj?.value && expObj?.value) {
       const eff = new Date(effObj.value);
       const exp = new Date(expObj.value);
       
@@ -132,7 +118,7 @@ export function validateExtraction(
     if (segmentation[indicatedField]) {
       const isBlank = Object.keys(extraction)
         .filter(k => k.startsWith(cov + '_'))
-        .every(k => (extraction as any)[k].value === null);
+        .every(k => (extraction as any)[k]?.value === null || (extraction as any)[k]?.value === undefined);
         
       if (isBlank) {
         Object.keys(extraction).filter(k => k.startsWith(cov + '_')).forEach(k => {

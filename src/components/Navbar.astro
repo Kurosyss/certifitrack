@@ -13,8 +13,9 @@ const translatePath = useTranslatedPath(lang);
 const navLinks = [
   { name: t('nav.whatWeDo'), href: translatePath('/what-we-do') },
   { name: t('nav.howItWorks'), href: translatePath('/how-it-works') },
-  { name: t('nav.faq'), href: translatePath('/faq') },
   { name: t('nav.template'), href: translatePath('/templates/coi-tracking-spreadsheet') },
+  { name: t('nav.about'), href: translatePath('/about') },
+  { name: t('nav.faq'), href: translatePath('/faq') },
 ];
 ---
 
@@ -58,11 +59,11 @@ const navLinks = [
 
   {/* Mobile Menu Dropdown */}
   <div id="mobile-menu" class="hidden md:hidden border-t border-border bg-background">
-    <nav class="flex flex-col py-4 px-4 gap-4">
+    <nav class="flex flex-col py-4 px-4 gap-3">
       {navLinks.map((link) => (
         <a
           href={link.href}
-          class="text-base font-medium text-foreground transition-colors"
+          class="text-base font-medium text-foreground transition-colors py-1"
         >
           {link.name}
         </a>
