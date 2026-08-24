@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "astro dev",
+    "dev:all": "node scripts/dev.js",
+    "dev:backend": "npm --prefix backend run dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -20,7 +22,6 @@
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "astro": "^7.2.4",
-    "chalk": "^6.0.0",
     "dotenv": "^17.4.2",
     "lucide-react": "^1.33.0",
     "pdfkit": "^0.19.1",

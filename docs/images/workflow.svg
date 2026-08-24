@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240">
+  <defs><style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+      
+      .bg { fill: #0B0E14; }
+      .bg-panel { fill: #171B21; stroke: #2A303C; stroke-width: 1; rx: 4; }
+      .bg-panel-alt { fill: #1A1F26; }
+      
+      .text-display { fill: #F0EEE8; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 32px; letter-spacing: -1px; }
+      .text-title { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase; }
+      .text-subtitle { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 18px; }
+      
+      .text-header { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; }
+      .text-cell { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-dim { fill: #6E7681; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-mono { fill: #8B949E; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+      
+      .grid-line { stroke: #2A303C; stroke-width: 1; }
+      .arrow { stroke: #4F46E5; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #4F46E5; }
+      
+      .badge-valid-bg { fill: rgba(16, 185, 129, 0.08); stroke: rgba(16, 185, 129, 0.2); stroke-width: 1; rx: 4; }
+      .badge-valid-text { fill: #6EE7B7; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-review-bg { fill: rgba(245, 158, 11, 0.08); stroke: rgba(245, 158, 11, 0.2); stroke-width: 1; rx: 4; }
+      .badge-review-text { fill: #FCD34D; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-missing-bg { fill: rgba(100, 116, 139, 0.08); stroke: rgba(100, 116, 139, 0.2); stroke-width: 1; rx: 4; }
+      .badge-missing-text { fill: #94A3B8; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+
+      .badge-expired-bg { fill: rgba(239, 68, 68, 0.08); stroke: rgba(239, 68, 68, 0.2); stroke-width: 1; rx: 4; }
+      .badge-expired-text { fill: #FCA5A5; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .paper-doc { fill: #F0EEE8; stroke: #D3D6DC; stroke-width: 1; rx: 2; }
+      .paper-line { stroke: #D3D6DC; stroke-width: 2; stroke-linecap: round; }
+      .paper-highlight { stroke: #4F46E5; stroke-width: 2; stroke-linecap: round; }
+
+    .step-box { fill: #171B21; stroke: #2A303C; stroke-width: 1; rx: 6; }
+    .step-number { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 14px; opacity: 0.5; }
+    .step-title { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; }
+    .step-desc { fill: #8B949E; font-family: 'Inter', sans-serif; font-size: 13px; }
+  </style></defs>
+  <rect width="900" height="240" class="bg" />
+
+  <!-- Step 1 -->
+  <rect x="40" y="50" width="180" height="140" class="step-box" />
+  <text x="60" y="80" class="step-number">01</text>
+  <text x="60" y="115" class="step-title">COLLECT</text>
+  <text x="60" y="140" class="step-desc">Raw Documents</text>
+  <text x="60" y="160" class="step-desc">Disorganized PDFs</text>
+
+  <path d="M 230 120 L 260 120" class="arrow" />
+  <polygon points="260,116 268,120 260,124" class="arrow-head" />
+
+  <!-- Step 2 -->
+  <rect x="280" y="50" width="180" height="140" class="step-box" />
+  <text x="300" y="80" class="step-number">02</text>
+  <text x="300" y="115" class="step-title">EXTRACT</text>
+  <text x="300" y="140" class="step-desc">Local-First AI</text>
+  <text x="300" y="160" class="step-desc">Bring-Your-Own API</text>
+
+  <path d="M 470 120 L 500 120" class="arrow" />
+  <polygon points="500,116 508,120 500,124" class="arrow-head" />
+
+  <!-- Step 3 -->
+  <rect x="520" y="50" width="180" height="140" class="step-box" />
+  <text x="540" y="80" class="step-number">03</text>
+  <text x="540" y="115" class="step-title">VALIDATE</text>
+  <text x="540" y="140" class="step-desc">Deterministic rules</text>
+  <text x="540" y="160" class="step-desc">Identify coverage gaps</text>
+
+  <path d="M 710 120 L 740 120" class="arrow" />
+  <polygon points="740,116 748,120 740,124" class="arrow-head" />
+
+  <!-- Step 4 -->
+  <rect x="760" y="50" width="180" height="140" class="step-box" />
+  <text x="780" y="80" class="step-number">04</text>
+  <text x="780" y="115" class="step-title">TRACK</text>
+  <text x="780" y="140" class="step-desc">Clean Spreadsheet</text>
+  <text x="780" y="160" class="step-desc">Audit-ready XLSX</text>
+</svg>

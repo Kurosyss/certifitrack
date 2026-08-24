@@ -10,10 +10,10 @@ const baseStyles = "inline-flex items-center rounded-full border px-2.5 py-0.5 t
 
 const variants = {
     default: "border-transparent bg-primary text-primary-foreground",
-    success: "border-transparent bg-success-bg text-success",
-    warning: "border-transparent bg-warning-bg text-warning",
-    danger: "border-transparent bg-danger-bg text-danger",
-    outline: "text-foreground",
+    success: "border-[var(--color-status-active-border)] bg-[var(--color-status-active-bg)] text-[var(--color-status-active)]",
+    warning: "border-[var(--color-status-review-border)] bg-[var(--color-status-review-bg)] text-[var(--color-status-review)]",
+    danger: "border-[var(--color-status-expired-border)] bg-[var(--color-status-expired-bg)] text-[var(--color-status-expired)]",
+    outline: "border-border text-foreground",
 };
 ---
 

@@ -1,0 +1,19 @@
+<svg viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap');
+      .wordmark { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 80px; letter-spacing: -2px; }
+      .wordmark-nav { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 24px; letter-spacing: -0.5px; }
+      .label { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; fill: #6b7280; }
+    </style>
+  </defs>
+
+  <g style="color: #111827;">
+    
+  <path d="M 45 15 A 35 35 0 0 0 45 85 Z" fill="currentColor"/>
+  <rect x="65" y="15" width="15" height="70" fill="currentColor"/>
+
+    <text x="110" y="65" class="wordmark-nav">CertifiTrack</text>
+  </g>
+</svg>

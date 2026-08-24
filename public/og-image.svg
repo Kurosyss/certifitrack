@@ -1,5 +1,121 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#0f172a"/>
-  <text x="600" y="315" font-family="Inter, sans-serif" font-size="72" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">CertifiTrack</text>
-  <text x="600" y="400" font-family="Inter, sans-serif" font-size="36" fill="#94a3b8" text-anchor="middle" dominant-baseline="middle">Turn Your Messy COI Folder Into a Clean Tracker</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+      .bg { fill: #0f111a; }
+      .surface { fill: #1e1e24; stroke: #27272a; stroke-width: 1; rx: 6; }
+      .surface-highlight { fill: #27272a; }
+      .text-title { fill: #f8fafc; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -1px; }
+      .text-subtitle { fill: #94a3b8; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; }
+      .text-file { fill: #a1a1aa; font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+      .text-cell { fill: #e4e4e7; font-family: 'Inter', sans-serif; font-size: 14px; }
+      .text-header { fill: #71717a; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; }
+      .grid-line { stroke: #27272a; stroke-width: 1; }
+      .arrow { stroke: #3f3f46; stroke-width: 3; fill: none; }
+      .arrow-head { fill: #3f3f46; }
+      .badge-valid-bg { fill: #064e3b; rx: 4; }
+      .badge-valid-text { fill: #34d399; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; }
+      .badge-review-bg { fill: #450a0a; rx: 4; }
+      .badge-review-text { fill: #f87171; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; }
+      .badge-missing-bg { fill: #422006; rx: 4; }
+      .badge-missing-text { fill: #fb923c; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; }
+      .brand-text { fill: #f8fafc; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 32px; letter-spacing: -1px; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" class="bg" />
+
+  <!-- BRANDING (Top Left) -->
+  <g transform="translate(60, 60)">
+    <g transform="scale(0.4)" style="color: #f8fafc;">
+      
+  <path d="M 45 15 A 35 35 0 0 0 45 85 Z" fill="currentColor"/>
+  <rect x="65" y="15" width="15" height="70" fill="currentColor"/>
+
+    </g>
+    <text x="50" y="28" class="brand-text">CertifiTrack</text>
+  </g>
+
+  <!-- HEADLINE -->
+  <text x="60" y="160" class="text-title">Turn messy COI folders into</text>
+  <text x="60" y="205" class="text-title">structured, validated trackers.</text>
+  <text x="60" y="250" class="text-subtitle">Open-source • Local-First • Bring-Your-Own-API</text>
+
+  <!-- GRAPHICS: CHAOS -> STRUCTURE -->
+  <g transform="translate(60, 310)">
+    
+    <!-- LEFT: CHAOS -->
+    <rect x="0" y="0" width="260" height="260" class="surface" />
+    <rect x="0" y="40" width="260" height="40" class="surface-highlight" />
+    <path d="M 20 25 L 30 25 M 20 30 L 25 30" stroke="#71717a" stroke-width="2" />
+    <text x="20" y="30" class="text-header">Input Directory</text>
+    <line x1="0" y1="40" x2="260" y2="40" class="grid-line" />
+    
+    <path d="M 20 60 L 30 60 L 30 70 L 20 70 Z" fill="none" stroke="#71717a" stroke-width="1.5" />
+    <text x="45" y="65" class="text-file">ACORD_25_Atlas...</text>
+    
+    <path d="M 20 100 L 30 100 L 30 110 L 20 110 Z" fill="none" stroke="#71717a" stroke-width="1.5" />
+    <text x="45" y="105" class="text-file">Renewal_Cedar_...</text>
+    
+    <path d="M 20 140 L 30 140 L 30 150 L 20 150 Z" fill="none" stroke="#71717a" stroke-width="1.5" />
+    <text x="45" y="145" class="text-file">Northstar_COI.pdf</text>
+    
+    <path d="M 20 180 L 30 180 L 30 190 L 20 190 Z" fill="none" stroke="#71717a" stroke-width="1.5" />
+    <text x="45" y="185" class="text-file">Sub042_Iron_Wo...</text>
+    
+    <text x="25" y="230" class="text-header">+ 142 more files...</text>
+
+    <!-- MIDDLE: ARROW -->
+    <path d="M 290 130 L 340 130" class="arrow" />
+    <polygon points="340,125 350,130 340,135" class="arrow-head" />
+
+    <!-- RIGHT: STRUCTURE -->
+    <rect x="380" y="0" width="700" height="260" class="surface" />
+    
+    <!-- Headers -->
+    <text x="400" y="30" class="text-header">Subcontractor</text>
+    <text x="560" y="30" class="text-header">GL Exp.</text>
+    <text x="680" y="30" class="text-header">Auto Limit</text>
+    <text x="800" y="30" class="text-header">Status</text>
+    <line x1="380" y1="40" x2="1080" y2="40" class="grid-line" />
+
+    <!-- Row 1 -->
+    <rect x="380" y="40" width="700" height="44" class="surface-highlight" />
+    <text x="400" y="68" class="text-cell">Atlas Ridge Construction</text>
+    <text x="560" y="68" class="text-cell">2026-10-01</text>
+    <text x="680" y="68" class="text-cell">$1,000,000</text>
+    <rect x="800" y="54" width="50" height="20" class="badge-valid-bg" />
+    <text x="807" y="68" class="badge-valid-text">Valid</text>
+    <line x1="380" y1="84" x2="1080" y2="84" class="grid-line" />
+
+    <!-- Row 2 -->
+    <text x="400" y="112" class="text-cell">Cedar Point Roofing</text>
+    <text x="560" y="112" class="text-cell">2025-01-15</text>
+    <text x="680" y="112" class="text-cell">$500,000</text>
+    <rect x="800" y="98" width="60" height="20" class="badge-review-bg" />
+    <text x="807" y="112" class="badge-review-text">Review</text>
+    <line x1="380" y1="128" x2="1080" y2="128" class="grid-line" />
+
+    <!-- Row 3 -->
+    <text x="400" y="156" class="text-cell">Northstar Electrical</text>
+    <text x="560" y="156" class="text-cell">2026-05-20</text>
+    <text x="680" y="156" class="text-cell">$2,000,000</text>
+    <rect x="800" y="142" width="60" height="20" class="badge-review-bg" />
+    <text x="807" y="156" class="badge-review-text">Review</text>
+    <line x1="380" y1="172" x2="1080" y2="172" class="grid-line" />
+
+    <!-- Row 4 -->
+    <text x="400" y="200" class="text-cell">Iron Works Steel</text>
+    <text x="560" y="200" class="text-cell">2027-02-28</text>
+    <text x="680" y="200" fill="#a1a1aa" font-family="Inter, sans-serif" font-size="14px">Not Included</text>
+    <rect x="800" y="186" width="65" height="20" class="badge-missing-bg" />
+    <text x="807" y="200" class="badge-missing-text">Missing</text>
+    <line x1="380" y1="216" x2="1080" y2="216" class="grid-line" />
+
+    <!-- Vertical Lines -->
+    <line x1="540" y1="0" x2="540" y2="260" class="grid-line" />
+    <line x1="660" y1="0" x2="660" y2="260" class="grid-line" />
+    <line x1="780" y1="0" x2="780" y2="260" class="grid-line" />
+
+  </g>
 </svg>

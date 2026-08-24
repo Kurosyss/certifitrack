@@ -18,6 +18,8 @@ export const ui = {
     'footer.contact': 'Contact',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
+    'footer.buyCoffee': 'Buy Me a Coffee',
+    'footer.github': 'GitHub Repository',
     'footer.description': 'Keep your subcontractor COIs organized. We organize certificates, extract key dates, and flag documents that need attention.',
     'footer.disclaimer': 'CertifiTrack provides administrative document organization and data extraction. It does not provide insurance, legal, or compliance advice.'
   },
@@ -33,6 +35,8 @@ export const ui = {
     'footer.contact': 'Contacto',
     'footer.privacy': 'Política de Privacidad',
     'footer.terms': 'Términos de Servicio',
+    'footer.buyCoffee': 'Invítanos un Café',
+    'footer.github': 'Repositorio GitHub',
     'footer.description': 'Mantén organizados los COI de tus subcontratistas. Organizamos los certificados, extraemos las fechas clave y marcamos los documentos que requieren atención.',
     'footer.disclaimer': 'CertifiTrack proporciona organización de documentos administrativos y extracción de datos. No brindamos asesoramiento sobre seguros, legal o de cumplimiento.'
   },

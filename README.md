@@ -1,102 +1,156 @@
 # CertifiTrack
 
-CertifiTrack is a free, open-source, local-first tool for extracting and tracking Certificates of Insurance (COI) using Large Language Models (LLMs). It automates the extraction of structured data from complex COI documents (PDFs) and ZIP archives, producing a clean, standardized Excel (XLSX) tracker.
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
+![Build](https://img.shields.io/badge/build-passing-brightgreen?style=flat-square)
+![Tests](https://img.shields.io/badge/tests-passing-brightgreen?style=flat-square)
+![Node](https://img.shields.io/badge/node-%3E%3D%2020-blue?style=flat-square)
 
-## Strategy & Model
+**Turn messy COI folders into structured, validated tracking spreadsheets.**
 
-CertifiTrack operates on a **Bring-Your-Own-API** (BYO-API) model. 
+<p align="center">
+  <img src="docs/images/hero-social.svg" alt="CertifiTrack Hero" width="100%">
+</p>
 
-1. **Free Open-Source Core**: The application code is open-source and MIT-licensed.
-2. **Local-First**: Data processing, extraction, and generation run entirely on your own hardware. Your documents are never stored in a central proprietary cloud database.
-3. **Bring-Your-Own-API**: CertifiTrack uses your provided API keys (e.g., Google Gemini) to perform the intelligent extraction. You pay the LLM provider directly for usage.
+[What is CertifiTrack?](#what-is-certifitrack) • [How it Works](#how-it-works) • [Quick Start](#quick-start) • [Providers](#providers) • [Privacy](#privacy--data-flow)
 
-## Features
+---
 
-- **Multi-Document Extraction**: Process individual PDFs or ZIP archives containing hundreds of COIs.
-- **Intelligent Processing**: Powered by the Gemini API (or the local Mock provider for testing) to understand complex insurance forms with high accuracy.
-- **Standardized Output**: Generates an `.xlsx` file summarizing coverages, limits, insured parties, and policy numbers.
-- **High Security**: Stringent ZIP path-traversal checks, memory limits, and file constraints ensure stability and safety when processing untrusted documents.
-- **No Database Needed**: Runs completely stateless. Extracts data, builds the tracker, and cleans up temporary files immediately.
+## What is CertifiTrack?
+
+CertifiTrack is a free, open-source, local-first tool for compliance teams, risk managers, and operations staff who manually process dozens or hundreds of Certificates of Insurance (COIs). 
+
+Instead of typing data by hand, CertifiTrack extracts structured data from complex PDFs and ZIP archives using Large Language Models (LLMs) and produces a clean, standardized Excel (XLSX) tracker.
+
+<p align="center">
+  <img src="docs/images/transformation.svg" alt="Before and After Transformation" width="100%">
+</p>
+
+### Why Local-First?
+You control your infrastructure and your API keys. Instead of sending sensitive documents to a proprietary SaaS database, you process them locally on your own machine. CertifiTrack runs completely stateless and cleans up memory immediately.
+
+---
+
+## How it Works
+
+CertifiTrack uses a **Bring-Your-Own-API** model. You run the app locally and supply your own API key for extraction.
+
+<p align="center">
+  <img src="docs/images/architecture.svg" alt="Architecture Diagram" width="800">
+</p>
+
+1. **Upload**: Drop a messy ZIP of COIs into the local web interface.
+2. **Extraction**: The backend streams files to your configured AI Provider (e.g., Google Gemini).
+3. **Validation**: CertifiTrack evaluates the structured JSON against standard insurance logic.
+4. **Export**: It generates a flagged, readable `.xlsx` tracker.
+
+---
 
 ## Quick Start
 
-### 1. Requirements
-
-- [Node.js](https://nodejs.org/) (version 20 or higher)
-- [npm](https://www.npmjs.com/)
-
-### 2. Setup
-
-Clone the repository and install dependencies for both the frontend (Astro) and the backend (Fastify).
-
+### 1. Clone & Install
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/certifitrack.git
+git clone https://github.com/certifitrack/certifitrack.git
 cd certifitrack
 
-# Install frontend dependencies
+# Frontend dependencies
 npm install
 
-# Install backend dependencies
+# Backend dependencies
 cd backend
 npm install
 ```
 
-### 3. Configuration
-
-You need to provide your Gemini API key. If you don't have one, you can get it from Google AI Studio.
-
-1. **Backend Environment Variables**:
-   Copy `.env.example` to `.env` in the `backend/` directory:
-   ```bash
-   cp backend/.env.example backend/.env
-   ```
-   Edit `backend/.env` and add your key:
-   ```env
-   CERTIFITRACK_PROVIDER=gemini
-   GEMINI_API_KEY=your_actual_key_here
-   ```
-
-2. **Frontend Environment Variables**:
-   Copy `.env.example` to `.env` in the root directory:
-   ```bash
-   cp .env.example .env
-   ```
-   Ensure it has the correct public backend URL for local development:
-   ```env
-   PUBLIC_BACKEND_URL=http://127.0.0.1:3000
-   ```
-
-### 4. Run Locally
-
-Start the backend:
+### 2. Configure Environment
+Copy the configuration files:
 ```bash
-cd backend
-npm run dev
+cp backend/.env.example backend/.env
+cp .env.example .env
+```
+*(Ensure frontend `.env` points `PUBLIC_BACKEND_URL` to `http://127.0.0.1:3000`)*
+
+### 3. Choose Provider (`backend/.env`)
+Set your extraction provider in `backend/.env`:
+
+**Gemini Mode (Real AI Extraction)**
+```env
+CERTIFITRACK_PROVIDER=gemini
+GEMINI_API_KEY=your_actual_api_key_here
 ```
 
-Start the frontend (in a new terminal):
-```bash
-npm run dev
+**Mock Mode (Local Testing)**
+```env
+CERTIFITRACK_PROVIDER=mock
 ```
 
-Visit `http://localhost:4321` in your browser.
+### 4. Start Servers
+```bash
+# Terminal 1 (Backend)
+cd backend && npm run dev
 
-## Supported Providers
+# Terminal 2 (Frontend)
+npm run dev
+```
+Open `http://localhost:4321` and upload a ZIP to generate your tracker.
 
-- `gemini`: Uses the Google Gemini API (`GEMINI_API_KEY` required).
-- `mock`: Uses a deterministic local mock extraction provider for testing (No API key required).
+---
 
-Other providers (like OpenAI or Mistral) are not currently implemented out-of-the-box but can be easily added by implementing the `ExtractionProvider` interface.
+## Output Tracker
 
-## Contributing
+CertifiTrack generates a highly readable Excel workbook summarizing coverages, limits, insured parties, and policy numbers, complete with deterministic status flags.
 
-We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to get started.
+<p align="center">
+  <img src="docs/images/tracker-preview.svg" alt="Tracker Preview" width="100%">
+</p>
 
-## Security
+---
 
-Please refer to [SECURITY.md](SECURITY.md) for our security policies and how to report vulnerabilities.
+## Configuration & Providers
 
-## License
+CertifiTrack requires a provider to extract text from unstructured PDFs.
 
-CertifiTrack is distributed under the [MIT License](LICENSE).
+- **`gemini`**: Uses the Google Gemini API (Requires `GEMINI_API_KEY`).
+- **`mock`**: Uses a deterministic local mock provider. Does not require an API key and is excellent for validating the local workflow.
+
+*Note: OpenAI and Mistral providers are planned for future MVP iterations.*
+
+---
+
+## Privacy & Data Flow
+
+- **Stateless & Local**: CertifiTrack itself stores no data. It does not use a database. Uploaded files are immediately deleted from temporary storage after extraction.
+- **Data Transmission**: If you configure a cloud provider (like `gemini`), your document data **is transmitted** to that external API. You are responsible for reviewing your chosen provider's data retention policies.
+- **Disclaimer**: AI extraction is for informational purposes only. It does not constitute legal or insurance compliance advice.
+
+---
+
+## Project Status
+
+> **Note**: This is an early-stage Open-Source MVP.
+> 
+> The local application logic, validation engine, and mock pipelines are stable and tested. Real-world Gemini extraction benchmarking is currently pending unblocking of API quotas. 
+
+## Roadmap
+
+- [x] Local-first architecture
+- [x] Bring-Your-Own-API model
+- [x] Mock Provider
+- [x] Gemini Provider
+- [ ] OpenAI / Anthropic Providers
+- [ ] Local Ollama Integration
+- [ ] Custom Schema Definitions
+
+---
+
+## Support the Project
+
+CertifiTrack is completely free and open source. If it saves your team hours of manual data entry or you want to support continued development:
+
+☕ [Buy Me a Coffee](https://buymeacoffee.com/kurosys)
+
+---
+
+## Contributing & Security
+
+- **Contributing**: Read [CONTRIBUTING.md](CONTRIBUTING.md) to learn how to run the test suites (`vitest`) and submit Pull Requests.
+- **Security**: For vulnerabilities (e.g., zip-slip or path traversal bypasses), please review our policy in [SECURITY.md](SECURITY.md).
+- **License**: Released under the [MIT License](LICENSE).

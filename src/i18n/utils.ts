@@ -22,6 +22,7 @@ export function useTranslatedPath(lang: keyof typeof ui) {
         : path;
     
     const cleanPath = pathWithoutLang.startsWith('/') ? pathWithoutLang.substring(1) : pathWithoutLang;
-    return `/${l}/${cleanPath}`.replace(/\/$/, ''); // no trailing slash
+    const result = `/${l}/${cleanPath}`.replace(/\/+$/, '');
+    return result === `/${l}` ? `/${l}/` : `${result}/`;
   }
 }

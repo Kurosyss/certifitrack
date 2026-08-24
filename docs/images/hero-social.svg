@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs><style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+      
+      .bg { fill: #0B0E14; }
+      .bg-panel { fill: #171B21; stroke: #2A303C; stroke-width: 1; rx: 4; }
+      .bg-panel-alt { fill: #1A1F26; }
+      
+      .text-display { fill: #F0EEE8; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 32px; letter-spacing: -1px; }
+      .text-title { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase; }
+      .text-subtitle { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 18px; }
+      
+      .text-header { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; }
+      .text-cell { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-dim { fill: #6E7681; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-mono { fill: #8B949E; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+      
+      .grid-line { stroke: #2A303C; stroke-width: 1; }
+      .arrow { stroke: #4F46E5; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #4F46E5; }
+      
+      .badge-valid-bg { fill: rgba(16, 185, 129, 0.08); stroke: rgba(16, 185, 129, 0.2); stroke-width: 1; rx: 4; }
+      .badge-valid-text { fill: #6EE7B7; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-review-bg { fill: rgba(245, 158, 11, 0.08); stroke: rgba(245, 158, 11, 0.2); stroke-width: 1; rx: 4; }
+      .badge-review-text { fill: #FCD34D; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-missing-bg { fill: rgba(100, 116, 139, 0.08); stroke: rgba(100, 116, 139, 0.2); stroke-width: 1; rx: 4; }
+      .badge-missing-text { fill: #94A3B8; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+
+      .badge-expired-bg { fill: rgba(239, 68, 68, 0.08); stroke: rgba(239, 68, 68, 0.2); stroke-width: 1; rx: 4; }
+      .badge-expired-text { fill: #FCA5A5; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .paper-doc { fill: #F0EEE8; stroke: #D3D6DC; stroke-width: 1; rx: 2; }
+      .paper-line { stroke: #D3D6DC; stroke-width: 2; stroke-linecap: round; }
+      .paper-highlight { stroke: #4F46E5; stroke-width: 2; stroke-linecap: round; }
+</style></defs>
+  <rect width="1200" height="630" class="bg" />
+
+  <!-- BRANDING (Top Left) -->
+  <g transform="translate(80, 80)">
+    <g transform="scale(0.4)" style="color: #F0EEE8;">
+      
+  <path d="M 45 15 A 35 35 0 0 0 45 85 Z" fill="currentColor"/>
+  <rect x="65" y="15" width="15" height="70" fill="currentColor"/>
+
+    </g>
+    <text x="50" y="28" class="text-display" style="font-size: 32px;">CertifiTrack</text>
+  </g>
+
+  <!-- HEADLINE -->
+  <text x="80" y="200" class="text-display" style="font-size: 42px;">Turn messy COI folders into</text>
+  <text x="80" y="255" class="text-display" style="font-size: 42px;">structured, validated trackers.</text>
+  <text x="80" y="310" class="text-subtitle">Open-source • Local-First • Bring-Your-Own-API</text>
+
+  <!-- GRAPHICS: CHAOS -> STRUCTURE -->
+  <g transform="translate(80, 370)">
+    <!-- LEFT: CHAOS -->
+    <rect x="0" y="0" width="280" height="180" class="bg-panel" />
+    <rect x="0" y="0" width="280" height="40" class="bg-panel-alt" style="rx: 4px 4px 0 0;" />
+    <text x="20" y="25" class="text-header">Input Directory</text>
+    <line x1="0" y1="40" x2="280" y2="40" class="grid-line" />
+    
+    <text x="20" y="70" class="text-mono">ACORD_25_Atlas_Ridge...</text>
+    <text x="20" y="100" class="text-mono">Renewal_Cedar_Roof.pdf</text>
+    <text x="20" y="130" class="text-mono">Northstar_Electrical...</text>
+    <text x="20" y="160" class="text-header">+ 142 more files...</text>
+
+    <!-- MIDDLE: ARROW -->
+    <path d="M 310 90 L 370 90" class="arrow" />
+    <polygon points="370,86 378,90 370,94" class="arrow-head" />
+
+    <!-- RIGHT: STRUCTURE -->
+    <rect x="400" y="0" width="680" height="180" class="bg-panel" />
+    <rect x="400" y="0" width="680" height="40" class="bg-panel-alt" style="rx: 4px 4px 0 0;" />
+    
+    <text x="420" y="25" class="text-header">Subcontractor</text>
+    <text x="640" y="25" class="text-header">GL Exp.</text>
+    <text x="760" y="25" class="text-header">Auto Limit</text>
+    <text x="940" y="25" class="text-header">Status</text>
+    <line x1="400" y1="40" x2="1080" y2="40" class="grid-line" />
+
+    <!-- Row 1 -->
+    <text x="420" y="70" class="text-cell">Atlas Ridge Construction</text>
+    <text x="640" y="70" class="text-cell">2026-10-01</text>
+    <text x="760" y="70" class="text-cell">$1,000,000</text>
+    <rect x="940" y="56" width="46" height="20" class="badge-valid-bg" />
+    <text x="948" y="70" class="badge-valid-text">Valid</text>
+    <line x1="400" y1="85" x2="1080" y2="85" class="grid-line" />
+
+    <!-- Row 2 -->
+    <text x="420" y="115" class="text-cell">Cedar Point Roofing</text>
+    <text x="640" y="115" class="text-cell">2025-01-15</text>
+    <text x="760" y="115" class="text-cell">$500,000</text>
+    <rect x="940" y="101" width="58" height="20" class="badge-review-bg" />
+    <text x="948" y="115" class="badge-review-text">Review</text>
+    <line x1="400" y1="130" x2="1080" y2="130" class="grid-line" />
+
+    <!-- Row 3 -->
+    <text x="420" y="160" class="text-cell">Iron Works Steel</text>
+    <text x="640" y="160" class="text-cell">2027-02-28</text>
+    <text x="760" y="160" class="text-dim">Not Included</text>
+    <rect x="940" y="146" width="62" height="20" class="badge-missing-bg" />
+    <text x="948" y="160" class="badge-missing-text">Missing</text>
+
+    <!-- Vertical Lines -->
+    <line x1="620" y1="0" x2="620" y2="180" class="grid-line" />
+    <line x1="740" y1="0" x2="740" y2="180" class="grid-line" />
+    <line x1="920" y1="0" x2="920" y2="180" class="grid-line" />
+  </g>
+</svg>

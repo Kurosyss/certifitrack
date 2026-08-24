@@ -1,25 +1,25 @@
 import React from 'react';
-import { FileCheck, AlertCircle, Clock, Search, MoreHorizontal, FileText, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, Clock, Search, MoreHorizontal, FileText, CheckCircle2 } from 'lucide-react';
 
 export function ReportPreview() {
   const stats = [
     { label: 'Total', value: '42', icon: <FileText className="w-4 h-4 text-muted-foreground" /> },
-    { label: 'Received', value: '39', icon: <CheckCircle2 className="w-4 h-4 text-success" /> },
+    { label: 'Received', value: '39', icon: <CheckCircle2 className="w-4 h-4 text-status-active" /> },
     { label: 'Missing', value: '3', icon: <AlertCircle className="w-4 h-4 text-muted-foreground" /> },
-    { label: 'Expired', value: '2', icon: <AlertCircle className="w-4 h-4 text-danger" /> },
-    { label: 'Expiring Soon', value: '4', icon: <Clock className="w-4 h-4 text-warning" /> },
-    { label: 'Review', value: '3', icon: <Search className="w-4 h-4 text-warning" /> },
+    { label: 'Expired', value: '2', icon: <AlertCircle className="w-4 h-4 text-status-expired" /> },
+    { label: 'Expiring Soon', value: '4', icon: <Clock className="w-4 h-4 text-status-review" /> },
+    { label: 'Review', value: '3', icon: <Search className="w-4 h-4 text-status-review" /> },
   ];
 
   const rows = [
-    { name: 'ABC Framing', expiry: 'Sep 18, 2026', limit: '$1M', status: 'ACTIVE', statusClass: 'bg-success-bg text-success border-success/20' },
-    { name: 'Smith Plumbing', expiry: 'Aug 12, 2026', limit: '$1M', status: 'EXPIRED', statusClass: 'bg-danger-bg text-danger border-danger/20' },
-    { name: 'Elite Roofing', expiry: '—', limit: '—', status: 'MISSING', statusClass: 'bg-secondary text-secondary-foreground border-border/50' },
-    { name: 'Titan Concrete', expiry: 'Dec 4, 2026', limit: '$500K', status: 'REVIEW', statusClass: 'bg-warning-bg text-warning border-warning/20' },
+    { name: 'ABC Framing', expiry: 'Sep 18, 2026', limit: '$1M', status: 'ACTIVE', statusClass: 'bg-[var(--color-status-active-bg)] text-[var(--color-status-active)] border-[var(--color-status-active-border)]' },
+    { name: 'Smith Plumbing', expiry: 'Aug 12, 2026', limit: '$1M', status: 'EXPIRED', statusClass: 'bg-[var(--color-status-expired-bg)] text-[var(--color-status-expired)] border-[var(--color-status-expired-border)]' },
+    { name: 'Elite Roofing', expiry: '—', limit: '—', status: 'MISSING', statusClass: 'bg-[var(--color-status-missing-bg)] text-[var(--color-status-missing)] border-[var(--color-status-missing-border)]' },
+    { name: 'Titan Concrete', expiry: 'Dec 4, 2026', limit: '$500K', status: 'REVIEW', statusClass: 'bg-[var(--color-status-review-bg)] text-[var(--color-status-review)] border-[var(--color-status-review-border)]' },
   ];
 
   return (
-    <div className="w-full max-w-2xl bg-card rounded-xl border border-border shadow-sm overflow-hidden flex flex-col font-sans">
+    <div className="w-full max-w-2xl bg-surface rounded-xl border border-border shadow-sm overflow-hidden flex flex-col font-sans">
       {/* Header/Stats */}
       <div className="bg-muted/30 p-5 border-b border-border">
         <h3 className="text-sm font-semibold text-foreground mb-4">COI Status Overview</h3>
@@ -52,7 +52,7 @@ export function ReportPreview() {
             {rows.map((row, idx) => (
               <tr key={idx} className="hover:bg-muted/30 transition-colors group">
                 <td className="py-3.5 px-5 text-sm font-medium text-foreground">{row.name}</td>
-                <td className={`py-3.5 px-5 text-sm ${row.status === 'EXPIRED' ? 'text-danger font-semibold' : 'text-muted-foreground'}`}>{row.expiry}</td>
+                <td className={`py-3.5 px-5 text-sm ${row.status === 'EXPIRED' ? 'text-status-expired font-semibold' : 'text-muted-foreground'}`}>{row.expiry}</td>
                 <td className="py-3.5 px-5 text-sm text-muted-foreground">{row.limit}</td>
                 <td className="py-3.5 px-5 text-right">
                   <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase border ${row.statusClass}`}>

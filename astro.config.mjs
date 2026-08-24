@@ -33,6 +33,14 @@ export default defineConfig({
     '/terms': '/en/terms'
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      proxy: {
+        '/v1': {
+          target: 'http://127.0.0.1:3000',
+          changeOrigin: true,
+        }
+      }
+    }
   }
 });

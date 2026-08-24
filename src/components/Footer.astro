@@ -18,15 +18,17 @@ const footerLinks = [
   {
     title: t('footer.support'),
     links: [
-      { name: t('nav.faq'), href: translatePath('/faq') },
-      { name: t('footer.contact'), href: translatePath('/contact') },
+      { name: t('nav.faq'), href: translatePath('/faq'), external: false },
+      { name: t('footer.contact'), href: translatePath('/contact'), external: false },
+      { name: t('footer.buyCoffee'), href: siteConfig.buyMeACoffee, external: true },
+      { name: t('footer.github'), href: siteConfig.socials.github, external: true },
     ],
   },
   {
     title: t('footer.legal'),
     links: [
-      { name: t('footer.privacy'), href: translatePath('/privacy') },
-      { name: t('footer.terms'), href: translatePath('/terms') },
+      { name: t('footer.privacy'), href: translatePath('/privacy'), external: false },
+      { name: t('footer.terms'), href: translatePath('/terms'), external: false },
     ],
   },
 ];
@@ -48,7 +50,11 @@ const footerLinks = [
           <ul class="space-y-3">
             {section.links.map((link) => (
               <li>
-                <a href={link.href} class="text-sm text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href={link.href} 
+                  class="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                >
                   {link.name}
                 </a>
               </li>

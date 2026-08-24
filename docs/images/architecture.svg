@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 680">
+  <defs><style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+      
+      .bg { fill: #0B0E14; }
+      .bg-panel { fill: #171B21; stroke: #2A303C; stroke-width: 1; rx: 4; }
+      .bg-panel-alt { fill: #1A1F26; }
+      
+      .text-display { fill: #F0EEE8; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 32px; letter-spacing: -1px; }
+      .text-title { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px; letter-spacing: 0.5px; text-transform: uppercase; }
+      .text-subtitle { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 18px; }
+      
+      .text-header { fill: #8B949E; font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; }
+      .text-cell { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-dim { fill: #6E7681; font-family: 'Inter', sans-serif; font-size: 13px; }
+      .text-mono { fill: #8B949E; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+      
+      .grid-line { stroke: #2A303C; stroke-width: 1; }
+      .arrow { stroke: #4F46E5; stroke-width: 1.5; fill: none; }
+      .arrow-head { fill: #4F46E5; }
+      
+      .badge-valid-bg { fill: rgba(16, 185, 129, 0.08); stroke: rgba(16, 185, 129, 0.2); stroke-width: 1; rx: 4; }
+      .badge-valid-text { fill: #6EE7B7; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-review-bg { fill: rgba(245, 158, 11, 0.08); stroke: rgba(245, 158, 11, 0.2); stroke-width: 1; rx: 4; }
+      .badge-review-text { fill: #FCD34D; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .badge-missing-bg { fill: rgba(100, 116, 139, 0.08); stroke: rgba(100, 116, 139, 0.2); stroke-width: 1; rx: 4; }
+      .badge-missing-text { fill: #94A3B8; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+
+      .badge-expired-bg { fill: rgba(239, 68, 68, 0.08); stroke: rgba(239, 68, 68, 0.2); stroke-width: 1; rx: 4; }
+      .badge-expired-text { fill: #FCA5A5; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 500; }
+      
+      .paper-doc { fill: #F0EEE8; stroke: #D3D6DC; stroke-width: 1; rx: 2; }
+      .paper-line { stroke: #D3D6DC; stroke-width: 2; stroke-linecap: round; }
+      .paper-highlight { stroke: #4F46E5; stroke-width: 2; stroke-linecap: round; }
+
+    .arch-line { stroke: #2A303C; stroke-width: 1.5; fill: none; stroke-dasharray: 4,4; }
+    .arch-line-solid { stroke: #D3D6DC; stroke-width: 1.5; fill: none; }
+    .arch-arrow { fill: #D3D6DC; }
+    .arch-text-body { fill: #D3D6DC; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; text-anchor: middle; }
+    .arch-text-small { fill: #8B949E; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-anchor: middle; }
+    .arch-box { fill: #171B21; stroke: #2A303C; stroke-width: 1; rx: 4; }
+    .arch-box-accent { fill: #1e1e2d; stroke: #4F46E5; stroke-width: 1; rx: 4; }
+  </style></defs>
+  <rect width="800" height="680" class="bg" />
+
+  <g transform="translate(400, 60)">
+    
+    <!-- User -->
+    <rect x="-80" y="0" width="160" height="40" class="arch-box" />
+    <text x="0" y="25" class="arch-text-body">User</text>
+    
+    <line x1="0" y1="40" x2="0" y2="75" class="arch-line-solid" />
+    <polygon points="-4,71 4,71 0,78" class="arch-arrow" />
+
+    <!-- Application Boundary -->
+    <rect x="-260" y="80" width="520" height="480" fill="none" stroke="#2A303C" stroke-width="1" stroke-dasharray="4,4" rx="8" />
+    <text x="-240" y="110" fill="#8B949E" font-family="Inter, sans-serif" font-size="12px" font-weight="600" letter-spacing="1px" text-transform="uppercase">CertifiTrack Local Instance</text>
+
+    <!-- PDF/ZIP -->
+    <rect x="-100" y="130" width="200" height="40" class="arch-box" />
+    <text x="0" y="155" class="arch-text-body">PDF / ZIP Upload</text>
+    
+    <line x1="0" y1="170" x2="0" y2="205" class="arch-line-solid" />
+    <polygon points="-4,201 4,201 0,208" class="arch-arrow" />
+
+    <!-- Provider Abstraction -->
+    <rect x="-100" y="210" width="200" height="50" class="arch-box-accent" />
+    <text x="0" y="232" class="arch-text-body">Extraction Provider</text>
+    <text x="0" y="248" class="arch-text-small">CERTIFITRACK_PROVIDER</text>
+    
+    <!-- Branching out -->
+    <path d="M 0 235 L -160 235 L -160 270" class="arch-line" />
+    <polygon points="-164,266 -156,266 -160,273" class="arch-arrow" transform="translate(0, -3)" />
+
+    <path d="M 0 235 L 160 235 L 160 270" class="arch-line" />
+    <polygon points="156,266 164,266 160,273" class="arch-arrow" transform="translate(0, -3)" />
+
+    <!-- External API (Gemini) -->
+    <rect x="-240" y="270" width="160" height="50" class="arch-box" />
+    <text x="-160" y="293" class="arch-text-body">Gemini API</text>
+    <text x="-160" y="310" class="arch-text-small">External (BYO Key)</text>
+    
+    <path d="M -160 320 L -160 360 L -6 360" class="arch-line" />
+    <polygon points="-10,356 -10,364 -3,360" class="arch-arrow" />
+    
+    <!-- Local Mock API -->
+    <rect x="80" y="270" width="160" height="50" class="arch-box" />
+    <text x="160" y="293" class="arch-text-body">Mock Provider</text>
+    <text x="160" y="310" class="arch-text-small">Local (Testing)</text>
+
+    <path d="M 160 320 L 160 360 L 6 360" class="arch-line" />
+    <polygon points="10,356 10,364 3,360" class="arch-arrow" />
+
+    <line x1="0" y1="260" x2="0" y2="335" class="arch-line-solid" />
+    <polygon points="-4,331 4,331 0,338" class="arch-arrow" />
+
+    <!-- Structured Extraction -->
+    <rect x="-100" y="340" width="200" height="40" class="arch-box" />
+    <text x="0" y="365" class="arch-text-body">Structured Data (JSON)</text>
+    
+    <line x1="0" y1="380" x2="0" y2="415" class="arch-line-solid" />
+    <polygon points="-4,411 4,411 0,418" class="arch-arrow" />
+
+    <!-- Validation -->
+    <rect x="-100" y="420" width="200" height="40" class="arch-box" />
+    <text x="0" y="445" class="arch-text-body">Deterministic Validation</text>
+
+    <line x1="0" y1="460" x2="0" y2="495" class="arch-line-solid" />
+    <polygon points="-4,491 4,491 0,498" class="arch-arrow" />
+
+    <!-- XLSX -->
+    <rect x="-100" y="500" width="200" height="40" class="arch-box" style="stroke: #10B981;" />
+    <text x="0" y="525" class="arch-text-body" fill="#6EE7B7">Generated XLSX Tracker</text>
+  </g>
+</svg>
