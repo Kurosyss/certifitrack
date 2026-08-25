@@ -1,18 +1,27 @@
 # CertifiTrack
 
+Turn Certificate of Insurance (COI) documents into structured data and Excel workbooks.
+
+<p align="left">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
+  <img src="https://img.shields.io/badge/TypeScript-5.8-3178c6.svg?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Astro-5.3-ff5d01.svg?style=flat-square&logo=astro&logoColor=white" alt="Astro">
+  <img src="https://img.shields.io/badge/Fastify-5.2-000000.svg?style=flat-square&logo=fastify&logoColor=white" alt="Fastify">
+  <img src="https://img.shields.io/badge/Mode-Deterministic%20(Local--First)-059669.svg?style=flat-square" alt="Deterministic Mode">
+  <img src="https://img.shields.io/badge/Tests-28%20Passing-success.svg?style=flat-square" alt="28 Tests Passing">
+</p>
+
 <p align="center">
   <img src="docs/assets/certifitrack-readme-hero.png" alt="CertifiTrack — Turn COI documents into structured data" width="100%">
 </p>
-
-Turn Certificate of Insurance (COI) documents into structured, usable data and Excel workbooks.
 
 ---
 
 ## What CertifiTrack Does
 
-In property management, construction, and vendor onboarding, Certificate of Insurance (COI) records are routinely collected as PDF attachments. Operations and administrative teams must manually re-key policy numbers, effective terms, coverage limits, and certificate holder details into tracking spreadsheets—a slow and error-prone process.
+In property management, construction, and vendor onboarding, Certificate of Insurance (COI) records are routinely collected as PDF attachments. Operations, risk management, and administrative teams often must manually re-key policy numbers, effective terms, coverage limits, and certificate holder details into tracking spreadsheets—a repetitive and error-prone process.
 
-**CertifiTrack** is an open-source, local-first utility that extracts supported insurance information from standard ACORD 25 certificates and multi-document ZIP archives, compiling normalized records directly into formatted Excel spreadsheets.
+**CertifiTrack** is an open-source, local-first insurance certificate parser and extraction utility. It extracts supported insurance coverage information from standard ACORD 25 certificates and multi-document ZIP archives, compiling normalized records directly into formatted Excel spreadsheets.
 
 <p align="center">
   <img src="docs/assets/screenshots/home.png" alt="CertifiTrack Homepage and Document Upload Interface" width="100%">
@@ -22,7 +31,7 @@ In property management, construction, and vendor onboarding, Certificate of Insu
 
 ## How It Works
 
-CertifiTrack operates as a streamlined three-step workflow designed to minimize friction and prevent manual transcription errors:
+CertifiTrack operates as a streamlined three-step workflow designed to simplify COI extraction and eliminate manual data entry:
 
 <p align="center">
   <img src="docs/assets/screenshots/how-it-works.png" alt="How CertifiTrack Works: Upload, Extract & Normalize, Download" width="100%">
@@ -36,17 +45,17 @@ CertifiTrack operates as a streamlined three-step workflow designed to minimize 
 
 ## See It In Action
 
-When extraction completes, CertifiTrack displays an instant, human-verified summary highlighting key parties, policy terms, and coverage limits before exporting to Excel:
+When extraction completes, CertifiTrack displays a structured extraction summary highlighting key parties, policy terms, coverage lines, and validation status before exporting to Excel:
 
 <p align="center">
-  <img src="docs/assets/screenshots/result.png" alt="CertifiTrack Successful Extraction Result Summary" width="100%">
+  <img src="docs/assets/screenshots/result.png" alt="CertifiTrack Structured Extraction Result Summary" width="100%">
 </p>
 
 ---
 
 ## Features
 
-- **COI & ACORD 25 Parsing**: Extracts key parties, policy numbers, effective/expiration dates, and coverage limits from standard certificates.
+- **COI & ACORD 25 Parsing**: Extracts key parties, policy numbers, effective/expiration dates, and coverage limits from standard insurance certificates.
 - **Single PDF & ZIP Batch Processing**: Supports single document uploads and multi-file `.zip` archives with decompression safety verification.
 - **Deterministic Offline Processing**: Built-in regex and PDF stream parser runs 100% locally with zero external API dependencies or cloud quota limits.
 - **Normalized Dates & Monetary Limits**: Converts varied date conventions into standard `YYYY-MM-DD` and cleans monetary values into numeric formats.
@@ -106,7 +115,7 @@ CertifiTrack provides two distinct operational modes configurable via environmen
   ```env
   CERTIFITRACK_PROVIDER=gemini
   GEMINI_API_KEY=your_gemini_api_key_here
-  GEMINI_MODEL=gemini-2.5-flash
+  GEMINI_MODEL=gemini-3.6-flash
   ```
 
 > **Note**: CertifiTrack does not require Gemini to function. The default deterministic provider handles standard digital ACORD 25 certificates offline.
