@@ -3,12 +3,12 @@
 Turn Certificate of Insurance (COI) documents into structured data and Excel workbooks.
 
 <p align="left">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/TypeScript-5.8-3178c6.svg?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Astro-5.3-ff5d01.svg?style=flat-square&logo=astro&logoColor=white" alt="Astro">
-  <img src="https://img.shields.io/badge/Fastify-5.2-000000.svg?style=flat-square&logo=fastify&logoColor=white" alt="Fastify">
-  <img src="https://img.shields.io/badge/Mode-Deterministic%20(Local--First)-059669.svg?style=flat-square" alt="Deterministic Mode">
-  <img src="https://img.shields.io/badge/Tests-28%20Passing-success.svg?style=flat-square" alt="28 Tests Passing">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-6b21a8?style=flat-square&labelColor=0d0c13" alt="License: MIT"></a>
+  <img src="https://img.shields.io/badge/TypeScript-5.8-251d38?style=flat-square&labelColor=0d0c13&logo=typescript&logoColor=c4b5fd" alt="TypeScript 5.8">
+  <img src="https://img.shields.io/badge/Astro-5.3-251d38?style=flat-square&labelColor=0d0c13&logo=astro&logoColor=c4b5fd" alt="Astro 5.3">
+  <img src="https://img.shields.io/badge/Fastify-5.2-251d38?style=flat-square&labelColor=0d0c13&logo=fastify&logoColor=c4b5fd" alt="Fastify 5.2">
+  <img src="https://img.shields.io/badge/Mode-Deterministic%20(Local--First)-6b21a8?style=flat-square&labelColor=0d0c13" alt="Mode: Deterministic (Local-First)">
+  <img src="https://img.shields.io/badge/Tests-28%20Passing-6b21a8?style=flat-square&labelColor=0d0c13" alt="Tests: 28 Passing">
 </p>
 
 <p align="center">
