@@ -3,12 +3,12 @@
 Turn Certificate of Insurance (COI) documents into structured data and Excel workbooks.
 
 <p align="left">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-4c1d95?style=flat-square&labelColor=0a0910" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/TypeScript-5.8-1c1530?style=flat-square&labelColor=0a0910&logo=typescript&logoColor=a78bfa" alt="TypeScript 5.8">
-  <img src="https://img.shields.io/badge/Astro-5.3-1c1530?style=flat-square&labelColor=0a0910&logo=astro&logoColor=a78bfa" alt="Astro 5.3">
-  <img src="https://img.shields.io/badge/Fastify-5.2-1c1530?style=flat-square&labelColor=0a0910&logo=fastify&logoColor=a78bfa" alt="Fastify 5.2">
-  <img src="https://img.shields.io/badge/Mode-Deterministic%20(Local--First)-4c1d95?style=flat-square&labelColor=0a0910" alt="Mode: Deterministic (Local-First)">
-  <img src="https://img.shields.io/badge/Tests-28%20Passing-4c1d95?style=flat-square&labelColor=0a0910" alt="Tests: 28 Passing">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/LICENSE-MIT-14131c?style=flat-square&labelColor=3d3b45" alt="LICENSE: MIT"></a>
+  <img src="https://img.shields.io/badge/TYPESCRIPT-5.8-14131c?style=flat-square&labelColor=3d3b45" alt="TYPESCRIPT: 5.8">
+  <img src="https://img.shields.io/badge/ASTRO-5.3-14131c?style=flat-square&labelColor=3d3b45" alt="ASTRO: 5.3">
+  <img src="https://img.shields.io/badge/FASTIFY-5.2-14131c?style=flat-square&labelColor=3d3b45" alt="FASTIFY: 5.2">
+  <img src="https://img.shields.io/badge/MODE-DETERMINISTIC%20(LOCAL--FIRST)-14131c?style=flat-square&labelColor=3d3b45" alt="MODE: DETERMINISTIC (LOCAL-FIRST)">
+  <img src="https://img.shields.io/badge/TESTS-28%20PASSING-14131c?style=flat-square&labelColor=3d3b45" alt="TESTS: 28 PASSING">
 </p>
 
 <p align="center">
