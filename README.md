@@ -45,10 +45,18 @@ CertifiTrack operates as a streamlined three-step workflow designed to simplify 
 
 ## See It In Action
 
-When extraction completes, CertifiTrack displays a structured extraction summary highlighting key parties, policy terms, coverage lines, and validation status before exporting to Excel:
+When extraction completes, CertifiTrack presents the extracted certificate data as structured information, allowing you to review key parties, policy terms, coverage lines, and validation status before exporting to Excel.
+
+### Extraction Summary & Policy Details
 
 <p align="center">
-  <img src="docs/assets/screenshots/result.png" alt="CertifiTrack Structured Extraction Result Summary" width="100%">
+  <img src="docs/assets/screenshots/result-summary.png" alt="CertifiTrack Extraction Summary and Key Policy Details" width="100%">
+</p>
+
+### Coverage Breakdown & Validation Status
+
+<p align="center">
+  <img src="docs/assets/screenshots/result-details.png" alt="CertifiTrack Coverage Breakdown, Endorsement Flags, and Verification Status" width="100%">
 </p>
 
 ---
