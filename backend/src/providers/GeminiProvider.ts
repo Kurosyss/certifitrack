@@ -39,7 +39,7 @@ export class GeminiProvider implements ExtractionProvider {
 
       // PASS 1: Segmentation
       const segResponse = await this.ai.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: env.GEMINI_MODEL,
         contents: [
           { 
             role: "user", 
@@ -61,7 +61,7 @@ export class GeminiProvider implements ExtractionProvider {
 
       // PASS 2: Field Extraction (passing segmentation context)
       const extractResponse = await this.ai.models.generateContent({
-        model: "gemini-2.0-flash",
+        model: env.GEMINI_MODEL,
         contents: [
           { 
             role: "user", 
@@ -88,7 +88,7 @@ export class GeminiProvider implements ExtractionProvider {
       logger.warn({ error: error.message }, "Gemini API call failed, attempting deterministic text extraction fallback...");
       try {
         const fallbackResult = await this.fallbackExtractor.extractData(pdfBuffer);
-        if (fallbackResult.segmentation.is_coi && fallbackResult.extraction.named_insured.value) {
+        if (fallbackResult.segmentation.is_coi || fallbackResult.extraction.named_insured.value) {
           logger.info("Deterministic fallback succeeded for text-based COI PDF.");
           return fallbackResult;
         }

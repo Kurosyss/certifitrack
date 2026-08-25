@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { generateXlsx } from "../src/export/xlsxGenerator.js";
-import { ProcessedDocument } from "../src/services/ExtractionService.js";
+import { ProcessedDocument } from "../src/services/extractionService.js";
 import ExcelJS from "exceljs";
 
 describe("XLSX Generator", () => {
@@ -57,17 +57,26 @@ describe("XLSX Generator", () => {
     expect(buffer.length).toBeGreaterThan(0);
 
     const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(buffer);
+    await workbook.xlsx.load(buffer as any);
     const sheet = workbook.getWorksheet("COI Tracker");
     expect(sheet).toBeDefined();
 
-    const headers = sheet!.getRow(1).values as string[];
-    expect(headers).toContain("Source File");
-    expect(headers).toContain("Named Insured");
-    expect(headers).toContain("GL Eff Date");
+    // Verify Title Banner at Row 1
+    const titleVal = sheet!.getCell("A1").value as string;
+    expect(titleVal).toContain("CertifiTrack");
 
-    const row2 = sheet!.getRow(2).values as any[];
-    expect(row2).toContain("test-subcontractor.pdf");
-    expect(row2).toContain("Atlas Ridge Mechanical LLC");
+    // Verify Detailed Subheaders at Row 5
+    const row5Values = sheet!.getRow(5).values as string[];
+    expect(row5Values).toContain("Source File");
+    expect(row5Values).toContain("Named Insured");
+    expect(row5Values).toContain("GL Effective");
+    expect(row5Values).toContain("Certificate Holder");
+
+    // Verify First Data Record at Row 6
+    const row6Values = sheet!.getRow(6).values as any[];
+    expect(row6Values).toContain("test-subcontractor.pdf");
+    expect(row6Values).toContain("Atlas Ridge Mechanical LLC");
+    expect(row6Values).toContain("Test Holder");
+    expect(row6Values).toContain("Test Project");
   });
 });

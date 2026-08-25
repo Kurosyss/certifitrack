@@ -57,31 +57,32 @@ describe("E2E Pipeline with Real COI PDFs in ZIP Archive", () => {
 
     // 4. Open XLSX and verify contents
     const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(response.rawPayload);
+    await workbook.xlsx.load(response.rawPayload as any);
     const sheet = workbook.worksheets[0];
 
-    // Check rows (header + 2 data rows)
-    expect(sheet.rowCount).toBe(3);
+    // Check rows (5 header/meta rows + 2 data rows = 7 rows)
+    expect(sheet.rowCount).toBe(7);
     
-    const row2 = sheet.getRow(2);
-    const row3 = sheet.getRow(3);
+    const row6 = sheet.getRow(6);
+    const row7 = sheet.getRow(7);
 
-    // Row 2 is Harborstone
-    expect(row2.getCell(1).value).toBe("harborstone.pdf");
-    expect(row2.getCell(2).value).toBe("Harborstone Mechanical Services LLC");
-    expect(row2.getCell(4).value).toBe("GL-47Q8-9135");
-    expect(row2.getCell(5).value).toBe("Meridian Harbor Insurance Company");
-    expect(row2.getCell(6).value).toBe("2026-01-15");
-    expect(row2.getCell(7).value).toBe("2027-01-15");
-    expect(row2.getCell(8).value).toBe(1000000);
+    // Row 6 is Harborstone
+    expect(row6.getCell(1).value).toBe("harborstone.pdf");
+    expect(row6.getCell(2).value).toBe("Harborstone Mechanical Services LLC");
+    expect(row6.getCell(4).value).toBe("GL-47Q8-9135");
+    expect(row6.getCell(5).value).toBe("Meridian Harbor Insurance Company");
+    expect(row6.getCell(6).value).toBe("2026-01-15");
+    expect(row6.getCell(7).value).toBe("2027-01-15");
+    expect(row6.getCell(8).value).toBe(1000000);
+    expect(row6.getCell(28).value).toBe("Northbridge Commercial Builders LLC");
 
-    // Row 3 is Vanguard
-    expect(row3.getCell(1).value).toBe("vanguard.pdf");
-    expect(row3.getCell(2).value).toBe("Vanguard Electrical Contractors Inc");
-    expect(row3.getCell(4).value).toBe("GL-8821-4409");
-    expect(row3.getCell(5).value).toBe("Pacific Crest Casualty Co");
-    expect(row3.getCell(6).value).toBe("2026-04-01");
-    expect(row3.getCell(7).value).toBe("2027-04-01");
-    expect(row3.getCell(8).value).toBe(2000000);
+    // Row 7 is Vanguard
+    expect(row7.getCell(1).value).toBe("vanguard.pdf");
+    expect(row7.getCell(2).value).toBe("Vanguard Electrical Contractors Inc");
+    expect(row7.getCell(4).value).toBe("GL-8821-4409");
+    expect(row7.getCell(5).value).toBe("Pacific Crest Casualty Co");
+    expect(row7.getCell(6).value).toBe("2026-04-01");
+    expect(row7.getCell(7).value).toBe("2027-04-01");
+    expect(row7.getCell(8).value).toBe(2000000);
   }, 30000);
 });

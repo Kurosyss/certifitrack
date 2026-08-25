@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import crypto from "crypto";
 import { ExtractionProvider } from "../providers/ExtractionProvider.js";
 import { GeminiProvider } from "../providers/GeminiProvider.js";
 import { DeterministicPdfExtractor } from "../providers/DeterministicPdfExtractor.js";
@@ -70,6 +71,14 @@ export class ExtractionService {
         try {
           logger.info({ file: file.filename }, "Processing PDF document");
           const pdfBuffer = await fs.readFile(file.path);
+          const bufferSha256 = crypto.createHash("sha256").update(pdfBuffer).digest("hex");
+
+          logger.info({
+            event: "SERVICE_BUFFER_READ",
+            filename: file.filename,
+            bufferLength: pdfBuffer.length,
+            sha256: bufferSha256
+          }, "PDF buffer read from disk for extractor");
           
           const timeoutPromise = new Promise<never>((_, reject) => {
             setTimeout(() => reject(new Error("Document processing timeout")), env.DOCUMENT_TIMEOUT_MS);

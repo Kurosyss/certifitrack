@@ -29,6 +29,13 @@ yarn-error.log*
 pnpm-debug.log*
 *.log
 backend/tests/debug_pdf.cjs
+backend/tests/analyze_pdf_objects.ts
+backend/tests/inspect_real_pdf.ts
+backend/tests/load_test_real_pdf.cjs
+backend/tests/print_full_text.ts
+backend/tests/test_*.ts
+backend/src/scripts/
+scripts/serve_frontend.js
 scratch/
 
 # macOS-specific files
@@ -41,3 +48,6 @@ scratch/
 benchmark/.env
 benchmark_results.json
 benchmark/data/
+
+# Temporary design explorations
+docs/hero_exploration/

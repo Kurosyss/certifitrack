@@ -74,7 +74,7 @@ const doc1Lines = [
   'PROJECT: Ridgeway Distribution Center Expansion',
   'CERTIFICATE HOLDER: Turner Construction Management'
 ];
-fs.writeFileSync(path.join(fixturesDir, 'certifitrack_sample_coi_test.pdf'), createPdf(doc1Lines));
+fs.writeFileSync(path.join(fixturesDir, 'certifitrack_sample_coi_synthetic_1741.pdf'), createPdf(doc1Lines));
 
 // 2. Fixture 2: Vanguard Electrical Contractors Inc
 const doc2Lines = [

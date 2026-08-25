@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import fs from "fs/promises";
 import path from "path";
-import { DeterministicPdfExtractor } from "../src/providers/DeterministicPdfExtractor.js";
+import { DeterministicPdfExtractor, extractTextFromPdfBuffer } from "../src/providers/DeterministicPdfExtractor.js";
 import { validateExtraction } from "../src/validation/deterministic.js";
 import { generateXlsx } from "../src/export/xlsxGenerator.js";
 import ExcelJS from "exceljs";
@@ -19,7 +19,39 @@ describe("Deterministic Real PDF Extraction & Multi-Signal Classifier Suite", ()
 
     const { validatedData } = validateExtraction(extraction, segmentation);
 
+    console.log("=== FULL RAW TEXT START ===");
+    console.log(extractTextFromPdfBuffer(pdfBuffer));
+    console.log("=== FULL RAW TEXT END ===");
+
     expect(validatedData.named_insured.value).toBe("Harborstone Mechanical Services LLC");
+    expect(validatedData.certificate_holder.value).toBe("Northbridge Commercial Builders LLC");
+    expect(validatedData.certificate_holder.value).not.toContain("when required by written contract");
+    expect(validatedData.description_of_operations.value).toBe("Ridgeway Distribution Center Expansion, Denver, Colorado.");
+    expect(validatedData.gl_carrier_name.value).toBe("Meridian Harbor Insurance Company");
+    expect(validatedData.gl_policy_number.value).toBe("GL-47Q8-9135");
+    expect(validatedData.gl_effective_date.value).toBe("2026-01-15");
+    expect(validatedData.gl_expiration_date.value).toBe("2027-01-15");
+    expect(validatedData.gl_each_occurrence_limit.value).toBe(1000000);
+    expect(validatedData.gl_general_aggregate_limit.value).toBe(2000000);
+    expect(validatedData.auto_policy_number.value).toBe("AL-26-44018");
+    expect(validatedData.wc_policy_number.value).toBe("WC-88210-26");
+    expect(validatedData.umbrella_policy_number.value).toBe("UMB-77421");
+    expect(validatedData.additional_insured_indicated.value).toBe(true);
+    expect(validatedData.waiver_of_subrogation_indicated.value).toBe(true);
+  });
+
+  it("1b. should extract exact expected values from certifitrack_sample_coi_synthetic_1741.pdf (Synthetic 1.7KB Fixture)", async () => {
+    const pdfPath = path.join(fixturesDir, "certifitrack_sample_coi_synthetic_1741.pdf");
+    const pdfBuffer = await fs.readFile(pdfPath);
+
+    const { segmentation, extraction } = await extractor.extractData(pdfBuffer);
+    expect(segmentation.is_coi).toBe(true);
+
+    const { validatedData } = validateExtraction(extraction, segmentation);
+
+    expect(validatedData.named_insured.value).toBe("Harborstone Mechanical Services LLC");
+    expect(validatedData.certificate_holder.value).toBe("Turner Construction Management");
+    expect(validatedData.certificate_holder.value).not.toContain("when required by written contract");
     expect(validatedData.gl_carrier_name.value).toBe("Meridian Harbor Insurance Company");
     expect(validatedData.gl_policy_number.value).toBe("GL-47Q8-9135");
     expect(validatedData.gl_effective_date.value).toBe("2026-01-15");
@@ -127,5 +159,52 @@ describe("Deterministic Real PDF Extraction & Multi-Signal Classifier Suite", ()
     expect(segmentation.is_coi).toBe(false);
     expect(extraction.named_insured.value).toBeNull();
     expect(extraction.gl_policy_number.value).toBeNull();
+  });
+
+  it("9. should extract detailed synthetic COI with full coverage limits and carriers", async () => {
+    const pdfPath = path.join(fixturesDir, "certifitrack_detailed_synthetic_coi.pdf");
+    const pdfBuffer = await fs.readFile(pdfPath);
+
+    const { segmentation, extraction } = await extractor.extractData(pdfBuffer);
+    expect(segmentation.is_coi).toBe(true);
+
+    const { validatedData } = validateExtraction(extraction, segmentation);
+
+    expect(validatedData.named_insured.value).toBe("BlueCedar Mechanical & Electrical Services LLC");
+    expect(validatedData.certificate_holder.value).toBe("Evergreen Commercial Builders LLC");
+    
+    // GL
+    expect(validatedData.gl_policy_number.value).toBe("GL-26-78431-CGL");
+    expect(validatedData.gl_carrier_name.value).toBe("Prairie State Casualty Company");
+    expect(validatedData.gl_effective_date.value).toBe("2026-02-01");
+    expect(validatedData.gl_expiration_date.value).toBe("2027-02-01");
+    expect(validatedData.gl_each_occurrence_limit.value).toBe(1000000);
+    expect(validatedData.gl_general_aggregate_limit.value).toBe(2000000);
+
+    // Auto
+    expect(validatedData.auto_policy_number.value).toBe("AL-26-44018-AUTO");
+    expect(validatedData.auto_carrier_name.value).toBe("Prairie State Casualty Company");
+    expect(validatedData.auto_effective_date.value).toBe("2026-02-01");
+    expect(validatedData.auto_expiration_date.value).toBe("2027-02-01");
+    expect(validatedData.auto_combined_single_limit.value).toBe(1000000);
+
+    // WC
+    expect(validatedData.wc_policy_number.value).toBe("WC-88210-26-07");
+    expect(validatedData.wc_carrier_name.value).toBe("Summit Peak Indemnity Co.");
+    expect(validatedData.wc_effective_date.value).toBe("2026-02-01");
+    expect(validatedData.wc_expiration_date.value).toBe("2027-02-01");
+    expect(validatedData.wc_each_accident_limit.value).toBe(1000000);
+
+    // Umbrella
+    expect(validatedData.umbrella_policy_number.value).toBe("UMB-77421-26");
+    expect(validatedData.umbrella_carrier_name.value).toBe("Meridian Harbor Insurance Company");
+    expect(validatedData.umbrella_effective_date.value).toBe("2026-02-01");
+    expect(validatedData.umbrella_expiration_date.value).toBe("2027-02-01");
+    expect(validatedData.umbrella_each_occurrence_limit.value).toBe(5000000);
+
+    // Endorsements & Operations
+    expect(validatedData.additional_insured_indicated.value).toBe(true);
+    expect(validatedData.waiver_of_subrogation_indicated.value).toBe(true);
+    expect(validatedData.description_of_operations.value).toContain("Summit Health Campus - Mechanical Retrofit, Denver, Colorado");
   });
 });

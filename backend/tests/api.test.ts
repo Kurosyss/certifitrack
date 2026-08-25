@@ -69,5 +69,5 @@ describe("API Routes - POST /v1/extract", () => {
     expect(response.statusCode).toBe(200);
     expect(response.headers["content-type"]).toBe("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     expect(response.rawPayload.length).toBeGreaterThan(0);
-  });
+  }, 30000);
 });

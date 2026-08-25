@@ -7,8 +7,9 @@ const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   PORT: z.coerce.number().default(3000),
   HOST: z.string().default("127.0.0.1"),
-  CERTIFITRACK_PROVIDER: z.enum(["gemini", "deterministic", "mock"]).default("gemini"),
+  CERTIFITRACK_PROVIDER: z.enum(["gemini", "deterministic", "mock"]).default("deterministic"),
   GEMINI_API_KEY: z.string().optional(),
+  GEMINI_MODEL: z.string().default("gemini-3.6-flash"),
   MAX_UPLOAD_SIZE_MB: z.coerce.number().default(10),
   REQUEST_TIMEOUT_MS: z.coerce.number().default(120000), // 2 mins total
   DOCUMENT_TIMEOUT_MS: z.coerce.number().default(15000), // 15s per PDF

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 680" width="100%" height="100%">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Inter:wght@400;500;600;700&amp;display=swap');
+      .bg { fill: #0B0E14; }
+      .box { fill: #13171F; stroke: #232936; stroke-width: 1.5; rx: 8; }
+      .box-accent { fill: #13171F; stroke: #0284C7; stroke-width: 1.5; rx: 8; }
+      .box-optional { fill: #13171F; stroke: #334155; stroke-width: 1.5; stroke-dasharray: 4,4; rx: 8; }
+      .box-success { fill: #13171F; stroke: #10B981; stroke-width: 1.5; rx: 8; }
+      .boundary { fill: rgba(19, 23, 31, 0.4); stroke: #232936; stroke-width: 1.5; stroke-dasharray: 6,6; rx: 12; }
+      
+      .title { fill: #F8FAFC; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 15px; }
+      .subtitle { fill: #94A3B8; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 12px; }
+      .tag { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; }
+      .tag-default { fill: #38BDF8; }
+      .tag-optional { fill: #94A3B8; }
+      .tag-success { fill: #34D399; }
+      
+      .line { stroke: #475569; stroke-width: 1.5; fill: none; }
+      .line-accent { stroke: #0284C7; stroke-width: 1.5; fill: none; }
+      .line-dash { stroke: #475569; stroke-width: 1.5; stroke-dasharray: 4,4; fill: none; }
+      .arrow { fill: #475569; }
+      .arrow-accent { fill: #0284C7; }
+    </style>
+  </defs>
+
+  <rect width="1000" height="680" class="bg" />
+
+  <!-- Architecture Header -->
+  <g transform="translate(50, 45)">
+    <text x="0" y="0" fill="#F8FAFC" font-family="'Inter', sans-serif" font-weight="700" font-size="20px" letter-spacing="-0.5px">CertifiTrack Architecture</text>
+    <text x="0" y="22" fill="#64748B" font-family="'Inter', sans-serif" font-weight="400" font-size="13px">Stateless COI Extraction, Multi-Signal Document Classification &amp; Structured Workbook Pipeline</text>
+  </g>
+
+  <!-- User & Client Layer -->
+  <g transform="translate(50, 110)">
+    <!-- User Input -->
+    <rect x="0" y="0" width="180" height="80" class="box" />
+    <text x="20" y="32" class="title">User Upload</text>
+    <text x="20" y="52" class="subtitle">PDF COI or ZIP Archive</text>
+    <text x="20" y="68" class="tag" fill="#64748B">Multipart / 10MB Max</text>
+
+    <!-- Line to Frontend -->
+    <line x1="180" y1="40" x2="240" y2="40" class="line" />
+    <polygon points="238,36 246,40 238,44" class="arrow" />
+
+    <!-- Astro Frontend Island -->
+    <rect x="250" y="0" width="200" height="80" class="box" />
+    <text x="270" y="32" class="title">Astro + React UI</text>
+    <text x="270" y="52" class="subtitle">Client Island / Uploader.tsx</text>
+    <text x="270" y="68" class="tag tag-default">Proxy to /v1/extract</text>
+
+    <!-- Line to Fastify Backend -->
+    <line x1="450" y1="40" x2="510" y2="40" class="line-accent" />
+    <polygon points="508,36 516,40 508,44" class="arrow-accent" />
+
+    <!-- Fastify Gateway -->
+    <rect x="520" y="0" width="210" height="80" class="box-accent" />
+    <text x="540" y="32" class="title">Fastify Backend API</text>
+    <text x="540" y="52" class="subtitle">REST Gateway (:3000)</text>
+    <text x="540" y="68" class="tag tag-default">@fastify/multipart</text>
+
+    <!-- Line to Parsing -->
+    <line x1="730" y1="40" x2="790" y2="40" class="line" />
+    <polygon points="788,36 796,40 788,44" class="arrow" />
+
+    <!-- Document Parser & Zip Slip Guard -->
+    <rect x="800" y="0" width="150" height="80" class="box" />
+    <text x="815" y="32" class="title">Zip Safety &amp; Temp</text>
+    <text x="815" y="52" class="subtitle">UUID Isolation</text>
+    <text x="815" y="68" class="tag" fill="#64748B">Auto-Cleanup</text>
+  </g>
+
+  <!-- Core Processing Subsystem Boundary -->
+  <g transform="translate(50, 230)">
+    <rect x="0" y="0" width="900" height="270" class="boundary" />
+    <text x="24" y="30" fill="#64748B" font-family="'Inter', sans-serif" font-size="12px" font-weight="600" letter-spacing="0.5px" text-transform="uppercase">Extraction &amp; Classification Subsystem</text>
+
+    <!-- Inflow from gateway -->
+    <path d="M 875 -40 L 875 60 L 580 60" class="line" />
+    <polygon points="582,56 574,60 582,64" class="arrow" />
+
+    <!-- Router Box -->
+    <rect x="360" y="40" width="210" height="50" class="box" />
+    <text x="380" y="65" class="title">ExtractionService</text>
+    <text x="380" y="80" class="subtitle">Provider Resolution Engine</text>
+
+    <!-- Branch A: Deterministic Extractor (Default) -->
+    <path d="M 400 90 L 400 130 L 220 130 L 220 150" class="line-accent" />
+    <polygon points="216,148 220,156 224,148" class="arrow-accent" />
+
+    <rect x="70" y="160" width="300" height="90" class="box-accent" />
+    <text x="90" y="190" class="title">Deterministic Extractor</text>
+    <text x="90" y="208" class="subtitle">Local PDF Stream Decoding &amp; FlateDecode</text>
+    <text x="90" y="226" class="subtitle">Multi-Signal Weighted Regex Classifier</text>
+    <text x="90" y="242" class="tag tag-default">DEFAULT • 100% OFFLINE • 0 QUOTA</text>
+
+    <!-- Branch B: Optional Gemini AI Provider -->
+    <path d="M 530 90 L 530 130 L 710 130 L 710 150" class="line-dash" />
+    <polygon points="706,148 710,156 714,148" class="arrow" />
+
+    <rect x="560" y="160" width="300" height="90" class="box-optional" />
+    <text x="580" y="190" class="title">Gemini Provider</text>
+    <text x="580" y="208" class="subtitle">Multi-pass Multimodal Extraction</text>
+    <text x="580" y="226" class="subtitle">Requires GEMINI_API_KEY env config</text>
+    <text x="580" y="242" class="tag tag-optional">OPTIONAL • CLOUD AI ASSISTED</text>
+  </g>
+
+  <!-- Output & Validation Layer -->
+  <g transform="translate(50, 530)">
+    <!-- Convergence from Extractors -->
+    <path d="M 220 480 L 220 540 L 320 540" class="line" />
+    <path d="M 710 480 L 710 540 L 490 540" class="line" />
+    <polygon points="328,536 336,540 328,544" class="arrow" />
+
+    <!-- Validation & Quality Gate -->
+    <rect x="290" y="0" width="240" height="90" class="box" />
+    <text x="310" y="30" class="title">Deterministic Validation</text>
+    <text x="310" y="50" class="subtitle">ISO Date Parsing (YYYY-MM-DD)</text>
+    <text x="310" y="66" class="subtitle">Currency Sanitization &amp; Limit Typing</text>
+    <text x="310" y="82" class="tag tag-success">Quality Gate &amp; Review Flags</text>
+
+    <!-- Line to Excel Generator -->
+    <line x1="530" y1="45" x2="610" y2="45" class="line-accent" />
+    <polygon points="608,41 616,45 608,49" class="arrow-accent" />
+
+    <!-- Excel Workbook Generator -->
+    <rect x="620" y="0" width="280" height="90" class="box-success" />
+    <text x="640" y="30" class="title">Excel Workbook Generator</text>
+    <text x="640" y="50" class="subtitle">ExcelJS Structured Spreadsheet Export</text>
+    <text x="640" y="66" class="subtitle">Header Styling, Number Formatting &amp; Lineage</text>
+    <text x="640" y="82" class="tag tag-success">COI_Tracker_Export.xlsx</text>
+  </g>
+
+</svg>

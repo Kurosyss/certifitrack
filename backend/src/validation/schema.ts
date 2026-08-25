@@ -24,11 +24,11 @@ const GeminiFieldSchema = (typeStr: string) => ({
   type: Type.OBJECT,
   properties: {
     value: { type: typeStr, nullable: true },
-    confidence: { type: Type.STRING, nullable: true, enum: ['HIGH', 'MEDIUM', 'LOW'] },
+    confidence: { type: Type.STRING, nullable: true, description: "HIGH, MEDIUM, or LOW" },
     review_required: { type: Type.BOOLEAN },
     source_text: { type: Type.STRING, nullable: true, description: "Verbatim text from document as evidence." },
     source_page: { type: Type.NUMBER, nullable: true, description: "Page number where evidence is found." },
-    reason_code: { type: Type.STRING, nullable: true, enum: [...ReasonCodeEnum] }
+    reason_code: { type: Type.STRING, nullable: true, description: "Reason code if review is required (e.g. MISSING_FIELD, AMBIGUOUS_VALUE, NON_COI)." }
   },
   required: ["value", "review_required", "source_text", "source_page", "reason_code"]
 });

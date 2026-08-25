@@ -1,9 +1,11 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from "fastify";
 import fs from "fs/promises";
+import crypto from "crypto";
 import { FileManager } from "../utils/fileManager.js";
-import { ExtractionService } from "../services/ExtractionService.js";
+import { ExtractionService } from "../services/extractionService.js";
 import { generateXlsx } from "../export/xlsxGenerator.js";
 import { BadRequestError, UnsupportedMediaTypeError, UnprocessableEntityError } from "../utils/errors.js";
+import { logger } from "../utils/logger.js";
 import { env } from "../utils/env.js";
 
 const extractionService = new ExtractionService();
@@ -48,6 +50,15 @@ export async function routes(fastify: FastifyInstance) {
       
       // Save the uploaded file to safe path
       const buffer = await data.toBuffer();
+      const uploadSha256 = crypto.createHash("sha256").update(buffer).digest("hex");
+      
+      logger.info({
+        event: "UPLOAD_BUFFER_RECEIVED",
+        filename: originalFilename,
+        fileSizeBytes: buffer.length,
+        sha256: uploadSha256
+      }, "Upload buffer received in route handler");
+
       await fs.writeFile(safePath, buffer);
 
       // Process the upload
@@ -85,6 +96,7 @@ export async function routes(fastify: FastifyInstance) {
         return {
           filename: r.filename,
           insured: r.extraction.named_insured?.value || null,
+          holder: r.extraction.certificate_holder?.value || null,
           carrier: r.extraction.gl_carrier_name?.value || r.extraction.wc_carrier_name?.value || r.extraction.auto_carrier_name?.value || r.extraction.umbrella_carrier_name?.value || null,
           policyNumber: r.extraction.gl_policy_number?.value || r.extraction.wc_policy_number?.value || r.extraction.auto_policy_number?.value || r.extraction.umbrella_policy_number?.value || null,
           effectiveDate: r.extraction.gl_effective_date?.value || r.extraction.wc_effective_date?.value || r.extraction.auto_effective_date?.value || r.extraction.umbrella_effective_date?.value || null,
@@ -100,10 +112,12 @@ export async function routes(fastify: FastifyInstance) {
         };
       });
 
-      reply.header("Access-Control-Expose-Headers", "X-Extraction-Summary, Content-Disposition");
-      reply.header("X-Extraction-Summary", encodeURIComponent(JSON.stringify(summary)));
+      reply.header("Access-Control-Expose-Headers", "X-Extraction-Summary, X-CertifiTrack-Build, Content-Disposition");
+      reply.header("X-CertifiTrack-Build", "current-dev-2026-08-25-v4");
       reply.header("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-      reply.header("Content-Disposition", `attachment; filename="certifitrack-results.xlsx"`);
+      reply.header("Content-Disposition", 'attachment; filename="certifitrack-results.xlsx"');
+      reply.header("X-Extraction-Summary", encodeURIComponent(JSON.stringify(summary)));
+
       return reply.send(xlsxBuffer);
 
     } finally {
